@@ -46,3 +46,47 @@ hr {
     image-rendering: -webkit-optimize-contrast;
     transition: trnsform 0.3s ease;
 }
+
+.Hreo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5rem auto;
+    max-width: 1200px;
+}
+
+.arrow {
+    position: absolute;
+    transform: translateX(-5.5rem) translateY(1.5rem);
+}
+
+.HeroSub {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.name {
+    font-size: 3rem;
+    color: #eeeeee;
+}
+
+.tital {
+    font-size: 4rem;
+    color: #00adb5;
+}
+
+.HreoBtns {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.hireMe {
+    background-color: #00adb5;
+    color: #eeeeee;
+    border-radius: 24px;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    text-shadow: 0px 4px 4px rgb(0, 0, 0.5);
+}
