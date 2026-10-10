@@ -163,6 +163,8 @@ hr {
 
 .works ul {
     display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
     list-style-type: none;
     align-items: center;
     justify-content: space-between;
@@ -173,4 +175,15 @@ hr {
     background-color: rgba(57, 62, 70, 0.5);
     backdrop-filter: blur(4px);
     padding: 1rem 4rem;
+}
+
+.works li img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    transition: transform 0.2s;
+}
+
+.works li :hover {
+    transform: scale(1.5);
 }
