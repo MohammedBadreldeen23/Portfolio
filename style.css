@@ -7,6 +7,14 @@
     font-family: "Poppins", "serif";
 }
 
+.img1 {
+    width: auto;
+    height: 50px;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    transition: trnsform 0.3s ease;
+}
+
 body {
     background-color: #222831;
 }
@@ -37,14 +45,6 @@ header {
 
 hr {
     opacity: 10%;
-}
-
-.img1 {
-    width: auto;
-    height: 50px;
-    object-fit: contain;
-    image-rendering: -webkit-optimize-contrast;
-    transition: trnsform 0.3s ease;
 }
 
 .Hreo {
