@@ -255,3 +255,425 @@ footer {
     padding: 2rem;
     text-align: center;
 }
+
+
+/* ========================================
+   RESPONSIVE DESIGN
+   All screen sizes
+======================================== */
+
+
+/* Prevent horizontal overflow */
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* Large laptops and smaller desktops */
+
+@media screen and (max-width: 1200px) {
+    header,
+    .Hreo,
+    .Hero,
+    .aboutMe,
+    .worksContainer,
+    .contactContainer {
+        width: 90%;
+        max-width: 1100px;
+    }
+    .Hreo,
+    .Hero {
+        gap: 2rem;
+    }
+    .aboutMe {
+        gap: 4rem;
+    }
+    .works {
+        padding: 6rem 5%;
+    }
+    .works li {
+        padding: 1rem 2rem;
+    }
+    .contact {
+        margin-right: 0;
+        gap: 5rem;
+    }
+    .socialMedia {
+        gap: 1.5rem;
+    }
+}
+
+
+/* Tablets and small laptops */
+
+@media screen and (max-width: 992px) {
+    header {
+        margin: 1.5rem auto;
+        gap: 1rem;
+    }
+    .img1 {
+        height: 42px;
+    }
+    .navigation ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .navigation a {
+        font-size: 0.9rem;
+    }
+    .Hreo,
+    .Hero {
+        margin: 4rem auto;
+        gap: 2rem;
+    }
+    .name {
+        font-size: 2.5rem;
+    }
+    .tital {
+        font-size: 3.2rem;
+        overflow-wrap: anywhere;
+    }
+    .arrow {
+        transform: translateX(-3rem) translateY(1rem);
+    }
+    .aboutMe {
+        gap: 2rem;
+        margin: 4rem auto;
+    }
+    .textTitle,
+    .projectTitle,
+    .contactTitle {
+        font-size: 1.7rem;
+        flex-wrap: wrap;
+    }
+    .works {
+        padding: 4rem 5%;
+        margin: 3rem 0;
+    }
+    .worksContainer {
+        margin: 2rem auto;
+    }
+    .works ul {
+        justify-content: center;
+        gap: 1rem;
+    }
+    .works li {
+        padding: 1rem;
+    }
+    .works li img {
+        width: 170px;
+        height: 170px;
+    }
+    .contact {
+        gap: 3rem;
+    }
+    .emailAndPhone {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* Tablets and mobile phones */
+
+@media screen and (max-width: 768px) {
+    header {
+        width: 92%;
+        margin: 1.5rem auto;
+        padding: 0;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .img1 {
+        height: 38px;
+    }
+    .navigation {
+        max-width: 100%;
+    }
+    .navigation ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.7rem 1rem;
+    }
+    .navigation a {
+        font-size: 0.85rem;
+    }
+    /* Hero section */
+    .Hreo,
+    .Hero {
+        width: 90%;
+        margin: 3rem auto;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+    }
+    .HeroSub {
+        width: 100%;
+        align-items: center;
+    }
+    .name {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        overflow-wrap: anywhere;
+    }
+    .tital {
+        font-size: clamp(2.2rem, 7vw, 3.2rem);
+        overflow-wrap: anywhere;
+    }
+    .HeroBtns {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    .hireMe,
+    .CV {
+        padding: 0.6rem 1.2rem;
+    }
+    .arrow {
+        display: none;
+    }
+    /* About section */
+    .aboutMe {
+        width: 90%;
+        margin: 4rem auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .textContainer {
+        width: 100%;
+    }
+    .textTitle {
+        font-size: 1.7rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    .aboutMePar {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        text-align: left;
+        overflow-wrap: anywhere;
+    }
+    /* Works / projects */
+    .works {
+        padding: 3rem 5%;
+        margin: 3rem 0;
+        background-position: center;
+        background-size: cover;
+    }
+    .worksContainer {
+        width: 100%;
+        margin: 1rem auto;
+        align-items: center;
+    }
+    .projectTitle {
+        justify-content: center;
+        text-align: center;
+        font-size: 1.7rem;
+        margin-bottom: 1.5rem;
+    }
+    .works ul {
+        width: 100%;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .works li {
+        flex: 0 1 220px;
+        max-width: 100%;
+        padding: 1rem;
+        text-align: center;
+    }
+    .works li img {
+        width: 100%;
+        max-width: 180px;
+        height: 160px;
+        object-fit: contain;
+    }
+    .works li img:hover {
+        transform: scale(1.05);
+    }
+    /* Contact section */
+    .contactContainer {
+        width: 90%;
+        margin: 3rem auto;
+        gap: 1.5rem;
+    }
+    .contactTitle {
+        font-size: 1.7rem;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+    .contact {
+        width: 100%;
+        margin-right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .emailAndPhone {
+        flex-direction: column;
+        gap: 0.8rem;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .contact h3,
+    .contact a {
+        overflow-wrap: anywhere;
+    }
+    .socialMedia {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .socialMedia a {
+        padding: 0.8rem;
+    }
+    footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Small mobile phones */
+
+@media screen and (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    .img1 {
+        height: 35px;
+    }
+    .navigation {
+        width: 100%;
+    }
+    .navigation ul {
+        justify-content: center;
+        gap: 0.6rem 0.9rem;
+    }
+    .navigation a {
+        font-size: 0.8rem;
+    }
+    .Hreo,
+    .Hero {
+        width: 92%;
+        margin: 2.5rem auto;
+        gap: 1.5rem;
+    }
+    .name {
+        font-size: 1.7rem;
+    }
+    .tital {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+    .HeroBtns {
+        width: 100%;
+        gap: 0.7rem;
+    }
+    .hireMe,
+    .CV {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+    .aboutMe {
+        width: 92%;
+        gap: 1.5rem;
+    }
+    .textTitle,
+    .projectTitle,
+    .contactTitle {
+        font-size: 1.4rem;
+    }
+    .aboutMePar {
+        font-size: 0.9rem;
+        line-height: 1.8;
+    }
+    .works {
+        padding: 2.5rem 4%;
+    }
+    .works ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .works li {
+        flex: 1 1 auto;
+        width: 100%;
+        padding: 1rem;
+    }
+    .works li img {
+        width: 100%;
+        max-width: 200px;
+        height: 150px;
+    }
+    .contactContainer {
+        width: 92%;
+    }
+    .socialMedia {
+        gap: 0.7rem;
+    }
+    .socialMedia a {
+        padding: 0.7rem;
+    }
+    .socialMedia img {
+        width: 22px;
+        height: 22px;
+    }
+    footer {
+        font-size: 0.8rem;
+        padding: 1.2rem 0.8rem;
+    }
+}
+
+
+/* Very small phones */
+
+@media screen and (max-width: 360px) {
+    .navigation ul {
+        gap: 0.5rem 0.7rem;
+    }
+    .navigation a {
+        font-size: 0.75rem;
+    }
+    .name {
+        font-size: 1.5rem;
+    }
+    .tital {
+        font-size: 1.8rem;
+    }
+    .HeroBtns {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .hireMe,
+    .CV {
+        justify-content: center;
+        text-align: center;
+    }
+    .textTitle,
+    .projectTitle,
+    .contactTitle {
+        font-size: 1.25rem;
+    }
+    .works li img {
+        height: 130px;
+    }
+    .socialMedia {
+        gap: 0.5rem;
+    }
+}
