@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details | Mohammed Badreldeen</title>
+
+    <meta name="description" content="Details of a project, paper, seminar or conference by Mohammed Badreldeen.">
+    <meta name="theme-color" content="#0a0e1a">
+
+    <link rel="icon" href="/SRC/PIC/MB Monogram Elegant Code Mark.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Decorative background -->
+    <div class="bg-decor" aria-hidden="true">
+        <span class="glow glow-1"></span>
+        <span class="glow glow-2"></span>
+        <span class="glow glow-3"></span>
+        <span class="bg-grid"></span>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <a href="index.html" class="logo" aria-label="Back to home">
+            <img class="img1" src="/SRC/PIC/MB Monogram Elegant Code Mark.svg" alt="Web Logo">
+        </a>
+
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="navigation" id="primaryNav" aria-label="Main navigation">
+            <ul>
+                <li><a class="nav-link" href="index.html#aboutMe">About Me</a></li>
+                <li><a class="nav-link" href="index.html#MyWorks">MyWorks</a></li>
+                <li><a class="nav-link" href="index.html#skills">Skills</a></li>
+                <li><a class="nav-link" href="index.html#contact">ContactMe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- DETAIL PAGE -->
+    <main class="detailPage" id="detailPage">
+        <div class="detailContainer">
+
+            <a class="backLink" href="index.html#MyWorks">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg> Back to works
+            </a>
+
+            <div class="detailHeader">
+                <span class="detailBadge" id="detailBadge">Project</span>
+                <h1 class="detailTitle" id="detailTitle">—</h1>
+                <p class="detailSub" id="detailSub">—</p>
+                <div class="detailMeta" id="detailMeta"></div>
+            </div>
+
+            <div class="detailHero">
+                <img id="detailImage" src="" alt="">
+            </div>
+
+            <div class="detailContent">
+
+                <div class="detailMain">
+                    <h2 class="detailSectionTitle">Overview</h2>
+                    <p class="detailDescription" id="detailDescription">—</p>
+
+                    <h2 class="detailSectionTitle">Highlights</h2>
+                    <ul class="detailHighlights" id="detailHighlights"></ul>
+                </div>
+
+                <aside class="detailSide">
+                    <div class="detailSideBlock">
+                        <h3>Technologies</h3>
+                        <div class="detailTags" id="detailTags"></div>
+                    </div>
+
+                    <div class="detailSideBlock">
+                        <h3>Links</h3>
+                        <div class="detailLinks" id="detailLinks"></div>
+                    </div>
+                </aside>
+
+            </div>
+
+            <!-- Related items -->
+            <div class="detailRelatedWrap">
+                <h2 class="detailSectionTitle">Related items</h2>
+                <div class="detailRelated" id="detailRelated"></div>
+            </div>
+
+            <div class="detailFooter">
+                <a class="hireMe" href="index.html#MyWorks">← Explore more works</a>
+                <a class="CV" href="index.html#contact">
+                    Get in touch
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                        stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Built by Mohammed Badreldeen</p>
+    </footer>
+
+    <button class="to-top" id="toTop" type="button" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

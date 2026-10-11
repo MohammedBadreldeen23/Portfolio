@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammed Badreldeen | Software Developer</title>
 
-    <meta name="description" content="Mohammed Badreldeen — Software Developer with a Computer Science background. I build practical desktop and web applications with C#, .NET, Java, Python and SQL.">
+    <meta name="description" content="Mohammed Badreldeen — Software Developer. Projects, research papers, seminars and conferences. C#, .NET, Java, Python, SQL.">
     <meta name="author" content="Mohammed Badreldeen">
-    <meta name="theme-color" content="#0b0f14">
+    <meta name="theme-color" content="#0a0e1a">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mohammed Badreldeen | Software Developer">
@@ -29,6 +29,7 @@
     <div class="bg-decor" aria-hidden="true">
         <span class="glow glow-1"></span>
         <span class="glow glow-2"></span>
+        <span class="glow glow-3"></span>
         <span class="bg-grid"></span>
     </div>
 
@@ -49,6 +50,7 @@
             <ul>
                 <li><a class="nav-link" href="#aboutMe">About Me</a></li>
                 <li><a class="nav-link" href="#MyWorks">MyWorks</a></li>
+                <li><a class="nav-link" href="#skills">Skills</a></li>
                 <li><a class="nav-link" href="#contact">ContactMe</a></li>
             </ul>
         </nav>
@@ -102,34 +104,186 @@
     <!-- WORKS -->
     <section class="works" id="MyWorks">
         <div class="worksContainer">
+
             <div class="projectTitle">
                 <h1 class="aboutName">My recent</h1>
                 <h1 class="aboutTitle">works</h1>
             </div>
 
-            <ul>
-                <li>
-                    <a href="" aria-label="Landing Page project">
-                        <img src="assets/imgs/landingPage.png" alt="landing Page" />
-                        <h3>Landing Page</h3>
-                        <p>Responsive marketing page with semantic HTML and modern CSS.</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" aria-label="Web Application project">
-                        <img src="assets/imgs/webApp.png" alt="Wep App" />
-                        <h3>Web Application</h3>
-                        <p>Data-driven web app with a clean structure and smooth UX.</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="" aria-label="Desktop Application project">
-                        <img src="assets/imgs/app.png" alt="App" />
-                        <h3>Desktop Application</h3>
-                        <p>Windows Forms app with CRUD operations and a local database.</p>
-                    </a>
-                </li>
-            </ul>
+            <p class="worksIntro">
+                Projects, research papers, seminars, and conferences — click any item to see the full details.
+            </p>
+
+            <!-- Filter tabs -->
+            <div class="worksFilter" role="tablist" aria-label="Filter works by type">
+                <button class="filter-btn active" type="button" data-filter="all" role="tab" aria-selected="true">All</button>
+                <button class="filter-btn" type="button" data-filter="projects" role="tab" aria-selected="false">Projects</button>
+                <button class="filter-btn" type="button" data-filter="papers" role="tab" aria-selected="false">Papers</button>
+                <button class="filter-btn" type="button" data-filter="seminars" role="tab" aria-selected="false">Seminars</button>
+                <button class="filter-btn" type="button" data-filter="conferences" role="tab" aria-selected="false">Conferences</button>
+            </div>
+
+            <!-- Cards rendered by JS -->
+            <ul class="worksGrid" id="worksGrid"></ul>
+
+        </div>
+    </section>
+
+    <!-- SKILLS & EXPERIENCE -->
+    <section class="skills" id="skills">
+        <div class="skillsContainer">
+
+            <div class="projectTitle">
+                <h1 class="aboutName">Skills &</h1>
+                <h1 class="aboutTitle">Experience</h1>
+            </div>
+
+            <div class="skillsLayout">
+
+                <!-- LEFT: Skills -->
+                <div class="skillsColumn reveal">
+                    <h2 class="columnTitle">What I do best</h2>
+
+                    <div class="skillBars">
+                        <div class="skillBar">
+                            <div class="skillInfo">
+                                <span>Desktop App Development</span>
+                                <span class="skillTech">C# · .NET · WinForms</span>
+                            </div>
+                            <div class="skillTrack">
+                                <div class="skillFill" style="--lvl: 92%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skillBar">
+                            <div class="skillInfo">
+                                <span>Databases & Data Modeling</span>
+                                <span class="skillTech">SQL Server · SQLite</span>
+                            </div>
+                            <div class="skillTrack">
+                                <div class="skillFill" style="--lvl: 84%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skillBar">
+                            <div class="skillInfo">
+                                <span>Object-Oriented Programming</span>
+                                <span class="skillTech">Java · Python · C#</span>
+                            </div>
+                            <div class="skillTrack">
+                                <div class="skillFill" style="--lvl: 88%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skillBar">
+                            <div class="skillInfo">
+                                <span>Web Development</span>
+                                <span class="skillTech">HTML · CSS · JavaScript</span>
+                            </div>
+                            <div class="skillTrack">
+                                <div class="skillFill" style="--lvl: 78%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skillBar">
+                            <div class="skillInfo">
+                                <span>Problem Solving & Algorithms</span>
+                                <span class="skillTech">Data Structures · Logic</span>
+                            </div>
+                            <div class="skillTrack">
+                                <div class="skillFill" style="--lvl: 80%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skillBar">
+                            <div class="skillInfo">
+                                <span>Version Control & Collaboration</span>
+                                <span class="skillTech">Git · GitHub</span>
+                            </div>
+                            <div class="skillTrack">
+                                <div class="skillFill" style="--lvl: 82%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="subColumnTitle">Tools & Technologies</h3>
+                    <ul class="skillTags">
+                        <li>C#</li>
+                        <li>.NET</li>
+                        <li>Windows Forms</li>
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>OOP</li>
+                        <li>SQL Server</li>
+                        <li>SQLite</li>
+                        <li>Git</li>
+                        <li>GitHub</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>VS Code</li>
+                        <li>Visual Studio</li>
+                    </ul>
+                </div>
+
+                <!-- RIGHT: Experience -->
+                <div class="experienceColumn reveal">
+                    <h2 class="columnTitle">Experience & Activities</h2>
+
+                    <div class="timeline">
+
+                        <div class="timelineItem">
+                            <div class="timelineDot"></div>
+                            <div class="timelineContent">
+                                <span class="timelineDate">2023 — Present</span>
+                                <h3>IEEE University of Gezira Student Branch</h3>
+                                <span class="timelineRole">Active Member & Volunteer</span>
+                                <p>
+                                    Organizing and volunteering in technical events, workshops, and student activities. Collaborating with a multidisciplinary team to deliver IEEE activities, and representing the branch at conferences.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timelineItem">
+                            <div class="timelineDot"></div>
+                            <div class="timelineContent">
+                                <span class="timelineDate">2023 — Present</span>
+                                <h3>Freelance Software Development</h3>
+                                <span class="timelineRole">Solo Developer</span>
+                                <p>
+                                    Building small desktop and web applications for local clients and personal projects. Focus on clean architecture, offline-first desktop apps, and user-friendly interfaces.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timelineItem">
+                            <div class="timelineDot"></div>
+                            <div class="timelineContent">
+                                <span class="timelineDate">2023 — 2024</span>
+                                <h3>Human Resources & Team Coordination</h3>
+                                <span class="timelineRole">Volunteer Roles</span>
+                                <p>
+                                    Coordinated student teams, managed schedules and communication, and supported HR operations in student-led initiatives. Strengthened soft skills in leadership, planning, and teamwork.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timelineItem">
+                            <div class="timelineDot"></div>
+                            <div class="timelineContent">
+                                <span class="timelineDate">2024</span>
+                                <h3>IEEE Sudan Student Conference</h3>
+                                <span class="timelineRole">Attendee & Volunteer</span>
+                                <p>
+                                    Attended technical sessions, networked with professionals, and helped organize student activities at the conference.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -171,7 +325,6 @@
         <p>Built by Mohammed Badreldeen</p>
     </footer>
 
-    <!-- Back to top -->
     <button class="to-top" id="toTop" type="button" aria-label="Back to top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
