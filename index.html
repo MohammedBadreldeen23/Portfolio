@@ -4,48 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mohammed Badreldeen | Software Developer</title>
+
+    <meta name="description" content="Mohammed Badreldeen — Software Developer with a Computer Science background. I build practical desktop and web applications with C#, .NET, Java, Python and SQL.">
+    <meta name="author" content="Mohammed Badreldeen">
+    <meta name="theme-color" content="#0b0f14">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mohammed Badreldeen | Software Developer">
+    <meta property="og:description" content="Software Developer focused on C#, .NET, Java, Python and databases.">
+
+    <link rel="icon" href="/SRC/PIC/MB Monogram Elegant Code Mark.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <img class="img1" src="/SRC/PIC/MB Monogram Elegant Code Mark.svg" alt="Web Logo">
-        <nav class="navigation">
+
+    <!-- Decorative background -->
+    <div class="bg-decor" aria-hidden="true">
+        <span class="glow glow-1"></span>
+        <span class="glow glow-2"></span>
+        <span class="bg-grid"></span>
+    </div>
+
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <a href="#top" class="logo" aria-label="Back to top">
+            <img class="img1" src="/SRC/PIC/MB Monogram Elegant Code Mark.svg" alt="Web Logo">
+        </a>
+
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="navigation" id="primaryNav" aria-label="Main navigation">
             <ul>
-                <li>
-                    <a href="#aboutMe">About Me</a>
-                    <a href=""></a>
-                </li>
-                <li>
-                    <a href="#MyWorks">MyWorks</a></li>
-                <li><a href="#contact">ContactMe</a></li>
+                <li><a class="nav-link" href="#aboutMe">About Me</a></li>
+                <li><a class="nav-link" href="#MyWorks">MyWorks</a></li>
+                <li><a class="nav-link" href="#contact">ContactMe</a></li>
             </ul>
         </nav>
     </header>
-    <hr />
-    <section class="Hreo">
-        <img class="arrow" src="assets/svg/arrow.svg" alt="Arrow">
+
+    <!-- HERO -->
+    <section class="Hreo" id="top">
+        <img class="arrow" src="assets/svg/arrow.svg" alt="Arrow" aria-hidden="true">
+
         <div class="HeroSub">
+            <p class="hero-greet"><span class="dot"></span> Available for opportunities</p>
             <h1 class="name">I'M Mohammed Badreldeen</h1>
-            <h1 class="tital">Software Devolper</h1>
+            <h1 class="tital">
+                <span class="typed-text" id="typedText"></span><span class="caret" aria-hidden="true"></span>
+            </h1>
+
+            <div class="HeroBtns">
+                <a class="hireMe" href="#contact">Hire Me</a>
+                <a class="CV" href="assets/Mohammed cv.pdf" download>
+                    Download Cv
+                    <img src="assets/svg/download.svg" alt="Donload Button">
+                </a>
+            </div>
         </div>
-        <div class="HeroBtns">
-            <a class="hireMe" href="#contact">Hire Me</a>
-            <a class="CV" href="assets/Mohammed cv.pdf" download>Download Cv
-            <img src="assets/svg/download.svg" alt="Donload Button"></a>
-        </div>
+
         <img src="assets/svg/Hero.svg" alt="Hero Img" class="heroImg">
     </section>
 
+    <!-- ABOUT -->
     <section class="aboutMe" id="aboutMe">
         <img src="assets/svg/AboutMe.svg" alt="aboutMe image" class="aboutMeImg" />
+
         <div class="textContainer">
             <div class="textTitle">
                 <h1 class="aboutName">About</h1>
                 <h1 class="aboutTitle">me</h1>
                 <img src="assets/svg/lightbulb.svg" alt="ligh" class="light" />
             </div>
+
             <p class="aboutMePar">
                 Hi, I'm Mohamed Badreldeen Albalal, a Software Developer with a background in Computer Science and a strong interest in building practical software solutions that solve real-world problems. My technical interests include C#, .NET, Windows Forms, Java,
                 Python, Object-Oriented Programming (OOP), and database technologies such as SQL Server and SQLite. I enjoy developing desktop applications, working with data, and continuously expanding my technical skills to create reliable, user-friendly
@@ -57,32 +99,47 @@
         </div>
     </section>
 
-
+    <!-- WORKS -->
     <section class="works" id="MyWorks">
         <div class="worksContainer">
             <div class="projectTitle">
                 <h1 class="aboutName">My recent</h1>
                 <h1 class="aboutTitle">works</h1>
             </div>
+
             <ul>
                 <li>
-                    <a href=""><img src="assets/imgs/landingPage.png" alt="landing Page" /></a>
+                    <a href="" aria-label="Landing Page project">
+                        <img src="assets/imgs/landingPage.png" alt="landing Page" />
+                        <h3>Landing Page</h3>
+                        <p>Responsive marketing page with semantic HTML and modern CSS.</p>
+                    </a>
                 </li>
                 <li>
-                    <a href=""><img src="assets/imgs/webApp.png" alt="Wep App" /></a>
+                    <a href="" aria-label="Web Application project">
+                        <img src="assets/imgs/webApp.png" alt="Wep App" />
+                        <h3>Web Application</h3>
+                        <p>Data-driven web app with a clean structure and smooth UX.</p>
+                    </a>
                 </li>
                 <li>
-                    <a href=""><img src="assets/imgs/app.png" alt="App" /></a>
+                    <a href="" aria-label="Desktop Application project">
+                        <img src="assets/imgs/app.png" alt="App" />
+                        <h3>Desktop Application</h3>
+                        <p>Windows Forms app with CRUD operations and a local database.</p>
+                    </a>
                 </li>
             </ul>
-
         </div>
     </section>
+
+    <!-- CONTACT -->
     <section class="contactContainer" id="contact">
         <div class="contactTitle">
             <h1 class="aboutName">Contact</h1>
             <h1 class="aboutTitle">me</h1>
         </div>
+
         <div class="contact">
             <div class="emailAndPhone">
                 <img src="assets/svg/Email.svg" alt="email logo" />
@@ -90,20 +147,39 @@
                     <h3>mohammedbadreldeen23@gmail.com</h3>
                 </a>
             </div>
+
             <div class="emailAndPhone">
                 <img src="assets/svg/phone.svg" alt="phone logo" />
-                <h3>+0024908259705</h3>
+                <a href="tel:+24908259705">
+                    <h3>+0024908259705</h3>
+                </a>
             </div>
         </div>
-        <div class="socialMedia">
-            <a href="https://www.linkedin.com/in/mohamed-badreldeen-a-714299354?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><img src="assets/svg/linkedin.svg" alt="my linkedin account" /></a>
-            <a href="https://github.com/MohammedBadreldeen23" target="_blank"><img src="assets/svg/github.svg" alt=" my github account" /></a>
 
+        <div class="socialMedia">
+            <a href="https://www.linkedin.com/in/mohamed-badreldeen-a-714299354?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <img src="assets/svg/linkedin.svg" alt="my linkedin account" />
+            </a>
+            <a href="https://github.com/MohammedBadreldeen23" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <img src="assets/svg/github.svg" alt=" my github account" />
+            </a>
         </div>
     </section>
+
+    <!-- FOOTER -->
     <footer>
-        <p>Built by Mhammed badreldeen</p>
+        <p>Built by Mohammed Badreldeen</p>
     </footer>
+
+    <!-- Back to top -->
+    <button class="to-top" id="toTop" type="button" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
