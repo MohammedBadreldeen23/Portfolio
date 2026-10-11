@@ -1,27 +1,398 @@
 /* =========================================================
    Mohammed Badreldeen — Portfolio
-   Vanilla JS: nav, scroll progress, typing, reveal, back-to-top
+   Index: renders works from data + filters + skills animation
+   Details: reads ?id= from URL and renders the matching item
 ========================================================= */
 (function() {
     "use strict";
 
-    /* ---------------------------------------------------
-       1. Header scrolled state
-    --------------------------------------------------- */
+    /* =========================================================
+       SITE DATA — all works live here
+       Add / edit items here and both pages update automatically.
+    ========================================================= */
+    const SITE_DATA = {
+        works: [
+            /* ---------- PROJECTS ---------- */
+            {
+                id: "library-app",
+                category: "projects",
+                categoryLabel: "Project",
+                title: "Library Management System",
+                subtitle: "A desktop application for managing books, members, and borrowing workflows.",
+                image: "assets/imgs/app.png",
+                date: "2024",
+                duration: "3 months",
+                role: "Solo Developer",
+                tags: ["C#", ".NET", "Windows Forms", "SQLite"],
+                description: "A complete desktop solution built with C# and Windows Forms for small libraries. Staff can manage books, members and borrowing records through a clean, fast interface backed by a local SQLite database. The focus was on reliability, offline-first design, and a clean object-oriented structure.",
+                highlights: [
+                    "Full CRUD for books, members and borrowing records",
+                    "Due-date tracking with overdue alerts",
+                    "Advanced search and filtering",
+                    "Reports and export functionality",
+                    "Offline-first local database with SQLite"
+                ],
+                links: [
+                    { label: "Source code on GitHub", url: "https://github.com/MohammedBadreldeen23" }
+                ]
+            },
+            {
+                id: "portfolio-web",
+                category: "projects",
+                categoryLabel: "Project",
+                title: "Personal Portfolio Website",
+                subtitle: "A responsive portfolio built with semantic HTML, modern CSS and vanilla JavaScript.",
+                image: "assets/imgs/landingPage.png",
+                date: "2024",
+                duration: "2 weeks",
+                role: "Designer & Developer",
+                tags: ["HTML", "CSS", "JavaScript"],
+                description: "A modern, static portfolio designed to showcase projects, skills, and experience. The focus was on clean structure, accessibility, and a smooth experience across every device — without any external dependencies.",
+                highlights: [
+                    "Fully responsive layout for all screen sizes",
+                    "Smooth scroll and reveal animations",
+                    "Accessible semantic markup",
+                    "Zero dependencies — pure HTML, CSS and JS"
+                ],
+                links: [
+                    { label: "View on GitHub", url: "https://github.com/MohammedBadreldeen23" }
+                ]
+            },
+            {
+                id: "task-manager",
+                category: "projects",
+                categoryLabel: "Project",
+                title: "Task Manager Desktop App",
+                subtitle: "A lightweight Windows application for organizing daily tasks and projects.",
+                image: "assets/imgs/webApp.png",
+                date: "2023",
+                duration: "1 month",
+                role: "Solo Developer",
+                tags: ["C#", ".NET", "Windows Forms"],
+                description: "A small but practical desktop tool for organizing tasks by project, priority and deadline. Built with C# and Windows Forms, with a focus on keyboard shortcuts and fast data entry.",
+                highlights: [
+                    "Project-based task organization",
+                    "Priority levels and deadlines",
+                    "Quick search and filters",
+                    "Data persistence with SQLite"
+                ],
+                links: []
+            },
+
+            /* ---------- PAPERS ---------- */
+            {
+                id: "design-patterns-paper",
+                category: "papers",
+                categoryLabel: "Research Paper",
+                title: "Design Patterns in Desktop Applications",
+                subtitle: "A practical study of how classic design patterns improve maintainability in .NET desktop projects.",
+                image: "assets/imgs/app.png",
+                date: "2024",
+                role: "Author",
+                tags: ["Software Engineering", "Design Patterns", "C#"],
+                description: "This paper explores how well-known design patterns (MVC, Repository, Factory, Observer) are applied in real-world .NET desktop applications, and how they affect code maintainability, testability, and team collaboration.",
+                highlights: [
+                    "Analysis of 5 common patterns in desktop apps",
+                    "Case study on a real .NET Windows Forms project",
+                    "Recommendations for small and mid-sized teams",
+                    "Metrics on maintainability and code reuse"
+                ],
+                links: [
+                    { label: "Read the paper (PDF)", url: "#" }
+                ]
+            },
+            {
+                id: "db-normalization-paper",
+                category: "papers",
+                categoryLabel: "Research Paper",
+                title: "Database Normalization for Small-Scale Applications",
+                subtitle: "Balancing performance and data integrity in small desktop and web applications.",
+                image: "assets/imgs/webApp.png",
+                date: "2023",
+                role: "Author",
+                tags: ["Databases", "SQL", "Normalization"],
+                description: "A practical guide to applying normalization rules (1NF to 3NF) in small-scale applications without over-engineering the schema. Includes real SQL examples and a clear trade-off analysis.",
+                highlights: [
+                    "Step-by-step normalization walkthrough",
+                    "Trade-offs between normalization and performance",
+                    "Common mistakes in small projects",
+                    "SQL examples for SQL Server and SQLite"
+                ],
+                links: [
+                    { label: "Read the paper (PDF)", url: "#" }
+                ]
+            },
+
+            /* ---------- SEMINARS ---------- */
+            {
+                id: "dotnet-seminar",
+                category: "seminars",
+                categoryLabel: "Seminar",
+                title: "Modern C# and .NET 8",
+                subtitle: "A seminar on new language features and what they mean for desktop developers.",
+                image: "assets/imgs/app.png",
+                date: "2024",
+                role: "Speaker",
+                tags: ["C#", ".NET", "Seminar"],
+                description: "Presented an overview of the latest C# language features and .NET 8 improvements relevant to desktop developers, including performance improvements, new syntax, and best practices.",
+                highlights: [
+                    "Overview of C# 12 language features",
+                    "Performance improvements in .NET 8",
+                    "Migration tips for existing Windows Forms projects",
+                    "Live coding demo"
+                ],
+                links: []
+            },
+            {
+                id: "git-seminar",
+                category: "seminars",
+                categoryLabel: "Seminar",
+                title: "Git & GitHub Best Practices",
+                subtitle: "A practical seminar on version control for student developers.",
+                image: "assets/imgs/landingPage.png",
+                date: "2023",
+                role: "Speaker",
+                tags: ["Git", "GitHub", "Version Control"],
+                description: "Delivered a hands-on seminar covering Git fundamentals, branching strategies, pull requests, and collaborative workflows for student teams and small projects.",
+                highlights: [
+                    "Git fundamentals and mental model",
+                    "Branching strategies for teams",
+                    "Pull request and code review workflow",
+                    "Hands-on exercises for attendees"
+                ],
+                links: []
+            },
+
+            /* ---------- CONFERENCES ---------- */
+            {
+                id: "ieee-conference-2024",
+                category: "conferences",
+                categoryLabel: "Conference",
+                title: "IEEE Sudan Student Conference 2024",
+                subtitle: "Participated as an attendee and volunteer organizer.",
+                image: "assets/imgs/landingPage.png",
+                date: "2024",
+                role: "Attendee & Volunteer",
+                tags: ["IEEE", "Conference", "Networking"],
+                description: "Attended the IEEE Sudan Student Conference 2024, participated in technical sessions, and volunteered in organizing the event. Engaged with students and professionals from across Sudan.",
+                highlights: [
+                    "Attended technical sessions on AI and software engineering",
+                    "Volunteered in logistics and student coordination",
+                    "Networked with IEEE members and industry professionals",
+                    "Represented IEEE University of Gezira Student Branch"
+                ],
+                links: []
+            },
+            {
+                id: "sudan-tech-summit",
+                category: "conferences",
+                categoryLabel: "Conference",
+                title: "Sudan Tech Summit 2023",
+                subtitle: "Attended sessions on software development and emerging technologies.",
+                image: "assets/imgs/webApp.png",
+                date: "2023",
+                role: "Attendee",
+                tags: ["Tech Summit", "Networking"],
+                description: "Participated in the Sudan Tech Summit 2023, attending talks and workshops on software development, cloud technologies, and the growing tech ecosystem in Sudan.",
+                highlights: [
+                    "Attended talks on cloud and DevOps",
+                    "Participated in a workshop on modern web development",
+                    "Networked with local tech companies and startups"
+                ],
+                links: []
+            }
+        ]
+    };
+
+    /* =========================================================
+       UTILITIES
+    ========================================================= */
+    function escapeHTML(str) {
+        const div = document.createElement("div");
+        div.textContent = String(str);
+        return div.innerHTML;
+    }
+
+    function getQueryParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    /* =========================================================
+       INDEX PAGE — RENDER WORKS + FILTERS
+    ========================================================= */
+    const worksGrid = document.getElementById("worksGrid");
+
+    if (worksGrid) {
+        /* --- Render all cards --- */
+        SITE_DATA.works.forEach((item) => {
+            const li = document.createElement("li");
+            li.className = "workItem";
+            li.setAttribute("data-category", item.category);
+
+            const tagsHTML = item.tags
+                .slice(0, 3)
+                .map((t) => `<span class="workTag">${escapeHTML(t)}</span>`)
+                .join("");
+
+            li.innerHTML = `
+                <a href="details.html?id=${encodeURIComponent(item.id)}" aria-label="View details: ${escapeHTML(item.title)}">
+                    <div class="workThumb">
+                        <img src="${item.image}" alt="${escapeHTML(item.title)}" loading="lazy">
+                        <span class="workBadge">${escapeHTML(item.categoryLabel)}</span>
+                    </div>
+                    <div class="workBody">
+                        <h3>${escapeHTML(item.title)}</h3>
+                        <p>${escapeHTML(item.subtitle)}</p>
+                        <div class="workMeta">${tagsHTML}</div>
+                    </div>
+                </a>
+            `;
+            worksGrid.appendChild(li);
+        });
+
+        /* --- Filter buttons --- */
+        const filterButtons = document.querySelectorAll(".filter-btn");
+
+        filterButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                filterButtons.forEach((b) => {
+                    b.classList.remove("active");
+                    b.setAttribute("aria-selected", "false");
+                });
+                btn.classList.add("active");
+                btn.setAttribute("aria-selected", "true");
+
+                const filter = btn.getAttribute("data-filter");
+                document.querySelectorAll(".workItem").forEach((item) => {
+                    const cat = item.getAttribute("data-category");
+                    const show = filter === "all" || filter === cat;
+                    item.classList.toggle("hidden", !show);
+                });
+            });
+        });
+    }
+
+    /* =========================================================
+       DETAILS PAGE
+    ========================================================= */
+    const detailPage = document.getElementById("detailPage");
+
+    if (detailPage) {
+        const id = getQueryParam("id");
+        const item = SITE_DATA.works.find((w) => w.id === id);
+
+        if (!item) {
+            detailPage.innerHTML = `
+                <div class="detailContainer">
+                    <div class="detailError">
+                        <h1>Item not found</h1>
+                        <p>Sorry, we couldn't find the item you're looking for.</p>
+                        <a class="hireMe" href="index.html#MyWorks">← Back to works</a>
+                    </div>
+                </div>
+            `;
+        } else {
+            document.title = item.title + " | Mohammed Badreldeen";
+
+            const setText = (elId, value) => {
+                const el = document.getElementById(elId);
+                if (el) el.textContent = value;
+            };
+
+            setText("detailBadge", item.categoryLabel);
+            setText("detailTitle", item.title);
+            setText("detailSub", item.subtitle);
+            setText("detailDescription", item.description);
+
+            /* Hero image */
+            const img = document.getElementById("detailImage");
+            if (img) {
+                img.src = item.image;
+                img.alt = item.title;
+            }
+
+            /* Meta line */
+            const metaEl = document.getElementById("detailMeta");
+            if (metaEl) {
+                const parts = [];
+                if (item.date) parts.push(`<span><strong>Date:</strong> ${escapeHTML(item.date)}</span>`);
+                if (item.duration) parts.push(`<span><strong>Duration:</strong> ${escapeHTML(item.duration)}</span>`);
+                if (item.role) parts.push(`<span><strong>Role:</strong> ${escapeHTML(item.role)}</span>`);
+                metaEl.innerHTML = parts.join("");
+            }
+
+            /* Highlights */
+            const highlightsEl = document.getElementById("detailHighlights");
+            if (highlightsEl && item.highlights) {
+                highlightsEl.innerHTML = item.highlights
+                    .map((h) => `<li>${escapeHTML(h)}</li>`)
+                    .join("");
+            }
+
+            /* Tags */
+            const tagsEl = document.getElementById("detailTags");
+            if (tagsEl) {
+                tagsEl.innerHTML = item.tags
+                    .map((t) => `<span class="workTag">${escapeHTML(t)}</span>`)
+                    .join("");
+            }
+
+            /* Links */
+            const linksEl = document.getElementById("detailLinks");
+            if (linksEl) {
+                if (!item.links || item.links.length === 0) {
+                    linksEl.innerHTML = `<p class="detailMuted">No external links available.</p>`;
+                } else {
+                    linksEl.innerHTML = item.links
+                        .map(
+                            (l) =>
+                            `<a class="detailLink" href="${escapeHTML(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(l.label)} →</a>`
+                        )
+                        .join("");
+                }
+            }
+
+            /* Related items (same category) */
+            const relatedEl = document.getElementById("detailRelated");
+            if (relatedEl) {
+                const related = SITE_DATA.works
+                    .filter((w) => w.category === item.category && w.id !== item.id)
+                    .slice(0, 3);
+
+                if (related.length === 0) {
+                    relatedEl.innerHTML = `<p class="detailMuted">No related items yet.</p>`;
+                } else {
+                    relatedEl.innerHTML = related
+                        .map(
+                            (r) => `
+                            <a class="relatedCard" href="details.html?id=${encodeURIComponent(r.id)}">
+                                <img src="${r.image}" alt="${escapeHTML(r.title)}">
+                                <div>
+                                    <span class="relatedBadge">${escapeHTML(r.categoryLabel)}</span>
+                                    <h4>${escapeHTML(r.title)}</h4>
+                                </div>
+                            </a>
+                        `
+                        )
+                        .join("");
+                }
+            }
+        }
+    }
+
+    /* =========================================================
+       SHARED — header, nav, scroll, typing, reveal, to-top
+    ========================================================= */
+
+    /* Header scrolled */
     const header = document.querySelector("header");
 
     function updateHeader() {
         if (!header) return;
-        if (window.scrollY > 20) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
+        header.classList.toggle("scrolled", window.scrollY > 20);
     }
 
-    /* ---------------------------------------------------
-       2. Mobile navigation toggle
-    --------------------------------------------------- */
+    /* Mobile nav */
     const navToggle = document.getElementById("navToggle");
     const primaryNav = document.getElementById("primaryNav");
 
@@ -41,85 +412,55 @@
             navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
         });
 
-        primaryNav.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", closeNav);
-        });
-
+        primaryNav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") closeNav();
         });
-
         document.addEventListener("click", (e) => {
             if (!primaryNav.classList.contains("open")) return;
-            if (!primaryNav.contains(e.target) && !navToggle.contains(e.target)) {
-                closeNav();
-            }
+            if (!primaryNav.contains(e.target) && !navToggle.contains(e.target)) closeNav();
         });
     }
 
-    /* ---------------------------------------------------
-       3. Scroll progress bar
-    --------------------------------------------------- */
+    /* Scroll progress */
     const progressBar = document.getElementById("scrollProgress");
 
     function updateProgress() {
         if (!progressBar) return;
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = percent + "%";
+        const st = window.scrollY || document.documentElement.scrollTop;
+        const dh = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + "%";
     }
 
-    /* ---------------------------------------------------
-       4. Back-to-top button
-    --------------------------------------------------- */
+    /* To top */
     const toTop = document.getElementById("toTop");
 
     function updateToTop() {
         if (!toTop) return;
-        if (window.scrollY > 500) {
-            toTop.classList.add("show");
-        } else {
-            toTop.classList.remove("show");
-        }
+        toTop.classList.toggle("show", window.scrollY > 500);
     }
-
     if (toTop) {
-        toTop.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+        toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     }
 
-    /* ---------------------------------------------------
-       5. Active nav link based on scroll position
-    --------------------------------------------------- */
+    /* Active nav link */
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".nav-link");
 
     function setActiveNavLink() {
         if (!sections.length || !navLinks.length) return;
-
-        const scrollPos = window.scrollY + window.innerHeight * 0.28;
-        let currentId = "";
-
-        sections.forEach((section) => {
-            const top = section.offsetTop;
-            const bottom = top + section.offsetHeight;
-            if (scrollPos >= top && scrollPos < bottom) {
-                currentId = section.id;
-            }
+        const pos = window.scrollY + window.innerHeight * 0.28;
+        let current = "";
+        sections.forEach((s) => {
+            if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) current = s.id;
         });
-
-        navLinks.forEach((link) => {
-            const href = link.getAttribute("href");
-            const isMatch = href === "#" + currentId;
-            link.classList.toggle("active", isMatch);
+        navLinks.forEach((l) => {
+            const href = l.getAttribute("href") || "";
+            l.classList.toggle("active", href.endsWith("#" + current));
         });
     }
 
-    /* ---------------------------------------------------
-       6. Unified scroll handler (rAF throttled)
-    --------------------------------------------------- */
+    /* Unified scroll */
     let ticking = false;
 
     function onScroll() {
@@ -133,76 +474,55 @@
             ticking = false;
         });
     }
-
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-
     onScroll();
 
-    /* ---------------------------------------------------
-       7. Typing effect in hero
-    --------------------------------------------------- */
+    /* Typing effect */
     const typedText = document.getElementById("typedText");
-    const roles = [
-        "Software Developer",
-        "C# / .NET Developer",
-        "Problem Solver",
-        "Desktop App Builder"
-    ];
-
+    const roles = ["Software Developer", "C# / .NET Developer", "Desktop App Builder", "Problem Solver"];
     if (typedText) {
-        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        if (prefersReduced) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) {
             typedText.textContent = roles[0];
         } else {
-            let roleIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-
-            const TYPE_SPEED = 90;
-            const DELETE_SPEED = 45;
-            const PAUSE_END = 1400;
-            const PAUSE_START = 350;
-
-            function tick() {
-                const current = roles[roleIndex];
-
-                if (isDeleting) {
-                    charIndex--;
-                    typedText.textContent = current.substring(0, charIndex);
-
-                    if (charIndex === 0) {
-                        isDeleting = false;
-                        roleIndex = (roleIndex + 1) % roles.length;
-                        setTimeout(tick, PAUSE_START);
+            let ri = 0,
+                ci = 0,
+                del = false;
+            const TS = 90,
+                DS = 45,
+                PE = 1400,
+                PS = 350;
+            (function tick() {
+                const cur = roles[ri];
+                if (del) {
+                    ci--;
+                    typedText.textContent = cur.substring(0, ci);
+                    if (ci === 0) {
+                        del = false;
+                        ri = (ri + 1) % roles.length;
+                        setTimeout(tick, PS);
                         return;
                     }
-                    setTimeout(tick, DELETE_SPEED);
+                    setTimeout(tick, DS);
                 } else {
-                    charIndex++;
-                    typedText.textContent = current.substring(0, charIndex);
-
-                    if (charIndex === current.length) {
-                        isDeleting = true;
-                        setTimeout(tick, PAUSE_END);
+                    ci++;
+                    typedText.textContent = cur.substring(0, ci);
+                    if (ci === cur.length) {
+                        del = true;
+                        setTimeout(tick, PE);
                         return;
                     }
-                    setTimeout(tick, TYPE_SPEED);
+                    setTimeout(tick, TS);
                 }
-            }
-
-            setTimeout(tick, 500);
+            })();
         }
     }
 
-    /* ---------------------------------------------------
-       8. Reveal on scroll (IntersectionObserver)
-    --------------------------------------------------- */
+    /* Reveal on scroll */
     const revealEls = document.querySelectorAll(".reveal");
-
     if ("IntersectionObserver" in window && revealEls.length) {
-        const revealObserver = new IntersectionObserver(
+        const obs = new IntersectionObserver(
             (entries, observer) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -212,29 +532,22 @@
                 });
             }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
         );
-
-        revealEls.forEach((el) => revealObserver.observe(el));
+        revealEls.forEach((el) => obs.observe(el));
     } else {
         revealEls.forEach((el) => el.classList.add("in"));
     }
 
-    /* ---------------------------------------------------
-       9. Smooth scroll for internal links
-    --------------------------------------------------- */
+    /* Smooth scroll for same-page anchor links */
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener("click", (e) => {
-            const targetId = link.getAttribute("href");
-            if (!targetId || targetId === "#") return;
-
-            const target = document.querySelector(targetId);
+            const id = link.getAttribute("href");
+            if (!id || id === "#") return;
+            const target = document.querySelector(id);
             if (!target) return;
-
             e.preventDefault();
-            const headerOffset = 90;
-            const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-
+            const top = target.getBoundingClientRect().top + window.scrollY - 90;
             window.scrollTo({ top, behavior: "smooth" });
-            history.replaceState(null, "", targetId);
+            history.replaceState(null, "", id);
         });
     });
 
