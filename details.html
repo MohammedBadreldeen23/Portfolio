@@ -20,6 +20,85 @@
 
 <body>
 
+    <!-- ========== SIDEBAR (fixed) ========== -->
+    <aside class="sidebar" id="sidebar" aria-label="Profile sidebar">
+        <div class="sidebarInner">
+
+            <div class="sidebarProfile">
+                <div class="sidebarAvatar">
+                    <span class="avatarFallback" aria-hidden="true">MB</span>
+                    <img src="assets/imgs/profile.png" alt="Mohammed Badreldeen" onerror="this.style.display='none'">
+                </div>
+                <h2 class="sidebarName">Mohammed Badreldeen</h2>
+                <p class="sidebarRole">
+                    <span class="statusDot" aria-hidden="true"></span> Software Developer
+                </p>
+                <p class="sidebarLocation">Sudan · Remote friendly</p>
+            </div>
+
+            <p class="sidebarBio">
+                I build practical desktop & web applications with C#, .NET, Java and Python — focused on clean architecture and real-world problems.
+            </p>
+
+            <div class="sidebarBlock">
+                <h3 class="sidebarBlockTitle">Top Skills</h3>
+                <ul class="sidebarTags">
+                    <li>C#</li>
+                    <li>.NET</li>
+                    <li>WinForms</li>
+                    <li>Java</li>
+                    <li>Python</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+
+            <div class="sidebarBlock">
+                <h3 class="sidebarBlockTitle">Experience</h3>
+                <ul class="sidebarExpList">
+                    <li>
+                        <span class="sidebarExpDate">2023 — Now</span>
+                        <strong>IEEE UofG Student Branch</strong>
+                        <span class="sidebarExpRole">Member & Volunteer</span>
+                    </li>
+                    <li>
+                        <span class="sidebarExpDate">2023 — Now</span>
+                        <strong>Freelance Software Development</strong>
+                        <span class="sidebarExpRole">Solo Developer</span>
+                    </li>
+                    <li>
+                        <span class="sidebarExpDate">2023 — 2024</span>
+                        <strong>HR & Team Coordination</strong>
+                        <span class="sidebarExpRole">Volunteer Roles</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebarBlock">
+                <h3 class="sidebarBlockTitle">Connect</h3>
+                <div class="sidebarSocial">
+                    <a href="https://www.linkedin.com/in/mohamed-badreldeen-a-714299354?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <img src="assets/svg/linkedin.svg" alt="">
+                    </a>
+                    <a href="https://github.com/MohammedBadreldeen23" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <img src="assets/svg/github.svg" alt="">
+                    </a>
+                    <a href="mailto:mohammedbadreldeen23@gmail.com" aria-label="Email">
+                        <img src="assets/svg/Email.svg" alt="">
+                    </a>
+                </div>
+            </div>
+
+            <a class="sidebarCta" href="index.html#contact">
+                Get in touch
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+            </a>
+
+        </div>
+    </aside>
+
     <!-- Decorative background -->
     <div class="bg-decor" aria-hidden="true">
         <span class="glow glow-1"></span>
@@ -95,7 +174,6 @@
 
             </div>
 
-            <!-- Related items -->
             <div class="detailRelatedWrap">
                 <h2 class="detailSectionTitle">Related items</h2>
                 <div class="detailRelated" id="detailRelated"></div>
