@@ -165,21 +165,22 @@
 
             /* ---------- CONFERENCES ---------- */
             {
-                id: "ieee-conference-2024",
+                id: "ieee-uofg-conferences-1",
                 category: "conferences",
                 categoryLabel: "Conference",
-                title: "IEEE Sudan Student Conference 2024",
-                subtitle: "Participated as an attendee and volunteer organizer.",
-                image: "assets/imgs/landingPage.png",
-                date: "2024",
-                role: "Attendee & Volunteer",
-                tags: ["IEEE", "Conference", "Networking"],
-                description: "Attended the IEEE Sudan Student Conference 2024, participated in technical sessions, and volunteered in organizing the event. Engaged with students and professionals from across Sudan.",
+                title: "From Code to Presentation: 50 Scientific Papers Challenge ",
+                subtitle: "Finalist with a Medicine Warehouse Management System Developed in VB.NET | IEEE UofG SB.",
+                image: "SRC/PIC/Con1.jpg",
+                date: "2022",
+                role: "Participant",
+                tags: ["IEEE", "Conference", "Networking", "Uofg"],
+                description: "As a participant in the 50 Scientific Papers Challenge organized by the IEEE University of Gezira Student Branch, I presented my Medicine Warehouse Management System, a software project developed using VB.NET. Reaching the final stage of the challenge was a valuable milestone in my academic and technical journey. I had the opportunity to present my paper to an audience, explain the project's concept, and demonstrate how software development can be applied to address practical challenges in medicine warehouse management.Beyond the technical experience, this achievement helped me develop my public speaking, technical communication, and project presentation skills, bringing together my academic background in Computer Science and my passion for software development.",
                 highlights: [
-                    "Attended technical sessions on AI and software engineering",
-                    "Volunteered in logistics and student coordination",
+                    "Reached the final stage of the IEEE UofG SB 50 Scientific Papers Challenge.",
+                    "Developed a Medicine Warehouse Management System using VB.NET.",
                     "Networked with IEEE members and industry professionals",
-                    "Represented IEEE University of Gezira Student Branch"
+                    "Presented the project to an audience, demonstrating its concept and practical applications.",
+                    "Enhanced technical communication, public speaking, and software presentation skills."
                 ],
                 links: []
             },
@@ -550,5 +551,7 @@
             history.replaceState(null, "", id);
         });
     });
+
+
 
 })();

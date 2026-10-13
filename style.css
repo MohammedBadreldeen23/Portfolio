@@ -206,12 +206,27 @@ h4 {
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     height: 3px;
-    width: 0%;
     background: var(--gradient-rich);
     box-shadow: 0 0 14px var(--accent-glow);
     z-index: 1000;
-    transition: width 0.08s linear;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.08s linear;
+    pointer-events: none;
+}
+
+@media (min-width: 1100px) {
+    .scroll-progress {
+        left: 280px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .scroll-progress {
+        left: 320px;
+    }
 }
 
 
@@ -227,13 +242,16 @@ h4 {
     bottom: 0;
     width: 280px;
     z-index: 950;
-    background: rgba(13, 18, 32, 0.85);
+    background: rgba(13, 18, 32, 0.88);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-right: 1px solid var(--border);
+    padding: 2rem 1.4rem 1.5rem;
+    /* Independent scrolling */
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 2.2rem 1.4rem 2rem;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: #22304a transparent;
     animation: slideInLeft 0.7s var(--ease) both;
@@ -270,7 +288,7 @@ h4 {
 .sidebarInner {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.4rem;
     width: 100%;
 }
 
@@ -297,6 +315,17 @@ h4 {
     place-items: center;
     margin-bottom: 0.9rem;
     transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
+    overflow: hidden;
+}
+
+.sidebarAvatar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 3px var(--bg-soft);
+    pointer-events: none;
+    z-index: 3;
 }
 
 .sidebarAvatar:hover {
@@ -313,7 +342,7 @@ h4 {
     background: var(--surface-2);
     color: var(--text);
     font-family: var(--font-head);
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 700;
     letter-spacing: 0.05em;
 }
@@ -325,11 +354,12 @@ h4 {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--bg-soft);
+    object-position: center top;
+    display: block;
 }
 
 .sidebarName {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
     letter-spacing: -0.01em;
@@ -340,7 +370,7 @@ h4 {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--accent-2);
     font-weight: 500;
 }
@@ -356,7 +386,7 @@ h4 {
 }
 
 .sidebarLocation {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     color: var(--text-dim);
     letter-spacing: 0.02em;
 }
@@ -365,11 +395,11 @@ h4 {
 /* --- Bio --- */
 
 .sidebarBio {
-    font-size: 0.85rem;
-    line-height: 1.65;
+    font-size: 0.82rem;
+    line-height: 1.6;
     color: var(--text-muted);
     text-align: center;
-    padding: 0.9rem 0.7rem;
+    padding: 0.85rem 0.7rem;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -381,11 +411,11 @@ h4 {
 .sidebarBlock {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.7rem;
 }
 
 .sidebarBlockTitle {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 600;
     color: var(--text-dim);
     letter-spacing: 0.15em;
@@ -412,12 +442,12 @@ h4 {
 }
 
 .sidebarTags li {
-    padding: 0.3rem 0.7rem;
+    padding: 0.28rem 0.65rem;
     border-radius: 100px;
     background: rgba(0, 120, 212, 0.1);
     border: 1px solid rgba(0, 120, 212, 0.22);
     color: var(--accent-2);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 500;
     transition: all 0.2s var(--ease);
     cursor: default;
@@ -429,53 +459,48 @@ h4 {
 }
 
 
-/* --- Experience list --- */
+/* --- Contact --- */
 
-.sidebarExpList {
+.sidebarContact {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 0.45rem;
 }
 
-.sidebarExpList li {
+.sidebarContactItem {
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    padding-left: 0.9rem;
-    position: relative;
-}
-
-.sidebarExpList li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--accent-2);
-    box-shadow: 0 0 8px var(--accent-glow);
-}
-
-.sidebarExpDate {
-    font-size: 0.68rem;
-    color: var(--text-dim);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.sidebarExpList strong {
-    font-size: 0.82rem;
-    color: var(--text);
-    font-weight: 600;
-    line-height: 1.35;
-}
-
-.sidebarExpRole {
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
     font-size: 0.75rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    font-weight: 500;
+    transition: all 0.25s var(--ease);
+    overflow: hidden;
+}
+
+.sidebarContactItem:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent-2);
+    transform: translateX(3px);
+}
+
+.sidebarContactItem img {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    filter: brightness(0) saturate(100%) invert(60%) sepia(88%) saturate(2500%) hue-rotate(175deg) brightness(101%) contrast(101%);
+}
+
+.sidebarContactItem span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 
@@ -483,16 +508,17 @@ h4 {
 
 .sidebarSocial {
     display: flex;
-    gap: 0.5rem;
-    justify-content: flex-start;
+    gap: 0.45rem;
+    justify-content: center;
+    margin-top: 0.15rem;
 }
 
 .sidebarSocial a {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     display: grid;
     place-items: center;
-    border-radius: 12px;
+    border-radius: 10px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border);
     transition: all 0.25s var(--ease);
@@ -506,8 +532,8 @@ h4 {
 }
 
 .sidebarSocial img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     filter: brightness(0) invert(1);
     opacity: 0.8;
     transition: filter 0.25s ease, opacity 0.25s ease;
@@ -526,16 +552,15 @@ h4 {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 1rem;
     border-radius: 12px;
     background: var(--gradient);
     color: #fff;
     font-family: var(--font-head);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
     box-shadow: 0 10px 26px -12px var(--accent-glow);
     transition: transform 0.25s var(--ease), box-shadow 0.25s ease;
-    margin-top: 0.4rem;
 }
 
 .sidebarCta:hover {
@@ -544,13 +569,32 @@ h4 {
 }
 
 .sidebarCta svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     transition: transform 0.25s var(--ease);
 }
 
 .sidebarCta:hover svg {
     transform: translateX(3px);
+}
+
+
+/* --- Sidebar footer --- */
+
+.sidebarFooter {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.3rem;
+}
+
+.sidebarFooter .heart {
+    color: var(--accent-2);
+    animation: pulse 2s infinite;
+    display: inline-block;
 }
 
 
@@ -568,7 +612,7 @@ h4 {
 @media (min-width: 1600px) {
     .sidebar {
         width: 320px;
-        padding: 2.4rem 1.7rem;
+        padding: 2.2rem 1.7rem 1.7rem;
     }
     body {
         padding-left: 320px;
@@ -616,11 +660,19 @@ header.scrolled {
 }
 
 .img1 {
-    width: auto;
-    height: 46px;
-    object-fit: contain;
-    image-rendering: -webkit-optimize-contrast;
-    filter: drop-shadow(0 0 12px var(--accent-glow));
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid rgba(0, 180, 255, 0.35);
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.12), 0 4px 12px rgba(0, 120, 212, 0.35);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s ease;
+}
+
+.logo:hover .img1 {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.25), 0 6px 18px rgba(0, 120, 212, 0.5);
 }
 
 .navigation ul {
@@ -1421,128 +1473,39 @@ header.scrolled {
 
 
 /* =========================================================
-   CONTACT
-========================================================= */
-
-.contactContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-    margin: 5rem auto;
-    width: min(92%, var(--container));
-}
-
-.contactTitle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    flex-wrap: wrap;
-}
-
-.contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.emailAndPhone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1.2rem 1.6rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: transform 0.35s var(--ease), border-color 0.3s ease, box-shadow 0.35s ease;
-    min-width: 280px;
-    max-width: 420px;
-}
-
-.emailAndPhone:hover {
-    transform: translateY(-6px);
-    border-color: rgba(0, 120, 212, 0.5);
-    box-shadow: 0 20px 45px -18px rgba(0, 120, 212, 0.45);
-}
-
-.emailAndPhone img {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    filter: brightness(0) saturate(100%) invert(52%) sepia(97%) saturate(1890%) hue-rotate(182deg) brightness(101%) contrast(105%);
-}
-
-.contact h3,
-.contact a {
-    color: var(--text);
-    font-size: 0.95rem;
-    font-weight: 500;
-    overflow-wrap: anywhere;
-    transition: color 0.25s ease;
-}
-
-.contact a:hover h3 {
-    color: var(--accent-2);
-}
-
-.socialMedia {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-}
-
-.socialMedia a {
-    display: grid;
-    place-items: center;
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    transition: transform 0.3s var(--ease), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.socialMedia a:hover {
-    transform: translateY(-5px) scale(1.05);
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    box-shadow: 0 14px 30px -14px var(--accent-glow);
-}
-
-.socialMedia img {
-    width: 22px;
-    height: 22px;
-    filter: brightness(0) invert(1);
-    opacity: 0.85;
-    transition: filter 0.3s ease, opacity 0.3s ease;
-}
-
-.socialMedia a:hover img {
-    filter: brightness(0) saturate(100%) invert(60%) sepia(88%) saturate(2500%) hue-rotate(175deg) brightness(101%) contrast(101%);
-    opacity: 1;
-}
-
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
 footer {
     color: var(--text-muted);
-    padding: 2.2rem 1rem;
+    padding: 2.5rem 1rem 2rem;
     text-align: center;
     border-top: 1px solid var(--border);
     margin-top: 3rem;
     background: rgba(10, 14, 26, 0.6);
-    font-size: 0.9rem;
+}
+
+.footerInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.footerLine {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+
+.footerLine strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.footerSub {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
 }
 
 
@@ -1699,9 +1662,6 @@ footer {
     margin-right: 0.35rem;
 }
 
-
-/* Detail hero image */
-
 .detailHero {
     position: relative;
     border-radius: var(--radius-lg);
@@ -1719,9 +1679,6 @@ footer {
     height: 100%;
     object-fit: cover;
 }
-
-
-/* Detail content */
 
 .detailContent {
     display: grid;
@@ -1792,9 +1749,6 @@ footer {
     box-shadow: 0 0 8px var(--accent-glow);
 }
 
-
-/* Detail side */
-
 .detailSide {
     display: flex;
     flex-direction: column;
@@ -1858,9 +1812,6 @@ footer {
     font-style: italic;
 }
 
-
-/* Related items */
-
 .detailRelatedWrap {
     margin-bottom: 3rem;
     animation: fadeUp 1s var(--ease) 0.2s both;
@@ -1921,9 +1872,6 @@ footer {
     overflow-wrap: anywhere;
 }
 
-
-/* Detail footer */
-
 .detailFooter {
     display: flex;
     gap: 1rem;
@@ -1940,9 +1888,6 @@ footer {
 .detailFooter .CV:hover svg {
     transform: translateX(3px);
 }
-
-
-/* Detail error state */
 
 .detailError {
     text-align: center;
@@ -1969,8 +1914,7 @@ footer {
     .Hreo,
     .aboutMe,
     .worksContainer,
-    .skillsContainer,
-    .contactContainer {
+    .skillsContainer {
         width: 90%;
     }
     .Hreo {
@@ -2110,12 +2054,6 @@ footer {
     .works ul.worksGrid {
         grid-template-columns: 1fr;
     }
-    .emailAndPhone {
-        flex-direction: column;
-        text-align: center;
-        min-width: 0;
-        width: 100%;
-    }
     .to-top {
         bottom: 18px;
         right: 18px;
@@ -2171,17 +2109,6 @@ footer {
     .projectTitle {
         font-size: 1.5rem;
     }
-    .contactContainer {
-        gap: 1.5rem;
-    }
-    .socialMedia a {
-        width: 48px;
-        height: 48px;
-    }
-    .socialMedia img {
-        width: 20px;
-        height: 20px;
-    }
     footer {
         font-size: 0.83rem;
     }
@@ -2216,12 +2143,8 @@ footer {
         font-size: 1.25rem;
     }
     .textTitle,
-    .projectTitle,
-    .contactTitle {
+    .projectTitle {
         font-size: 1.3rem;
-    }
-    .contact h3 {
-        font-size: 0.82rem;
     }
     .filter-btn {
         font-size: 0.75rem;
