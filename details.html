@@ -9,7 +9,7 @@
     <meta name="description" content="Details of a project, paper, seminar or conference by Mohammed Badreldeen.">
     <meta name="theme-color" content="#0a0e1a">
 
-    <link rel="icon" href="/SRC/PIC/MB Monogram Elegant Code Mark.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/imgs/profile.png" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
             <div class="sidebarProfile">
                 <div class="sidebarAvatar">
                     <span class="avatarFallback" aria-hidden="true">MB</span>
-                    <img src="assets/imgs/profile.png" alt="Mohammed Badreldeen" onerror="this.style.display='none'">
+                    <img src="SRC/PIC/Pers.svg" alt="Mohammed Badreldeen" onerror="this.style.display='none'">
                 </div>
                 <h2 class="sidebarName">Mohammed Badreldeen</h2>
                 <p class="sidebarRole">
@@ -37,7 +37,7 @@
             </div>
 
             <p class="sidebarBio">
-                I build practical desktop & web applications with C#, .NET, Java and Python — focused on clean architecture and real-world problems.
+                I build practical desktop &amp; web applications with C#, .NET, Java and Python — focused on clean architecture and real-world problems.
             </p>
 
             <div class="sidebarBlock">
@@ -53,28 +53,19 @@
             </div>
 
             <div class="sidebarBlock">
-                <h3 class="sidebarBlockTitle">Experience</h3>
-                <ul class="sidebarExpList">
-                    <li>
-                        <span class="sidebarExpDate">2023 — Now</span>
-                        <strong>IEEE UofG Student Branch</strong>
-                        <span class="sidebarExpRole">Member & Volunteer</span>
-                    </li>
-                    <li>
-                        <span class="sidebarExpDate">2023 — Now</span>
-                        <strong>Freelance Software Development</strong>
-                        <span class="sidebarExpRole">Solo Developer</span>
-                    </li>
-                    <li>
-                        <span class="sidebarExpDate">2023 — 2024</span>
-                        <strong>HR & Team Coordination</strong>
-                        <span class="sidebarExpRole">Volunteer Roles</span>
-                    </li>
-                </ul>
-            </div>
+                <h3 class="sidebarBlockTitle">Get in touch</h3>
 
-            <div class="sidebarBlock">
-                <h3 class="sidebarBlockTitle">Connect</h3>
+                <div class="sidebarContact">
+                    <a class="sidebarContactItem" href="mailto:mohammedbadreldeen23@gmail.com">
+                        <img src="assets/svg/Email.svg" alt="" aria-hidden="true">
+                        <span>mohammedbadreldeen23@gmail.com</span>
+                    </a>
+                    <a class="sidebarContactItem" href="tel:+24908259705">
+                        <img src="assets/svg/phone.svg" alt="" aria-hidden="true">
+                        <span>+0024908259705</span>
+                    </a>
+                </div>
+
                 <div class="sidebarSocial">
                     <a href="https://www.linkedin.com/in/mohamed-badreldeen-a-714299354?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <img src="assets/svg/linkedin.svg" alt="">
@@ -82,19 +73,20 @@
                     <a href="https://github.com/MohammedBadreldeen23" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                         <img src="assets/svg/github.svg" alt="">
                     </a>
-                    <a href="mailto:mohammedbadreldeen23@gmail.com" aria-label="Email">
-                        <img src="assets/svg/Email.svg" alt="">
-                    </a>
                 </div>
             </div>
 
-            <a class="sidebarCta" href="index.html#contact">
-                Get in touch
+            <a class="sidebarCta" href="mailto:mohammedbadreldeen23@gmail.com">
+                Hire Me
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
             </a>
+
+            <p class="sidebarFooter">
+                © <span id="yearSide">2025</span> · Made with <span class="heart">♥</span>
+            </p>
 
         </div>
     </aside>
@@ -112,9 +104,8 @@
     <!-- HEADER -->
     <header id="siteHeader">
         <a href="index.html" class="logo" aria-label="Back to home">
-            <img class="img1" src="/SRC/PIC/MB Monogram Elegant Code Mark.svg" alt="Web Logo">
+            <img class="img1" src="SRC/PIC/Pers.svg" alt="Mohammed Badreldeen Logo">
         </a>
-
         <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
             <span></span><span></span><span></span>
         </button>
@@ -124,7 +115,6 @@
                 <li><a class="nav-link" href="index.html#aboutMe">About Me</a></li>
                 <li><a class="nav-link" href="index.html#MyWorks">MyWorks</a></li>
                 <li><a class="nav-link" href="index.html#skills">Skills</a></li>
-                <li><a class="nav-link" href="index.html#contact">ContactMe</a></li>
             </ul>
         </nav>
     </header>
@@ -181,7 +171,7 @@
 
             <div class="detailFooter">
                 <a class="hireMe" href="index.html#MyWorks">← Explore more works</a>
-                <a class="CV" href="index.html#contact">
+                <a class="CV" href="mailto:mohammedbadreldeen23@gmail.com">
                     Get in touch
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
                         stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
@@ -195,7 +185,12 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>Built by Mohammed Badreldeen</p>
+        <div class="footerInner">
+            <p class="footerLine">Built by <strong>Mohammed Badreldeen</strong></p>
+            <p class="footerSub">
+                Software Developer · <span id="year">2025</span>
+            </p>
+        </div>
     </footer>
 
     <button class="to-top" id="toTop" type="button" aria-label="Back to top">
