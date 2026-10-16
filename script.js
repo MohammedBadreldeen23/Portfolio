@@ -81,24 +81,32 @@
 
             /* ---------- PAPERS ---------- */
             {
-                id: "design-patterns-paper",
+                id: "Pharmaceutical-Warehouse-System-paper",
                 category: "papers",
                 categoryLabel: "Research Paper",
-                title: "Design Patterns in Desktop Applications",
-                subtitle: "A practical study of how classic design patterns improve maintainability in .NET desktop projects.",
+                title: "Implementation of Drugs Warehouse System Paper",
+                subtitle: "Design and implementation of a pharmaceutical warehouse management system.",
                 image: "assets/imgs/app.png",
-                date: "2024",
+                date: "2022",
                 role: "Author",
                 tags: ["Software Engineering", "Design Patterns", "C#"],
-                description: "This paper explores how well-known design patterns (MVC, Repository, Factory, Observer) are applied in real-world .NET desktop applications, and how they affect code maintainability, testability, and team collaboration.",
+                description: "This scientific paper will talk about drug warehouse" +
+                    "system and applications, through this study will learn about the" +
+                    "importance of systems, one of the main objectives of the study" +
+                    "is design a flexible database that gives ease of modification and" +
+                    "use of data so that data is not lost, this study The study used" +
+                    "the descriptive approach, the most prominent results of the study" +
+                    "are a system that gives satisfactory results." +
+                    "Index Terms—System, warehouse, Pharmaceutical warehouse," +
+                    "Management System",
                 highlights: [
-                    "Analysis of 5 common patterns in desktop apps",
-                    "Case study on a real .NET Windows Forms project",
-                    "Recommendations for small and mid-sized teams",
-                    "Metrics on maintainability and code reuse"
+                    "a database that gives flexibility modifying and using data easy.",
+                    "Control of warehouse.",
+                    "All supplier and customer and drug classes records are present in system.",
+                    "Bills for sale in the system."
                 ],
                 links: [
-                    { label: "Read the paper (PDF)", url: "#" }
+                    { label: "Read the paper (PDF)", url: "assets/last .pdf" }
                 ]
             },
             {
@@ -125,28 +133,28 @@
 
             /* ---------- SEMINARS ---------- */
             {
-                id: "dotnet-seminar",
-                category: "seminars",
-                categoryLabel: "Seminar",
-                title: "Modern C# and .NET 8",
-                subtitle: "A seminar on new language features and what they mean for desktop developers.",
-                image: "assets/imgs/app.png",
-                date: "2024",
-                role: "Speaker",
-                tags: ["C#", ".NET", "Seminar"],
+                id: "IEEE-ComPTION",
+                category: "Events",
+                categoryLabel: "Events",
+                title: "IEEE UofG SB Programming Competition",
+                subtitle: "Programming Contestant | Problem-Solving | Competitive Programming.",
+                image: "SRC/PIC/Comp1.jpg",
+                date: "2021",
+                role: "participated",
+                tags: ["C#", ".NET", "Events", "IEEE UOFG SB"],
                 description: "Presented an overview of the latest C# language features and .NET 8 improvements relevant to desktop developers, including performance improvements, new syntax, and best practices.",
                 highlights: [
-                    "Overview of C# 12 language features",
-                    "Performance improvements in .NET 8",
-                    "Migration tips for existing Windows Forms projects",
-                    "Live coding demo"
+                    "participated as a contestant in an open programming competition organized by IEEE UofG SB.",
+                    "Applied programming knowledge and logical thinking to solve coding challenges.",
+                    "Demonstrated problem-solving and analytical skills in a competitive environment.",
+                    "Gained valuable experience in competitive programming and technical skill development."
                 ],
                 links: []
             },
             {
-                id: "git-seminar",
-                category: "seminars",
-                categoryLabel: "Seminar",
+                id: "git-Events",
+                category: "Events",
+                categoryLabel: "Events",
                 title: "Git & GitHub Best Practices",
                 subtitle: "A practical seminar on version control for student developers.",
                 image: "assets/imgs/landingPage.png",
@@ -345,10 +353,21 @@
                     linksEl.innerHTML = `<p class="detailMuted">No external links available.</p>`;
                 } else {
                     linksEl.innerHTML = item.links
-                        .map(
-                            (l) =>
-                            `<a class="detailLink" href="${escapeHTML(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(l.label)} →</a>`
-                        )
+                        .map((l) => {
+                            const url = l.url || "";
+                            const isPdf = /\.pdf(\?.*)?$/i.test(url);
+                            const isExternal = /^https?:\/\//i.test(url);
+
+                            // PDF محلي → افتح في نفس الصفحة
+                            // رابط خارجي → تبويب جديد
+                            // رابط داخلي آخر → نفس الصفحة
+                            const target = isExternal ? "_blank" : "_self";
+                            const rel = isExternal ? 'rel="noopener noreferrer"' : "";
+                            const download = isPdf && !isExternal ? "download" : "";
+                            const icon = isPdf ? "📄" : "🔗";
+
+                            return `<a class="detailLink" href="${escapeHTML(url)}" target="${target}" ${rel} ${download}>${icon} ${escapeHTML(l.label)} →</a>`;
+                        })
                         .join("");
                 }
             }

@@ -52,7 +52,7 @@
     box-sizing: border-box;
 }
 
-html {
+.html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-h) + 12px);
     -webkit-text-size-adjust: 100%;
