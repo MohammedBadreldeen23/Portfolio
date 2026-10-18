@@ -14,26 +14,26 @@
         works: [
             /* ---------- PROJECTS ---------- */
             {
-                id: "library-app",
+                id: "Desgin-system",
                 category: "projects",
                 categoryLabel: "Project",
-                title: "Library Management System",
-                subtitle: "A desktop application for managing books, members, and borrowing workflows.",
-                image: "assets/imgs/app.png",
-                date: "2024",
+                title: "Pharmaceutical Warehouse System",
+                subtitle: "A desktop application for managing Drugs.",
+                image: "/SRC/PIC/Capture.PNG",
+                date: "2022",
                 duration: "3 months",
                 role: "Solo Developer",
-                tags: ["C#", ".NET", "Windows Forms", "SQLite"],
-                description: "A complete desktop solution built with C# and Windows Forms for small libraries. Staff can manage books, members and borrowing records through a clean, fast interface backed by a local SQLite database. The focus was on reliability, offline-first design, and a clean object-oriented structure.",
+                tags: ["C#", ".NET", "Windows Forms", "SQLsever"],
+                description: "A complete desktop solution built with C# and Windows Forms for Drugs Warhouses. Staff can manage drug, fast interface backed by a local SQL Server database. The focus was on reliability, offline-first design, and a clean object-oriented structure.",
                 highlights: [
-                    "Full CRUD for books, members and borrowing records",
+                    "Full CRUD for drug",
                     "Due-date tracking with overdue alerts",
                     "Advanced search and filtering",
                     "Reports and export functionality",
-                    "Offline-first local database with SQLite"
+                    "Offline-first local database with SQL SERVER"
                 ],
                 links: [
-                    { label: "Source code on GitHub", url: "https://github.com/MohammedBadreldeen23" }
+                    {}
                 ]
             },
             {
@@ -42,7 +42,7 @@
                 categoryLabel: "Project",
                 title: "Personal Portfolio Website",
                 subtitle: "A responsive portfolio built with semantic HTML, modern CSS and vanilla JavaScript.",
-                image: "assets/imgs/landingPage.png",
+                image: "/SRC/PIC/web.jpg",
                 date: "2024",
                 duration: "2 weeks",
                 role: "Designer & Developer",
@@ -55,28 +55,8 @@
                     "Zero dependencies — pure HTML, CSS and JS"
                 ],
                 links: [
-                    { label: "View on GitHub", url: "https://github.com/MohammedBadreldeen23" }
+                    { label: "View on GitHub", url: "#" }
                 ]
-            },
-            {
-                id: "task-manager",
-                category: "projects",
-                categoryLabel: "Project",
-                title: "Task Manager Desktop App",
-                subtitle: "A lightweight Windows application for organizing daily tasks and projects.",
-                image: "assets/imgs/webApp.png",
-                date: "2023",
-                duration: "1 month",
-                role: "Solo Developer",
-                tags: ["C#", ".NET", "Windows Forms"],
-                description: "A small but practical desktop tool for organizing tasks by project, priority and deadline. Built with C# and Windows Forms, with a focus on keyboard shortcuts and fast data entry.",
-                highlights: [
-                    "Project-based task organization",
-                    "Priority levels and deadlines",
-                    "Quick search and filters",
-                    "Data persistence with SQLite"
-                ],
-                links: []
             },
 
             /* ---------- PAPERS ---------- */
@@ -109,29 +89,7 @@
                     { label: "Read the paper (PDF)", url: "assets/last .pdf" }
                 ]
             },
-            {
-                id: "db-normalization-paper",
-                category: "papers",
-                categoryLabel: "Research Paper",
-                title: "Database Normalization for Small-Scale Applications",
-                subtitle: "Balancing performance and data integrity in small desktop and web applications.",
-                image: "assets/imgs/webApp.png",
-                date: "2023",
-                role: "Author",
-                tags: ["Databases", "SQL", "Normalization"],
-                description: "A practical guide to applying normalization rules (1NF to 3NF) in small-scale applications without over-engineering the schema. Includes real SQL examples and a clear trade-off analysis.",
-                highlights: [
-                    "Step-by-step normalization walkthrough",
-                    "Trade-offs between normalization and performance",
-                    "Common mistakes in small projects",
-                    "SQL examples for SQL Server and SQLite"
-                ],
-                links: [
-                    { label: "Read the paper (PDF)", url: "#" }
-                ]
-            },
-
-            /* ---------- SEMINARS ---------- */
+            /* ---------- Events ---------- */
             {
                 id: "IEEE-ComPTION",
                 category: "Events",
@@ -152,21 +110,40 @@
                 links: []
             },
             {
-                id: "git-Events",
+                id: "IEEE-UOFG-SOCIAL",
                 category: "Events",
                 categoryLabel: "Events",
-                title: "Git & GitHub Best Practices",
-                subtitle: "A practical seminar on version control for student developers.",
-                image: "assets/imgs/landingPage.png",
-                date: "2023",
+                title: "IEEE UOFG SB Social Event",
+                subtitle: "Connecting Members Through Fun, Friendship, and Teamwork",
+                image: "SRC/PIC/Soc.jpg",
+                date: "2025",
                 role: "Speaker",
-                tags: ["Git", "GitHub", "Version Control"],
-                description: "Delivered a hands-on seminar covering Git fundamentals, branching strategies, pull requests, and collaborative workflows for student teams and small projects.",
+                tags: ["Networking", "Social", "IEEE"],
+                description: "Participated in the IEEE University of Gezira Student Branch Social Day, an event designed to bring members together through interactive games, social activities, and opportunities to connect with fellow volunteers. The event fostered friendship, strengthened relationships among members, and promoted a sense of belonging within the IEEE community.",
                 highlights: [
-                    "Git fundamentals and mental model",
-                    "Branching strategies for teams",
-                    "Pull request and code review workflow",
-                    "Hands-on exercises for attendees"
+                    "Participated in interactive games and fun social activities with IEEE members.",
+                    "Networked with fellow IEEE members and volunteers.",
+                    "Contributed to fostering a welcoming, collaborative, and engaging IEEE community.",
+                    "Enhanced teamwork, communication, and interpersonal skills."
+                ],
+                links: []
+            },
+
+            {
+                id: "IEEE-DAY",
+                category: "conferences",
+                categoryLabel: "Conference",
+                title: "IEEE UOFG SB DAY",
+                subtitle: "IEEE event in celebration of Internatonal Foundation Day",
+                image: "SRC/PIC/Day1.jpg",
+                date: "2025",
+                role: "HR Coordnator",
+                tags: ["Tech Summit", "Networking", "IEEE-UOFG-SB"],
+                description: "Participated in IEEE Day celebrations organized by the IEEE University of Gezira Student Branch, an occasion celebrating the IEEE community, its achievements, and its impact on technology and engineering. The event brought members together to recognize volunteer contributions, share experiences, and strengthen the spirit of collaboration and innovation.",
+                highlights: [
+                    "Celebrated IEEE's global community and its contributions to technology and engineering",
+                    "Recognized the importance of volunteering, teamwork, and professional growth.",
+                    "Connected with IEEE UofG SB members and fellow volunteers"
                 ],
                 links: []
             },
@@ -189,24 +166,6 @@
                     "Networked with IEEE members and industry professionals",
                     "Presented the project to an audience, demonstrating its concept and practical applications.",
                     "Enhanced technical communication, public speaking, and software presentation skills."
-                ],
-                links: []
-            },
-            {
-                id: "sudan-tech-summit",
-                category: "conferences",
-                categoryLabel: "Conference",
-                title: "Sudan Tech Summit 2023",
-                subtitle: "Attended sessions on software development and emerging technologies.",
-                image: "assets/imgs/webApp.png",
-                date: "2023",
-                role: "Attendee",
-                tags: ["Tech Summit", "Networking"],
-                description: "Participated in the Sudan Tech Summit 2023, attending talks and workshops on software development, cloud technologies, and the growing tech ecosystem in Sudan.",
-                highlights: [
-                    "Attended talks on cloud and DevOps",
-                    "Participated in a workshop on modern web development",
-                    "Networked with local tech companies and startups"
                 ],
                 links: []
             }
