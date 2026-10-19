@@ -91,7 +91,7 @@
                     "Sales invoices and transaction records"
                 ],
                 links: [
-                    { label: "Read the paper (PDF)", url: "assets/last .pdf" }
+                    { label: "Read the paper (PDF)", url: "assets/last.pdf" }
                 ]
             },
 
@@ -315,10 +315,7 @@
                 }, { once: true });
             }
 
-            /* Optional gallery: store only extra image paths in item.images.
-               Example:
-               images: ["SRC/PIC/screenshot-2.png", "SRC/PIC/screenshot-3.png"]
-            */
+            /* Optional gallery */
             const gallery = document.getElementById("detailGallery");
             const galleryGrid = document.getElementById("detailGalleryGrid");
 
@@ -327,8 +324,7 @@
                     typeof src === "string" &&
                     src.trim() &&
                     src !== item.image
-                ) :
-                [];
+                ) : [];
 
             if (gallery && galleryGrid && extraImages.length > 0) {
                 gallery.hidden = false;
@@ -361,7 +357,10 @@
 
                         mainImage.hidden = false;
                         mainImage.src = button.getAttribute("data-gallery-src");
-                        mainImage.alt = button.querySelector("img") ? .alt || item.title;
+
+                        // FIXED: Removed the space between ? and .alt that caused the syntax error
+                        const thumbImg = button.querySelector("img");
+                        mainImage.alt = thumbImg ? thumbImg.alt : item.title;
 
                         const hero = mainImage.closest(".detailHero");
                         if (hero) hero.classList.remove("image-unavailable");
@@ -425,7 +424,7 @@
                     .join("");
             }
 
-            /* Links: ignore empty or placeholder links. */
+            /* Links */
             const linksElement = document.getElementById("detailLinks");
 
             if (linksElement) {
@@ -555,7 +554,7 @@
         });
     }
 
-    /* Scroll progress: animate with transform rather than recalculating width. */
+    /* Scroll progress */
     const progressBar = document.getElementById("scrollProgress");
 
     function updateProgress() {
@@ -792,7 +791,7 @@
         "me": "عني",
         "My recent": "أحدث",
         "works": "الأعمال",
-        "Projects, research papers, Events, and conferences — click any item to see the full details.": "مشروعات وأوراق علمية وفعاليات ومؤتمرات — اختر أي عنصر لعرض التفاصيل.",
+        "Projects, research papers, events, and conferences — click any item to see the full details.": "مشروعات وأوراق علمية وفعاليات ومؤتمرات — اختر أي عنصر لعرض التفاصيل.",
         "All": "الكل",
         "Projects": "المشروعات",
         "Papers": "الأوراق العلمية",
