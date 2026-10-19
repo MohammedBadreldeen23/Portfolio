@@ -1,39 +1,30 @@
 /* =========================================================
-   FONTS + VARIABLES — Windows Developer Palette
+   FONTS + VARIABLES — base developer palette
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap');
 :root {
-    /* Backgrounds — deep Windows dark */
     --bg: #0a0e1a;
     --bg-soft: #0d1220;
     --surface: #121a2c;
     --surface-2: #182238;
     --surface-3: #1e2a45;
-    /* Borders */
     --border: rgba(255, 255, 255, 0.08);
     --border-strong: rgba(255, 255, 255, 0.14);
-    /* Text */
     --text: #e6edf7;
     --text-muted: #8a99b3;
     --text-dim: #5d6b85;
-    /* Windows 11 accent — Modern dev palette */
     --accent: #0078d4;
     --accent-2: #00b4ff;
     --accent-3: #7c5cff;
     --accent-soft: rgba(0, 120, 212, 0.12);
     --accent-glow: rgba(0, 120, 212, 0.4);
-    /* Gradients */
     --gradient: linear-gradient(135deg, #0078d4, #00b4ff);
     --gradient-rich: linear-gradient(135deg, #0078d4 0%, #00b4ff 55%, #7c5cff 100%);
-    /* Radii */
     --radius: 16px;
     --radius-lg: 22px;
     --radius-sm: 10px;
-    /* Fonts */
     --font-head: "Poppins", system-ui, sans-serif;
     --font-body: "Inter", system-ui, sans-serif;
-    /* Layout */
     --container: 1200px;
     --header-h: 76px;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -52,11 +43,11 @@
     box-sizing: border-box;
 }
 
-.html {
+html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-h) + 12px);
     -webkit-text-size-adjust: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
@@ -65,7 +56,7 @@ body {
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.7;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -247,7 +238,6 @@ h4 {
     -webkit-backdrop-filter: blur(20px);
     border-right: 1px solid var(--border);
     padding: 2rem 1.4rem 1.5rem;
-    /* Independent scrolling */
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
@@ -293,7 +283,7 @@ h4 {
 }
 
 
-/* --- Profile --- */
+/* Profile */
 
 .sidebarProfile {
     text-align: center;
@@ -392,7 +382,7 @@ h4 {
 }
 
 
-/* --- Bio --- */
+/* Bio */
 
 .sidebarBio {
     font-size: 0.82rem;
@@ -406,7 +396,7 @@ h4 {
 }
 
 
-/* --- Blocks --- */
+/* Blocks */
 
 .sidebarBlock {
     display: flex;
@@ -433,7 +423,7 @@ h4 {
 }
 
 
-/* --- Skills tags --- */
+/* Skills tags */
 
 .sidebarTags {
     display: flex;
@@ -459,7 +449,7 @@ h4 {
 }
 
 
-/* --- Contact --- */
+/* Contact */
 
 .sidebarContact {
     display: flex;
@@ -504,7 +494,7 @@ h4 {
 }
 
 
-/* --- Social --- */
+/* Social */
 
 .sidebarSocial {
     display: flex;
@@ -545,7 +535,7 @@ h4 {
 }
 
 
-/* --- CTA --- */
+/* CTA */
 
 .sidebarCta {
     display: inline-flex;
@@ -579,7 +569,7 @@ h4 {
 }
 
 
-/* --- Sidebar footer --- */
+/* Sidebar footer */
 
 .sidebarFooter {
     text-align: center;
@@ -598,7 +588,7 @@ h4 {
 }
 
 
-/* --- Show sidebar on desktop --- */
+/* Show sidebar on desktop */
 
 @media (min-width: 1100px) {
     .sidebar {
@@ -2170,7 +2160,7 @@ footer {
 
 
 /* =========================================================
-   RESPONSIVE REFINEMENTS — preserve the original visual system
+   RESPONSIVE REFINEMENTS — preserve the current site design
 ========================================================= */
 
 :root {
@@ -2456,5 +2446,467 @@ body.language-ar .sidebar {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL REFINEMENT — charcoal, mint and lime developer palette
+   Existing class names are retained. These rules intentionally
+   override the earlier blue palette rather than replacing the design.
+========================================================= */
+
+:root {
+    --bg: #0c1110;
+    --bg-soft: #111a17;
+    --surface: #17221e;
+    --surface-2: #202f29;
+    --surface-3: #2a4037;
+    --border: rgba(224, 255, 239, 0.10);
+    --border-strong: rgba(224, 255, 239, 0.18);
+    --text: #eef8f1;
+    --text-muted: #a7bbb0;
+    --text-dim: #7c9689;
+    --accent: #c5f36b;
+    --accent-2: #74e0bd;
+    --accent-3: #c8a4ff;
+    --accent-soft: rgba(197, 243, 107, 0.12);
+    --accent-glow: rgba(116, 224, 189, 0.22);
+    --gradient: linear-gradient(135deg, #c5f36b, #74e0bd);
+    --gradient-rich: linear-gradient(135deg, #c5f36b 0%, #74e0bd 58%, #c8a4ff 100%);
+}
+
+html {
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.bg-grid {
+    opacity: .20;
+    background-image: linear-gradient(rgba(197, 243, 107, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 224, 189, .035) 1px, transparent 1px);
+}
+
+.glow-1 {
+    background: radial-gradient(circle, rgba(116, 224, 189, .28), transparent 70%);
+}
+
+.glow-2 {
+    background: radial-gradient(circle, rgba(197, 243, 107, .20), transparent 70%);
+}
+
+.glow-3 {
+    background: radial-gradient(circle, rgba(200, 164, 255, .16), transparent 70%);
+}
+
+.navigation,
+.navigation.open {
+    background-color: rgba(17, 26, 23, .97);
+}
+
+.hireMe,
+.sidebarCta {
+    color: #10180f;
+    font-weight: 700;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    color: #10180f;
+}
+
+.timelineDot {
+    box-shadow: 0 0 0 4px rgba(116, 224, 189, .12);
+}
+
+.timelineItem:hover .timelineDot {
+    box-shadow: 0 0 0 6px rgba(197, 243, 107, .18), 0 0 20px var(--accent-glow);
+}
+
+.timelineDate,
+.detailBadge,
+.workTag {
+    border-color: rgba(116, 224, 189, .28);
+}
+
+.backLink:hover {
+    border-color: var(--accent-2);
+}
+
+.relatedCard:hover {
+    border-color: rgba(116, 224, 189, .5);
+    box-shadow: 0 16px 35px -15px rgba(116, 224, 189, .24);
+}
+
+
+/* Place the skills first and the experience below it. This prevents
+   a long timeline from leaving an unused gap beside the skills column. */
+
+.skillsLayout {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    margin-top: 2.5rem;
+}
+
+.skillsColumn,
+.experienceColumn {
+    width: 100%;
+    min-width: 0;
+}
+
+.skillsColumn {
+    padding: clamp(1.15rem, 2.7vw, 2rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, rgba(32, 47, 41, .72), rgba(23, 34, 30, .88));
+    box-shadow: 0 22px 60px rgba(0, 0, 0, .14);
+}
+
+.skillBars {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 2rem;
+}
+
+.skillBar {
+    min-width: 0;
+}
+
+.skillInfo {
+    align-items: flex-start;
+}
+
+.skillInfo>span:first-child {
+    line-height: 1.45;
+}
+
+.skillTech {
+    text-align: end;
+}
+
+.experienceColumn>.columnTitle {
+    margin-bottom: 1.1rem;
+}
+
+.timeline {
+    padding-inline-start: 1.8rem;
+}
+
+.timeline::before {
+    left: 7px;
+    right: auto;
+}
+
+.timelineGroup {
+    padding: .25rem 0 1.5rem;
+    margin-bottom: 1.3rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.timelineGroup:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.timelineGroupTitle {
+    margin: .2rem 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: var(--accent);
+    font-size: 1rem;
+}
+
+.timelineGroupTitle::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, var(--border-strong), transparent);
+}
+
+.timelineGroup .timelineItem {
+    padding-bottom: 1.6rem;
+}
+
+.timelineContent {
+    display: grid;
+    grid-template-columns: minmax(145px, .28fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: clamp(1rem, 2.5vw, 2rem);
+    row-gap: .35rem;
+}
+
+.timelineDate {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    justify-self: start;
+    max-width: 100%;
+    white-space: normal;
+    margin-top: .1rem;
+}
+
+.timelineContent h3,
+.timelineContent .timelineRole,
+.timelineContent p {
+    grid-column: 2;
+    min-width: 0;
+}
+
+.timelineContent h3 {
+    margin: 0;
+}
+
+.timelineContent .timelineRole {
+    margin-bottom: .25rem;
+}
+
+.timelineContent p {
+    margin: 0;
+}
+
+
+/* Optional multi-image gallery on the details page. */
+
+.detailHero {
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at center, var(--surface-2), var(--surface));
+}
+
+.detailHero img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.detailHero.image-unavailable::after {
+    content: "Project image unavailable";
+    color: var(--text-muted);
+    font-size: .95rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.detailGallery[hidden] {
+    display: none !important;
+}
+
+.detailGallery {
+    margin: -1.25rem 0 3rem;
+    animation: fadeUp .55s var(--ease) both;
+}
+
+.detailGallery .detailSectionTitle {
+    margin-bottom: 1rem;
+}
+
+.detailGalleryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.detailGalleryItem {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: .45rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-align: start;
+    transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease;
+}
+
+.detailGalleryItem:hover,
+.detailGalleryItem[aria-pressed="true"] {
+    transform: translateY(-3px);
+    border-color: var(--accent-2);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .2);
+}
+
+.detailGalleryItem img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: calc(var(--radius) - 5px);
+    background: var(--surface-2);
+}
+
+.detailGalleryItem span {
+    display: block;
+    padding: .5rem .3rem .15rem;
+    color: var(--text-muted);
+    font-size: .78rem;
+}
+
+
+/* Right-to-left timeline adjustments */
+
+html[dir="rtl"] .timeline {
+    padding-left: 0;
+    padding-right: 1.8rem;
+}
+
+html[dir="rtl"] .timeline::before {
+    left: auto;
+    right: 7px;
+}
+
+html[dir="rtl"] .timelineDot {
+    left: auto;
+    right: -1.8rem;
+}
+
+html[dir="rtl"] .timelineGroup {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* Avoid content overflow on narrow screens. */
+
+@media (max-width: 800px) {
+    .skillBars {
+        grid-template-columns: 1fr;
+    }
+    .timelineContent {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: .35rem;
+    }
+    .timelineDate {
+        grid-column: 1;
+        grid-row: auto;
+    }
+    .timelineContent h3,
+    .timelineContent .timelineRole,
+    .timelineContent p {
+        grid-column: 1;
+    }
+    .timelineGroup {
+        padding: .25rem 0 1.25rem;
+    }
+    .timeline {
+        padding-left: 1.5rem;
+        padding-inline-start: 1.5rem;
+    }
+    .timelineDot {
+        left: -1.5rem;
+        right: auto;
+    }
+    .timeline::before {
+        left: 7px;
+        right: auto;
+    }
+    html[dir="rtl"] .timeline {
+        padding-left: 0;
+        padding-right: 1.5rem;
+    }
+    html[dir="rtl"] .timelineDot {
+        left: auto;
+        right: -1.5rem;
+    }
+    html[dir="rtl"] .timeline::before {
+        left: auto;
+        right: 7px;
+    }
+    .detailGalleryGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 440px) {
+    .detailGalleryGrid {
+        grid-template-columns: 1fr;
+    }
+    .detailGalleryItem img {
+        aspect-ratio: 16 / 9;
+    }
+    .skillsColumn {
+        padding: 1rem;
+    }
+}
+
+
+/* Final color harmonization: remove remaining hard-coded blue accents. */
+
+::selection {
+    background: var(--accent);
+    color: #10180f;
+}
+
+header,
+header.scrolled {
+    background-color: rgba(12, 17, 16, 0.92);
+}
+
+.hero-greet {
+    border-color: rgba(116, 224, 189, 0.38);
+}
+
+.img1 {
+    border-color: rgba(116, 224, 189, 0.45);
+    box-shadow: 0 0 0 3px rgba(197, 243, 107, 0.10), 0 4px 12px rgba(116, 224, 189, 0.18);
+}
+
+.logo:hover .img1 {
+    box-shadow: 0 0 0 3px rgba(197, 243, 107, 0.20), 0 6px 18px rgba(116, 224, 189, 0.30);
+}
+
+.heroImg,
+.aboutMeImg {
+    filter: drop-shadow(0 22px 45px rgba(116, 224, 189, 0.13));
+}
+
+.works {
+    background: linear-gradient( 180deg, transparent, rgba(116, 224, 189, 0.035), transparent);
+}
+
+.workBadge {
+    background: rgba(197, 243, 107, 0.96);
+    color: #10180f;
+}
+
+.workItem:hover {
+    border-color: rgba(116, 224, 189, 0.48);
+    box-shadow: 0 24px 50px -20px rgba(116, 224, 189, 0.22);
+}
+
+.filter-btn:hover {
+    border-color: rgba(116, 224, 189, 0.55);
+}
+
+.sidebarTags li {
+    background: rgba(197, 243, 107, 0.08);
+    border-color: rgba(197, 243, 107, 0.22);
+    color: var(--accent);
+}
+
+.sidebarTags li:hover {
+    background: rgba(197, 243, 107, 0.15);
+}
+
+.sidebarContactItem img,
+.sidebarSocial a:hover img,
+.light {
+    filter: none;
+}
+
+.navigation,
+.navigation.open {
+    background-color: rgba(17, 26, 23, 0.98);
+}
+
+.to-top {
+    color: #10180f;
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        background: rgba(17, 26, 23, 0.98);
     }
 }

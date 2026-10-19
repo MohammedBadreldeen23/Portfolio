@@ -6,6 +6,19 @@
 (function() {
     "use strict";
 
+    /*
+       Direct-open safeguard: if Live Server starts on details.html
+       without a selected work (?id=...), send the visitor to the home page.
+       Valid detail URLs, such as details.html?id=portfolio-web, are unaffected.
+    */
+    if (
+        document.getElementById("detailPage") &&
+        !new URLSearchParams(window.location.search).has("id")
+    ) {
+        window.location.replace(new URL("index.html", window.location.href).href);
+        return;
+    }
+
     /* =========================================================
        SITE DATA — all works live here
        Add / edit items here and both pages update automatically.
@@ -18,24 +31,24 @@
                 category: "projects",
                 categoryLabel: "Project",
                 title: "Pharmaceutical Warehouse System",
-                subtitle: "A desktop application for managing Drugs.",
+                subtitle: "A desktop application for medicine warehouse management.",
                 image: "SRC/PIC/Capture.PNG",
+                images: [], // Add more image paths here when those files exist.
                 date: "2022",
                 duration: "3 months",
                 role: "Solo Developer",
                 tags: ["C#", ".NET", "Windows Forms", "SQL Server"],
-                description: "A complete desktop solution built with C# and Windows Forms for Drugs warehouses. Staff can manage drug, fast interface backed by a local SQL Server database. The focus was on reliability, offline-first design, and a clean object-oriented structure.",
+                description: "A desktop application built with C# and Windows Forms to support medicine warehouse operations. It helps staff maintain medicine records through a straightforward interface backed by a SQL Server database. The project focuses on reliable data handling, practical workflows, and a clean object-oriented structure.",
                 highlights: [
-                    "Full CRUD for drug",
-                    "Due-date tracking with overdue alerts",
-                    "Advanced search and filtering",
-                    "Reports and export functionality",
-                    "Offline-first local database with SQL SERVER"
+                    "Create, view, update, and delete medicine records",
+                    "Expiry-date tracking and overdue alerts",
+                    "Search and filter medicine records",
+                    "Reports and data export functionality",
+                    "Local SQL Server database integration"
                 ],
-                links: [
-                    {}
-                ]
+                links: []
             },
+
             {
                 id: "portfolio-web",
                 category: "projects",
@@ -43,6 +56,7 @@
                 title: "Personal Portfolio Website",
                 subtitle: "A responsive portfolio built with semantic HTML, modern CSS and vanilla JavaScript.",
                 image: "SRC/PIC/web.jpg",
+                images: [],
                 date: "2024",
                 duration: "2 weeks",
                 role: "Designer & Developer",
@@ -54,9 +68,7 @@
                     "Accessible semantic markup",
                     "Zero dependencies — pure HTML, CSS and JS"
                 ],
-                links: [
-                    { label: "View on GitHub", url: "#" }
-                ]
+                links: []
             },
 
             /* ---------- PAPERS ---------- */
@@ -64,32 +76,26 @@
                 id: "Pharmaceutical-Warehouse-System-paper",
                 category: "papers",
                 categoryLabel: "Research Paper",
-                title: "Implementation of Drugs Warehouse System Paper",
-                subtitle: "Design and implementation of a pharmaceutical warehouse management system.",
+                title: "Implementation of a Medicine Warehouse System",
+                subtitle: "A research paper on designing and implementing a medicine warehouse management system.",
                 image: "assets/imgs/app.png",
+                images: [],
                 date: "2022",
                 role: "Author",
                 tags: ["Software Engineering", "Design Patterns", "C#"],
-                description: "This scientific paper will talk about drug warehouse" +
-                    "system and applications, through this study will learn about the" +
-                    "importance of systems, one of the main objectives of the study" +
-                    "is design a flexible database that gives ease of modification and" +
-                    "use of data so that data is not lost, this study The study used" +
-                    "the descriptive approach, the most prominent results of the study" +
-                    "are a system that gives satisfactory results." +
-                    "Index Terms—System, warehouse, Pharmaceutical warehouse," +
-                    "Management System",
+                description: "This paper examines the design and implementation of a medicine warehouse information system. It discusses the importance of managing warehouse data reliably and describes a flexible database structure intended to make records easier to maintain and update. The study used a descriptive approach and presented a working system for medicine, supplier, customer, and sales records.",
                 highlights: [
-                    "a database that gives flexibility modifying and using data easy.",
-                    "Control of warehouse.",
-                    "All supplier and customer and drug classes records are present in system.",
-                    "Bills for sale in the system."
+                    "A flexible database structure designed for easier updates",
+                    "Medicine warehouse inventory management",
+                    "Records for suppliers, customers, and medicine categories",
+                    "Sales invoices and transaction records"
                 ],
                 links: [
                     { label: "Read the paper (PDF)", url: "assets/last .pdf" }
                 ]
             },
-            /* ---------- Events ---------- */
+
+            /* ---------- EVENTS ---------- */
             {
                 id: "IEEE-ComPTION",
                 category: "Events",
@@ -97,18 +103,20 @@
                 title: "IEEE UofG SB Programming Competition",
                 subtitle: "Programming Contestant | Problem-Solving | Competitive Programming.",
                 image: "SRC/PIC/Comp1.jpg",
+                images: [],
                 date: "2021",
                 role: "Participant",
                 tags: ["C#", ".NET", "Events", "IEEE UOFG SB"],
-                description: "Presented an overview of the latest C# language features and .NET 8 improvements relevant to desktop developers, including performance improvements, new syntax, and best practices.",
+                description: "Participated as a contestant in an open programming competition organized by the IEEE University of Gezira Student Branch. The competition provided an opportunity to apply programming knowledge, logical reasoning, and problem-solving skills under contest conditions.",
                 highlights: [
-                    "participated as a contestant in an open programming competition organized by IEEE UofG SB.",
+                    "Participated as a contestant in an open programming competition organized by IEEE UofG SB.",
                     "Applied programming knowledge and logical thinking to solve coding challenges.",
                     "Demonstrated problem-solving and analytical skills in a competitive environment.",
                     "Gained valuable experience in competitive programming and technical skill development."
                 ],
                 links: []
             },
+
             {
                 id: "IEEE-UOFG-SOCIAL",
                 category: "Events",
@@ -116,8 +124,9 @@
                 title: "IEEE UOFG SB Social Event",
                 subtitle: "Connecting Members Through Fun, Friendship, and Teamwork",
                 image: "SRC/PIC/Soc.jpg",
+                images: [],
                 date: "2025",
-                role: "Speaker",
+                role: "Participant",
                 tags: ["Networking", "Social", "IEEE"],
                 description: "Participated in the IEEE University of Gezira Student Branch Social Day, an event designed to bring members together through interactive games, social activities, and opportunities to connect with fellow volunteers. The event fostered friendship, strengthened relationships among members, and promoted a sense of belonging within the IEEE community.",
                 highlights: [
@@ -133,9 +142,10 @@
                 id: "IEEE-DAY",
                 category: "conferences",
                 categoryLabel: "Conference",
-                title: "IEEE UOFG SB DAY",
-                subtitle: "IEEE event in celebration of International Foundation Day",
+                title: "IEEE Day — IEEE UofG SB",
+                subtitle: "Celebrating the IEEE community, volunteering, and technology",
                 image: "SRC/PIC/Day1.jpg",
+                images: [],
                 date: "2025",
                 role: "HR Coordinator",
                 tags: ["Tech Summit", "Networking", "IEEE-UOFG-SB"],
@@ -153,17 +163,18 @@
                 id: "ieee-uofg-conferences-1",
                 category: "conferences",
                 categoryLabel: "Conference",
-                title: "From Code to Presentation: 50 Scientific Papers Challenge ",
+                title: "From Code to Presentation: 50 Scientific Papers Challenge",
                 subtitle: "Finalist with a Medicine Warehouse Management System Developed in VB.NET | IEEE UofG SB.",
                 image: "SRC/PIC/Con1.jpg",
+                images: [],
                 date: "2022",
                 role: "Participant",
                 tags: ["IEEE", "Conference", "Networking", "Uofg"],
-                description: "As a participant in the 50 Scientific Papers Challenge organized by the IEEE University of Gezira Student Branch, I presented my Medicine Warehouse Management System, a software project developed using VB.NET. Reaching the final stage of the challenge was a valuable milestone in my academic and technical journey. I had the opportunity to present my paper to an audience, explain the project's concept, and demonstrate how software development can be applied to address practical challenges in medicine warehouse management.Beyond the technical experience, this achievement helped me develop my public speaking, technical communication, and project presentation skills, bringing together my academic background in Computer Science and my passion for software development.",
+                description: "I participated in the IEEE University of Gezira Student Branch 50 Scientific Papers Challenge and presented my Medicine Warehouse Management System, developed using VB.NET. Reaching the final stage was a valuable milestone in my academic and technical journey. I explained the project's concept and demonstrated how software can address practical challenges in medicine warehouse management. The experience also strengthened my public speaking, technical communication, and project presentation skills.",
                 highlights: [
                     "Reached the final stage of the IEEE UofG SB 50 Scientific Papers Challenge.",
                     "Developed a Medicine Warehouse Management System using VB.NET.",
-                    "Networked with IEEE members and industry professionals",
+                    "Networked with IEEE members and industry professionals.",
                     "Presented the project to an audience, demonstrating its concept and practical applications.",
                     "Enhanced technical communication, public speaking, and software presentation skills."
                 ],
@@ -175,9 +186,10 @@
     /* =========================================================
        UTILITIES
     ========================================================= */
-    function escapeHTML(str) {
+
+    function escapeHTML(value) {
         const div = document.createElement("div");
-        div.textContent = String(str);
+        div.textContent = String(value);
         return div.innerHTML;
     }
 
@@ -188,10 +200,10 @@
     /* =========================================================
        INDEX PAGE — RENDER WORKS + FILTERS
     ========================================================= */
+
     const worksGrid = document.getElementById("worksGrid");
 
     if (worksGrid) {
-        /* --- Render all cards --- */
         SITE_DATA.works.forEach((item) => {
             const li = document.createElement("li");
             li.className = "workItem";
@@ -199,13 +211,17 @@
 
             const tagsHTML = item.tags
                 .slice(0, 3)
-                .map((t) => `<span class="workTag">${escapeHTML(t)}</span>`)
+                .map((tag) => `<span class="workTag">${escapeHTML(tag)}</span>`)
                 .join("");
 
             li.innerHTML = `
-                <a href="details.html?id=${encodeURIComponent(item.id)}" aria-label="View details: ${escapeHTML(item.title)}">
+                <a href="details.html?id=${encodeURIComponent(item.id)}"
+                   aria-label="View details: ${escapeHTML(item.title)}">
                     <div class="workThumb">
-                        <img src="${item.image}" alt="${escapeHTML(item.title)}" loading="lazy">
+                        <img src="${escapeHTML(item.image)}"
+                             alt="${escapeHTML(item.title)}"
+                             loading="lazy"
+                             decoding="async">
                         <span class="workBadge">${escapeHTML(item.categoryLabel)}</span>
                     </div>
                     <div class="workBody">
@@ -215,26 +231,36 @@
                     </div>
                 </a>
             `;
+
             worksGrid.appendChild(li);
+
+            const cardImage = li.querySelector("img");
+            if (cardImage) {
+                cardImage.addEventListener("error", () => {
+                    cardImage.classList.add("image-missing");
+                    cardImage.removeAttribute("src");
+                }, { once: true });
+            }
         });
 
-        /* --- Filter buttons --- */
         const filterButtons = document.querySelectorAll(".filter-btn");
 
-        filterButtons.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                filterButtons.forEach((b) => {
-                    b.classList.remove("active");
-                    b.setAttribute("aria-selected", "false");
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                filterButtons.forEach((otherButton) => {
+                    otherButton.classList.remove("active");
+                    otherButton.setAttribute("aria-selected", "false");
                 });
-                btn.classList.add("active");
-                btn.setAttribute("aria-selected", "true");
 
-                const filter = btn.getAttribute("data-filter");
-                document.querySelectorAll(".workItem").forEach((item) => {
-                    const cat = item.getAttribute("data-category");
-                    const show = filter === "all" || filter === cat;
-                    item.classList.toggle("hidden", !show);
+                button.classList.add("active");
+                button.setAttribute("aria-selected", "true");
+
+                const filter = button.getAttribute("data-filter");
+
+                document.querySelectorAll(".workItem").forEach((workItem) => {
+                    const category = workItem.getAttribute("data-category");
+                    const shouldShow = filter === "all" || filter === category;
+                    workItem.classList.toggle("hidden", !shouldShow);
                 });
             });
         });
@@ -243,11 +269,12 @@
     /* =========================================================
        DETAILS PAGE
     ========================================================= */
+
     const detailPage = document.getElementById("detailPage");
 
     if (detailPage) {
         const id = getQueryParam("id");
-        const item = SITE_DATA.works.find((w) => w.id === id);
+        const item = SITE_DATA.works.find((work) => work.id === id);
 
         if (!item) {
             detailPage.innerHTML = `
@@ -260,11 +287,11 @@
                 </div>
             `;
         } else {
-            document.title = item.title + " | Mohammed Badreldeen";
+            document.title = `${item.title} | Mohammed Badreldeen`;
 
-            const setText = (elId, value) => {
-                const el = document.getElementById(elId);
-                if (el) el.textContent = value;
+            const setText = (elementId, value) => {
+                const element = document.getElementById(elementId);
+                if (element) element.textContent = value;
             };
 
             setText("detailBadge", item.categoryLabel);
@@ -272,98 +299,211 @@
             setText("detailSub", item.subtitle);
             setText("detailDescription", item.description);
 
-            /* Hero image */
-            const img = document.getElementById("detailImage");
-            if (img) {
-                img.src = item.image;
-                img.alt = item.title;
+            /* Main image */
+            const mainImage = document.getElementById("detailImage");
+
+            if (mainImage) {
+                mainImage.src = item.image;
+                mainImage.alt = item.title;
+                mainImage.loading = "eager";
+                mainImage.decoding = "async";
+
+                mainImage.addEventListener("error", () => {
+                    const hero = mainImage.closest(".detailHero");
+                    if (hero) hero.classList.add("image-unavailable");
+                    mainImage.hidden = true;
+                }, { once: true });
+            }
+
+            /* Optional gallery: store only extra image paths in item.images.
+               Example:
+               images: ["SRC/PIC/screenshot-2.png", "SRC/PIC/screenshot-3.png"]
+            */
+            const gallery = document.getElementById("detailGallery");
+            const galleryGrid = document.getElementById("detailGalleryGrid");
+
+            const extraImages = Array.isArray(item.images) ?
+                item.images.filter((src) =>
+                    typeof src === "string" &&
+                    src.trim() &&
+                    src !== item.image
+                ) :
+                [];
+
+            if (gallery && galleryGrid && extraImages.length > 0) {
+                gallery.hidden = false;
+
+                galleryGrid.innerHTML = extraImages.map((src, index) => `
+                    <button
+                        class="detailGalleryItem"
+                        type="button"
+                        data-gallery-src="${escapeHTML(src)}"
+                        aria-label="View additional image ${index + 1} for ${escapeHTML(item.title)}"
+                        aria-pressed="false">
+                        <img
+                            src="${escapeHTML(src)}"
+                            alt="${escapeHTML(item.title)} — image ${index + 2}"
+                            loading="lazy"
+                            decoding="async">
+                        <span>Image ${index + 2}</span>
+                    </button>
+                `).join("");
+
+                galleryGrid.querySelectorAll(".detailGalleryItem").forEach((button) => {
+                    const thumbnail = button.querySelector("img");
+
+                    if (thumbnail) {
+                        thumbnail.addEventListener("error", () => button.remove(), { once: true });
+                    }
+
+                    button.addEventListener("click", () => {
+                        if (!mainImage) return;
+
+                        mainImage.hidden = false;
+                        mainImage.src = button.getAttribute("data-gallery-src");
+                        mainImage.alt = button.querySelector("img") ? .alt || item.title;
+
+                        const hero = mainImage.closest(".detailHero");
+                        if (hero) hero.classList.remove("image-unavailable");
+
+                        galleryGrid.querySelectorAll(".detailGalleryItem").forEach((otherButton) => {
+                            otherButton.setAttribute(
+                                "aria-pressed",
+                                String(otherButton === button)
+                            );
+                        });
+
+                        if (hero) {
+                            hero.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            });
+                        }
+                    });
+                });
+            } else if (gallery && galleryGrid) {
+                gallery.hidden = true;
+                galleryGrid.replaceChildren();
             }
 
             /* Meta line */
-            const metaEl = document.getElementById("detailMeta");
-            if (metaEl) {
+            const metaElement = document.getElementById("detailMeta");
+
+            if (metaElement) {
                 const parts = [];
-                if (item.date) parts.push(`<span><strong>Date:</strong> ${escapeHTML(item.date)}</span>`);
-                if (item.duration) parts.push(`<span><strong>Duration:</strong> ${escapeHTML(item.duration)}</span>`);
-                if (item.role) parts.push(`<span><strong>Role:</strong> ${escapeHTML(item.role)}</span>`);
-                metaEl.innerHTML = parts.join("");
+
+                if (item.date) {
+                    parts.push(`<span><strong>Date:</strong> ${escapeHTML(item.date)}</span>`);
+                }
+
+                if (item.duration) {
+                    parts.push(`<span><strong>Duration:</strong> ${escapeHTML(item.duration)}</span>`);
+                }
+
+                if (item.role) {
+                    parts.push(`<span><strong>Role:</strong> ${escapeHTML(item.role)}</span>`);
+                }
+
+                metaElement.innerHTML = parts.join("");
             }
 
             /* Highlights */
-            const highlightsEl = document.getElementById("detailHighlights");
-            if (highlightsEl && item.highlights) {
-                highlightsEl.innerHTML = item.highlights
-                    .map((h) => `<li>${escapeHTML(h)}</li>`)
+            const highlightsElement = document.getElementById("detailHighlights");
+
+            if (highlightsElement && Array.isArray(item.highlights)) {
+                highlightsElement.innerHTML = item.highlights
+                    .map((highlight) => `<li>${escapeHTML(highlight)}</li>`)
                     .join("");
             }
 
             /* Tags */
-            const tagsEl = document.getElementById("detailTags");
-            if (tagsEl) {
-                tagsEl.innerHTML = item.tags
-                    .map((t) => `<span class="workTag">${escapeHTML(t)}</span>`)
+            const tagsElement = document.getElementById("detailTags");
+
+            if (tagsElement) {
+                tagsElement.innerHTML = item.tags
+                    .map((tag) => `<span class="workTag">${escapeHTML(tag)}</span>`)
                     .join("");
             }
 
-            /* Links */
-            const linksEl = document.getElementById("detailLinks");
-            if (linksEl) {
-                if (!item.links || item.links.length === 0) {
-                    linksEl.innerHTML = `<p class="detailMuted">No external links available.</p>`;
+            /* Links: ignore empty or placeholder links. */
+            const linksElement = document.getElementById("detailLinks");
+
+            if (linksElement) {
+                const validLinks = (Array.isArray(item.links) ? item.links : [])
+                    .filter((link) =>
+                        link &&
+                        typeof link.label === "string" &&
+                        link.label.trim() &&
+                        typeof link.url === "string" &&
+                        link.url.trim() &&
+                        link.url.trim() !== "#"
+                    );
+
+                if (validLinks.length === 0) {
+                    linksElement.innerHTML = `
+                        <p class="detailMuted">No external links available.</p>
+                    `;
                 } else {
-                    linksEl.innerHTML = item.links
-                        .map((l) => {
-                            const url = l.url || "";
-                            const isPdf = /\.pdf(\?.*)?$/i.test(url);
-                            const isExternal = /^https?:\/\//i.test(url);
+                    linksElement.innerHTML = validLinks.map((link) => {
+                        const url = link.url.trim();
+                        const isPdf = /\.pdf(\?.*)?$/i.test(url);
+                        const isExternal = /^https?:\/\//i.test(url);
+                        const target = isExternal ? "_blank" : "_self";
+                        const rel = isExternal ? 'rel="noopener noreferrer"' : "";
+                        const download = isPdf && !isExternal ? "download" : "";
+                        const icon = isPdf ? "📄" : "🔗";
 
-                            // PDF محلي → افتح في نفس الصفحة
-                            // رابط خارجي → تبويب جديد
-                            // رابط داخلي آخر → نفس الصفحة
-                            const target = isExternal ? "_blank" : "_self";
-                            const rel = isExternal ? 'rel="noopener noreferrer"' : "";
-                            const download = isPdf && !isExternal ? "download" : "";
-                            const icon = isPdf ? "📄" : "🔗";
-
-                            return `<a class="detailLink" href="${escapeHTML(url)}" target="${target}" ${rel} ${download}>${icon} ${escapeHTML(l.label)} →</a>`;
-                        })
-                        .join("");
+                        return `
+                            <a class="detailLink"
+                               href="${escapeHTML(url)}"
+                               target="${target}"
+                               ${rel}
+                               ${download}>
+                               ${icon} ${escapeHTML(link.label)} →
+                            </a>
+                        `;
+                    }).join("");
                 }
             }
 
-            /* Related items (same category) */
-            const relatedEl = document.getElementById("detailRelated");
-            if (relatedEl) {
-                const related = SITE_DATA.works
-                    .filter((w) => w.category === item.category && w.id !== item.id)
+            /* Related items from the same category */
+            const relatedElement = document.getElementById("detailRelated");
+
+            if (relatedElement) {
+                const relatedItems = SITE_DATA.works
+                    .filter((work) =>
+                        work.category === item.category &&
+                        work.id !== item.id
+                    )
                     .slice(0, 3);
 
-                if (related.length === 0) {
-                    relatedEl.innerHTML = `<p class="detailMuted">No related items yet.</p>`;
+                if (relatedItems.length === 0) {
+                    relatedElement.innerHTML = `
+                        <p class="detailMuted">No related items yet.</p>
+                    `;
                 } else {
-                    relatedEl.innerHTML = related
-                        .map(
-                            (r) => `
-                            <a class="relatedCard" href="details.html?id=${encodeURIComponent(r.id)}">
-                                <img src="${r.image}" alt="${escapeHTML(r.title)}">
-                                <div>
-                                    <span class="relatedBadge">${escapeHTML(r.categoryLabel)}</span>
-                                    <h4>${escapeHTML(r.title)}</h4>
-                                </div>
-                            </a>
-                        `
-                        )
-                        .join("");
+                    relatedElement.innerHTML = relatedItems.map((related) => `
+                        <a class="relatedCard" href="details.html?id=${encodeURIComponent(related.id)}">
+                            <img
+                                src="${escapeHTML(related.image)}"
+                                alt="${escapeHTML(related.title)}"
+                                loading="lazy"
+                                decoding="async">
+                            <div>
+                                <span class="relatedBadge">${escapeHTML(related.categoryLabel)}</span>
+                                <h4>${escapeHTML(related.title)}</h4>
+                            </div>
+                        </a>
+                    `).join("");
                 }
             }
         }
     }
 
     /* =========================================================
-       SHARED — header, nav, scroll, typing, reveal, to-top
+       SHARED — header, navigation, scroll, typing, reveal and top
     ========================================================= */
 
-    /* Header scrolled */
     const header = document.querySelector("header");
 
     function updateHeader() {
@@ -371,12 +511,13 @@
         header.classList.toggle("scrolled", window.scrollY > 20);
     }
 
-    /* Mobile nav */
+    /* Mobile navigation */
     const navToggle = document.getElementById("navToggle");
     const primaryNav = document.getElementById("primaryNav");
 
     function closeNav() {
         if (!primaryNav || !navToggle) return;
+
         primaryNav.classList.remove("open");
         navToggle.classList.remove("open");
         navToggle.setAttribute("aria-expanded", "false");
@@ -386,29 +527,49 @@
     if (navToggle && primaryNav) {
         navToggle.addEventListener("click", () => {
             const isOpen = primaryNav.classList.toggle("open");
+
             navToggle.classList.toggle("open", isOpen);
             navToggle.setAttribute("aria-expanded", String(isOpen));
-            navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+            navToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close menu" : "Open menu"
+            );
         });
 
-        primaryNav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") closeNav();
+        primaryNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeNav);
         });
-        document.addEventListener("click", (e) => {
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") closeNav();
+        });
+
+        document.addEventListener("click", (event) => {
             if (!primaryNav.classList.contains("open")) return;
-            if (!primaryNav.contains(e.target) && !navToggle.contains(e.target)) closeNav();
+
+            if (!primaryNav.contains(event.target) &&
+                !navToggle.contains(event.target)
+            ) {
+                closeNav();
+            }
         });
     }
 
-    /* Scroll progress */
+    /* Scroll progress: animate with transform rather than recalculating width. */
     const progressBar = document.getElementById("scrollProgress");
 
     function updateProgress() {
         if (!progressBar) return;
-        const st = window.scrollY || document.documentElement.scrollTop;
-        const dh = document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + "%";
+
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollableHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+        const progress = scrollableHeight > 0 ?
+            Math.min(1, Math.max(0, scrollTop / scrollableHeight)) :
+            0;
+
+        progressBar.style.transform = `scaleX(${progress})`;
     }
 
     /* To top */
@@ -418,33 +579,48 @@
         if (!toTop) return;
         toTop.classList.toggle("show", window.scrollY > 500);
     }
+
     if (toTop) {
-        toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        toTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     }
 
-    /* Active nav link */
+    /* Active navigation link */
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".nav-link");
 
     function setActiveNavLink() {
         if (!sections.length || !navLinks.length) return;
-        const pos = window.scrollY + window.innerHeight * 0.28;
-        let current = "";
-        sections.forEach((s) => {
-            if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) current = s.id;
+
+        const position = window.scrollY + window.innerHeight * 0.28;
+        let currentSection = "";
+
+        sections.forEach((section) => {
+            if (
+                position >= section.offsetTop &&
+                position < section.offsetTop + section.offsetHeight
+            ) {
+                currentSection = section.id;
+            }
         });
-        navLinks.forEach((l) => {
-            const href = l.getAttribute("href") || "";
-            l.classList.toggle("active", href.endsWith("#" + current));
+
+        navLinks.forEach((link) => {
+            const href = link.getAttribute("href") || "";
+            link.classList.toggle(
+                "active",
+                href.endsWith("#" + currentSection)
+            );
         });
     }
 
-    /* Unified scroll */
+    /* Unified scroll handler */
     let ticking = false;
 
     function onScroll() {
         if (ticking) return;
         ticking = true;
+
         window.requestAnimationFrame(() => {
             updateHeader();
             updateProgress();
@@ -453,92 +629,119 @@
             ticking = false;
         });
     }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     onScroll();
 
     /* Typing effect */
     const typedText = document.getElementById("typedText");
-    const roles = ["Software Developer", "C# / .NET Developer", "Desktop App Builder", "Problem Solver"];
+    const roles = [
+        "Software Developer",
+        "C# / .NET Developer",
+        "Desktop App Builder",
+        "Problem Solver"
+    ];
+
     if (typedText) {
-        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduce) {
+        const reduceMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        if (reduceMotion) {
             typedText.textContent = roles[0];
         } else {
-            let ri = 0,
-                ci = 0,
-                del = false;
-            const TS = 90,
-                DS = 45,
-                PE = 1400,
-                PS = 350;
+            let roleIndex = 0;
+            let characterIndex = 0;
+            let deleting = false;
+
+            const typeSpeed = 90;
+            const deleteSpeed = 45;
+            const endPause = 1400;
+            const startPause = 350;
+
             (function tick() {
-                const cur = roles[ri];
-                if (del) {
-                    ci--;
-                    typedText.textContent = cur.substring(0, ci);
-                    if (ci === 0) {
-                        del = false;
-                        ri = (ri + 1) % roles.length;
-                        setTimeout(tick, PS);
+                const currentRole = roles[roleIndex];
+
+                if (deleting) {
+                    characterIndex--;
+                    typedText.textContent = currentRole.substring(0, characterIndex);
+
+                    if (characterIndex === 0) {
+                        deleting = false;
+                        roleIndex = (roleIndex + 1) % roles.length;
+                        setTimeout(tick, startPause);
                         return;
                     }
-                    setTimeout(tick, DS);
+
+                    setTimeout(tick, deleteSpeed);
                 } else {
-                    ci++;
-                    typedText.textContent = cur.substring(0, ci);
-                    if (ci === cur.length) {
-                        del = true;
-                        setTimeout(tick, PE);
+                    characterIndex++;
+                    typedText.textContent = currentRole.substring(0, characterIndex);
+
+                    if (characterIndex === currentRole.length) {
+                        deleting = true;
+                        setTimeout(tick, endPause);
                         return;
                     }
-                    setTimeout(tick, TS);
+
+                    setTimeout(tick, typeSpeed);
                 }
             })();
         }
     }
 
     /* Reveal on scroll */
-    const revealEls = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window && revealEls.length) {
-        const obs = new IntersectionObserver(
-            (entries, observer) => {
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window && revealElements.length) {
+        const observer = new IntersectionObserver(
+            (entries, activeObserver) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("in");
-                        observer.unobserve(entry.target);
+                        activeObserver.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+            }, {
+                threshold: 0.12,
+                rootMargin: "0px 0px -60px 0px"
+            }
         );
-        revealEls.forEach((el) => obs.observe(el));
+
+        revealElements.forEach((element) => observer.observe(element));
     } else {
-        revealEls.forEach((el) => el.classList.add("in"));
+        revealElements.forEach((element) => element.classList.add("in"));
     }
 
     /* Smooth scroll for same-page anchor links */
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
-        link.addEventListener("click", (e) => {
+        link.addEventListener("click", (event) => {
             const id = link.getAttribute("href");
             if (!id || id === "#") return;
+
             const target = document.querySelector(id);
             if (!target) return;
-            e.preventDefault();
-            const top = target.getBoundingClientRect().top + window.scrollY - 90;
+
+            event.preventDefault();
+
+            const top =
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                90;
+
             window.scrollTo({ top, behavior: "smooth" });
             history.replaceState(null, "", id);
         });
     });
 
-
-
-
     /* =========================================================
-       ACCESSIBLE PROFILE DRAWER + BILINGUAL INTERFACE
-       Existing class names and content rendering are preserved.
+       PROFILE DRAWER + BILINGUAL INTERFACE
     ========================================================= */
+
     const sidebar = document.getElementById("sidebar");
     const sidebarOverlay = document.getElementById("sidebarOverlay");
+
     const profileButtons = [
         document.getElementById("profileDetailsToggle"),
         document.getElementById("mobileProfileOpen")
@@ -546,19 +749,40 @@
 
     function setProfileDrawer(open) {
         if (!sidebar) return;
+
         sidebar.classList.toggle("drawer-open", open);
-        if (sidebarOverlay) sidebarOverlay.classList.toggle("visible", open);
-        profileButtons.forEach((button) => button.setAttribute("aria-expanded", String(open)));
+
+        if (sidebarOverlay) {
+            sidebarOverlay.classList.toggle("visible", open);
+        }
+
+        profileButtons.forEach((button) => {
+            button.setAttribute("aria-expanded", String(open));
+        });
+
         document.body.classList.toggle("profile-drawer-open", open);
     }
-    profileButtons.forEach((button) => button.addEventListener("click", () => {
-        setProfileDrawer(!sidebar.classList.contains("drawer-open"));
-    }));
-    if (sidebarOverlay) sidebarOverlay.addEventListener("click", () => setProfileDrawer(false));
+
+    profileButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!sidebar) return;
+            setProfileDrawer(!sidebar.classList.contains("drawer-open"));
+        });
+    });
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener("click", () => setProfileDrawer(false));
+    }
+
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") setProfileDrawer(false);
     });
-    if (sidebar) sidebar.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setProfileDrawer(false)));
+
+    if (sidebar) {
+        sidebar.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => setProfileDrawer(false));
+        });
+    }
 
     const translations = {
         "About Me": "نبذة عني",
@@ -605,75 +829,154 @@
         "Software Development": "تطوير البرمجيات",
         "HR & Volunteering": "الموارد البشرية والتطوع",
         "Administration & IT Training": "الإدارة والتدريب التقني",
-        "Additional Experience": "خبرات إضافية"
+        "Additional Experience": "خبرات إضافية",
+        "Date:": "التاريخ:",
+        "Duration:": "المدة:",
+        "Role:": "الدور:",
+        "More images": "صور إضافية",
+        "Image 2": "الصورة 2",
+        "Image 3": "الصورة 3",
+        "No external links available.": "لا توجد روابط خارجية متاحة.",
+        "Item not found": "لم يتم العثور على العنصر",
+        "Sorry, we couldn't find the item you're looking for.": "عذرًا، لم نعثر على العنصر الذي تبحث عنه."
     };
+
     const originalText = new WeakMap();
 
     function applyLanguage(language) {
         const arabic = language === "ar";
+
         document.documentElement.lang = arabic ? "ar" : "en";
         document.documentElement.dir = arabic ? "rtl" : "ltr";
+
         const toggle = document.getElementById("languageToggle");
-        if (toggle) toggle.textContent = arabic ? "English" : "العربية";
+
         document.querySelectorAll("body *:not(script):not(style)").forEach((element) => {
             if (element.children.length !== 0) return;
-            if (!originalText.has(element)) originalText.set(element, element.textContent);
+
+            if (!originalText.has(element)) {
+                originalText.set(element, element.textContent);
+            }
+
             const original = originalText.get(element).trim();
             if (!original) return;
-            if (arabic && translations[original]) element.textContent = translations[original];
-            else if (!arabic) element.textContent = originalText.get(element);
+
+            if (arabic && translations[original]) {
+                element.textContent = translations[original];
+            } else if (!arabic) {
+                element.textContent = originalText.get(element);
+            }
         });
+
+        /* Label the button with the language the visitor can switch to. */
+        if (toggle) {
+            toggle.textContent = arabic ? "English" : "العربية";
+        }
+
         document.body.classList.toggle("language-ar", arabic);
-        try { localStorage.setItem("portfolio-language", language); } catch (_) {}
+
+        try {
+            localStorage.setItem("portfolio-language", language);
+        } catch (_) {
+            /* Storage may be blocked; the language switch still works for this page. */
+        }
     }
+
     const languageToggle = document.getElementById("languageToggle");
     let currentLanguage = "en";
-    try { currentLanguage = localStorage.getItem("portfolio-language") || "en"; } catch (_) {}
-    if (languageToggle) languageToggle.addEventListener("click", () => {
-        currentLanguage = currentLanguage === "en" ? "ar" : "en";
-        applyLanguage(currentLanguage);
-    });
-    if (currentLanguage !== "en") applyLanguage(currentLanguage);
 
-    /* Organize the existing experience entries into readable groups. */
+    try {
+        currentLanguage = localStorage.getItem("portfolio-language") || "en";
+    } catch (_) {
+        currentLanguage = "en";
+    }
+
+    if (languageToggle) {
+        languageToggle.addEventListener("click", () => {
+            currentLanguage = currentLanguage === "en" ? "ar" : "en";
+            applyLanguage(currentLanguage);
+        });
+    }
+
+    if (currentLanguage !== "en") {
+        applyLanguage(currentLanguage);
+    }
+
+    /* Organize existing experience entries into readable groups. */
     const timeline = document.querySelector(".timeline");
+
     if (timeline && !timeline.dataset.grouped) {
-        const entries = Array.from(timeline.querySelectorAll(":scope > .timelineItem"));
-        const groups = [
-            { title: "Software Development", match: (item) => /Freelance Software Development/i.test(item.textContent) },
-            { title: "HR & Volunteering", match: (item) => /IEEE University of Gezira|NextSudan HR|LCOY Gezira|Google Developer Student Clubs/i.test(item.textContent) },
-            { title: "Administration & IT Training", match: (item) => /Sudanese Standards and Metrology|Information Center of Gezira State/i.test(item.textContent) }
+        const entries = Array.from(
+            timeline.querySelectorAll(":scope > .timelineItem")
+        );
+
+        const groups = [{
+                title: "Software Development",
+                match: (item) => /Freelance Software Development/i.test(item.textContent)
+            },
+            {
+                title: "HR & Volunteering",
+                match: (item) => /IEEE University of Gezira|NextSudan HR|LCOY Gezira|Google Developer Student Clubs/i.test(item.textContent)
+            },
+            {
+                title: "Administration & IT Training",
+                match: (item) => /Sudanese Standards and Metrology|Information Center of Gezira State/i.test(item.textContent)
+            }
         ];
+
         const assigned = new Set();
+
         groups.forEach((group) => {
-            const items = entries.filter((item) => !assigned.has(item) && group.match(item));
-            if (!items.length) return;
+            const matchingItems = entries.filter(
+                (entry) => !assigned.has(entry) && group.match(entry)
+            );
+
+            if (!matchingItems.length) return;
+
             const wrapper = document.createElement("section");
             wrapper.className = "timelineGroup";
+
             const heading = document.createElement("h3");
             heading.className = "timelineGroupTitle";
             heading.textContent = group.title;
+
             wrapper.appendChild(heading);
-            items.forEach((item) => { assigned.add(item);
-                wrapper.appendChild(item); });
+
+            matchingItems.forEach((entry) => {
+                assigned.add(entry);
+                wrapper.appendChild(entry);
+            });
+
             timeline.appendChild(wrapper);
         });
-        const remaining = entries.filter((item) => !assigned.has(item));
-        if (remaining.length) {
+
+        const remainingItems = entries.filter((entry) => !assigned.has(entry));
+
+        if (remainingItems.length) {
             const wrapper = document.createElement("section");
             wrapper.className = "timelineGroup";
+
             const heading = document.createElement("h3");
             heading.className = "timelineGroupTitle";
             heading.textContent = "Additional Experience";
+
             wrapper.appendChild(heading);
-            remaining.forEach((item) => wrapper.appendChild(item));
+
+            remainingItems.forEach((entry) => wrapper.appendChild(entry));
             timeline.appendChild(wrapper);
         }
+
         timeline.dataset.grouped = "true";
     }
 
-    /* Keep copyright years current rather than hard-coding a future year. */
+    /* Translate group headings created by the grouping code above. */
+    if (currentLanguage === "ar") {
+        applyLanguage("ar");
+    }
+
+    /* Keep copyright years current. */
     const currentYear = String(new Date().getFullYear());
+
     ["year", "yearSide"].forEach((id) => {
         const year = document.getElementById(id);
         if (year) year.textContent = currentYear;
