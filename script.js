@@ -33,7 +33,7 @@
                 title: "Pharmaceutical Warehouse System",
                 subtitle: "A desktop application for medicine warehouse management.",
                 image: "SRC/PIC/Capture.PNG",
-                images: ["SRC/PIC/Capture2.PNG", "SRC/PIC/Capture3.PNG", "SRC/PIC/Capture4.PNG", "SRC/PIC/Capture5.PNG"], // Add more image paths here when those files exist.
+                images: ["SRC/PIC/Capture2.PNG", "SRC/PIC/Capture3.PNG", "SRC/PIC/Capture4.PNG", "SRC/PIC/Capture5.PNG", "SRC/PIC/Capture.PNG"], // Add more image paths here when those files exist.
                 date: "2022",
                 duration: "3 months",
                 role: "Solo Developer",
@@ -103,7 +103,7 @@
                 title: "IEEE UofG SB Programming Competition",
                 subtitle: "Programming Contestant | Problem-Solving | Competitive Programming.",
                 image: "SRC/PIC/Comp1.jpg",
-                images: ["SRC/PIC/Comp2.jpg"],
+                images: ["SRC/PIC/Comp2.jpg", "SRC/PIC/Comp1.jpg"],
                 date: "2021",
                 role: "Participant",
                 tags: ["C#", ".NET", "Events", "IEEE UOFG SB"],
@@ -140,8 +140,8 @@
 
             {
                 id: "IEEE-DAY",
-                category: "conferences",
-                categoryLabel: "Conference",
+                category: "Events",
+                categoryLabel: "Events",
                 title: "IEEE Day — IEEE UofG SB",
                 subtitle: "Celebrating the IEEE community, volunteering, and technology",
                 image: "SRC/PIC/Day1.jpg",
