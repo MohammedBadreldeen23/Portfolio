@@ -358,7 +358,7 @@
                         mainImage.hidden = false;
                         mainImage.src = button.getAttribute("data-gallery-src");
 
-                        // FIXED: Removed the space between ? and .alt that caused the syntax error
+                        // Fixed: Removed the space between ? and .alt that caused the syntax error
                         const thumbImg = button.querySelector("img");
                         mainImage.alt = thumbImg ? thumbImg.alt : item.title;
 
@@ -783,6 +783,9 @@
         });
     }
 
+    /* =========================================================
+       LANGUAGE TRANSLATION ENGINE
+    ========================================================= */
     const translations = {
         "About Me": "نبذة عني",
         "MyWorks": "أعمالي",
@@ -837,48 +840,104 @@
         "Image 3": "الصورة 3",
         "No external links available.": "لا توجد روابط خارجية متاحة.",
         "Item not found": "لم يتم العثور على العنصر",
-        "Sorry, we couldn't find the item you're looking for.": "عذرًا، لم نعثر على العنصر الذي تبحث عنه."
+        "Sorry, we couldn't find the item you're looking for.": "عذرًا، لم نعثر على العنصر الذي تبحث عنه.",
+        "I'M Mohammed Badreldeen": "أنا محمد برالدين",
+        "I build practical desktop applications with C# and .NET, and explore web and mobile development with HTML, CSS, JavaScript, Flutter and Dart.": "أبني تطبيقات سطح مكتب عملية باستخدام C# و .NET، وأستكشف تطوير الويب والجوال باستخدام HTML و CSS و JavaScript و Flutter و Dart.",
+        "I build practical desktop & web applications with C#, .NET, Java and Python — focused on clean architecture and real-world problems.": "أبني تطبيقات عملية لسطح المكتب والويب باستخدام C# و .NET و Java و Python — مع التركيز على البنية النظيفة والمشكلات الواقعية.",
+        "Wad Madani, Sudan · Open to remote opportunities": "ود مدني، السودان · متاح للعمل عن بُعد",
+        "Sudan · Remote friendly": "السودان · متاح للعمل عن بُعد",
+        "Software Developer ·": "مطور برمجيات ·",
+        "Software Developer · C# / .NET": "مطور برمجيات · C# / .NET",
+        "Soft Skills": "مهارات شخصية",
+        "Reporting": "إعداد التقارير",
+        "Technical Skills": "مهارات تقنية",
+        "Project": "مشروع",
+        "Research Paper": "ورقة علمية",
+        "Conference": "مؤتمر",
+        "Events": "فعالية",
+        "IEEE University of Gezira Student Branch": "فرع طلاب IEEE جامعة الجزيرة",
+        "Active Member & Volunteer": "عضو نشط ومتطوع",
+        "Freelance Software Development": "تطوير برمجيات مستقل",
+        "Solo Developer": "مطور فردي",
+        "Human Resources Coordinator": "منسق الموارد البشرية",
+        "HR Volunteer & Technical Support": "متطوع موارد بشرية ودعم فني",
+        "Human Resources": "الموارد البشرية",
+        "Secretary & Administrative Support": "سكرتير ودعم إداري",
+        "Technical Team Member": "عضو فريق فني",
+        "IT Support Trainee": "متدرب دعم فني",
+        "Google Developer Student Clubs (GDSC)": "نوادي طلاب مطوري جوجل (GDSC)",
+        "LCOY Gezira – Local Conference of Youth": "LCOY الجزيرة - المؤتمر المحلي للشباب",
+        "Sudanese Standards and Metrology Organization": "الهيئة السودانية للمواصفات والمقاييس",
+        "Information Center of Gezira State": "مركز معلومات ولاية الجزيرة",
+        "2023 — Present": "2023 — الآن",
+        "May 2025 – Aug 2026": "مايو 2025 – أغسطس 2026",
+        "Volunteer Experience": "خبرة تطوعية",
+        "HR Experience": "خبرة في الموارد البشرية",
+        "One Year – National Service": "سنة واحدة – الخدمة الوطنية",
+        "2020 · 3 Months": "2020 · 3 أشهر",
+        "Organizing and volunteering in technical events, workshops, and student activities. Collaborating with a multidisciplinary team to deliver IEEE activities, and representing the branch at conferences.": "تنظيم والتطوع في الفعاليات التقنية وورش العمل والأنشطة الطلابية. التعاون مع فريق متعدد التخصصات لتقديم أنشطة IEEE، وتمثيل الفرع في المؤتمرات.",
+        "Building small desktop and web applications for local clients and personal projects. Focus on clean architecture, offline-first desktop apps, and user-friendly interfaces.": "بناء تطبيقات سطح مكتب وويب صغيرة للعملاء المحليين والمشاريع الشخصية. التركيز على البنية النظيفة وتطبيقات سطح المكتب التي تعمل دون اتصال وواجهات سهلة الاستخدام.",
+        "Led human resources activities, supported volunteer engagement, coordinated HR team operations, and contributed to team restructuring and organizational development. Helped improve volunteer participation through recruitment, performance evaluation, and team development initiatives.": "قيادة أنشطة الموارد البشرية، ودعم مشاركة المتطوعين، وتنسيق عمليات فريق الموارد البشرية، والمساهمة في إعادة هيكلة الفريق والتطوير التنظيمي. ساعد في تحسين مشاركة المتطوعين من خلال التوظيف وتقييم الأداء ومبادرات تطوير الفريق.",
+        "Contributed to human resources activities while supporting technical operations. Collaborated with team members, assisted with organizational tasks, and supported initiatives aimed at strengthening volunteer engagement and team performance.": "المساهمة في أنشطة الموارد البشرية مع دعم العمليات التقنية. التعاون مع أعضاء الفريق، والمساعدة في المهام التنظيمية، ودعم المبادرات الرامية إلى تعزيز مشاركة المتطوعين وأداء الفريق.",
+        "Gained exposure to the human resources field, building an understanding of HR practices and the role of people management in organizational development.": "اكتساب خبرة في مجال الموارد البشرية، وبناء فهم لممارسات الموارد البشرية ودور إدارة الأفراد في التطوير التنظيمي.",
+        "Handled administrative and secretarial tasks, maintained records and documentation, organized data, and supported computer-based office operations. Also contributed to IT support and administrative workflows within the organization.": "التعامل مع المهام الإدارية والسكرتارية، والحفاظ على السجلات والوثائق، وتنظيم البيانات، ودعم عمليات المكتب المحوسبة. كما ساهم في دعم تكنولوجيا المعلومات وسير العمل الإداري داخل المنظمة.",
+        "Contributed to technical team activities, collaborated with fellow technology enthusiasts, and supported knowledge-sharing initiatives within the student developer community.": "المساهمة في أنشطة الفريق الفني، والتعاون مع زملاء التكنولوجيا، ودعم مبادرات تبادل المعرفة داخل مجتمع مطوري الطلاب.",
+        "Managed HR operations for the local climate conference, overseeing volunteer recruitment, team coordination, task allocation, communication, and volunteer engagement. Supported team organization and ensured effective collaboration to achieve the conference objectives.": "إدارة عمليات الموارد البشرية للمؤتمر المناخي المحلي، والإشراف على توظيف المتطوعين، وتنسيق الفريق، وتوزيع المهام، والتواصل، ومشاركة المتطوعين. دعم تنظيم الفريق وضمان التعاون الفعال لتحقيق أهداف المؤتمر.",
+        "Received practical training in computer maintenance, hardware troubleshooting, and computer networking. Developed foundational technical skills in diagnosing computer issues, maintaining hardware, and understanding network infrastructure and connectivity.": "تلقى تدريبًا عمليًا في صيانة الكمبيوتر واستكشاف أخطاء الأجهزة وإصلاحها وشبكات الكمبيوتر. تطوير المهارات التقنية الأساسية في تشخيص مشاكل الكمبيوتر، وصيانة الأجهزة، وفهم البنية التحتية للشبكة والاتصال."
     };
 
     const originalText = new WeakMap();
 
     function applyLanguage(language) {
         const arabic = language === "ar";
-
         document.documentElement.lang = arabic ? "ar" : "en";
         document.documentElement.dir = arabic ? "rtl" : "ltr";
 
         const toggle = document.getElementById("languageToggle");
-
-        document.querySelectorAll("body *:not(script):not(style)").forEach((element) => {
-            if (element.children.length !== 0) return;
-
-            if (!originalText.has(element)) {
-                originalText.set(element, element.textContent);
-            }
-
-            const original = originalText.get(element).trim();
-            if (!original) return;
-
-            if (arabic && translations[original]) {
-                element.textContent = translations[original];
-            } else if (!arabic) {
-                element.textContent = originalText.get(element);
-            }
-        });
-
-        /* Label the button with the language the visitor can switch to. */
         if (toggle) {
             toggle.textContent = arabic ? "English" : "العربية";
         }
-
         document.body.classList.toggle("language-ar", arabic);
 
-        try {
-            localStorage.setItem("portfolio-language", language);
-        } catch (_) {
-            /* Storage may be blocked; the language switch still works for this page. */
+        // TreeWalker translates text nodes precisely without breaking HTML tags/icons
+        const walker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_TEXT, {
+                acceptNode: function(node) {
+                    if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                    const parent = node.parentElement;
+                    if (!parent) return NodeFilter.FILTER_REJECT;
+                    if (parent.tagName === "SCRIPT" || parent.tagName === "STYLE") return NodeFilter.FILTER_REJECT;
+                    // Ignore elements that are dynamic or shouldn't be translated
+                    if (parent.classList.contains("typed-text") || parent.id === "typedText" || parent.classList.contains("caret") || parent.id === "languageToggle") {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        let node;
+        const textNodes = [];
+        while ((node = walker.nextNode())) {
+            textNodes.push(node);
         }
+
+        textNodes.forEach((textNode) => {
+            if (!originalText.has(textNode)) {
+                originalText.set(textNode, textNode.nodeValue);
+            }
+            const original = originalText.get(textNode);
+            const trimmed = original.trim();
+
+            if (arabic && translations[trimmed]) {
+                const leading = original.match(/^\s*/)[0];
+                const trailing = original.match(/\s*$/)[0];
+                textNode.nodeValue = leading + translations[trimmed] + trailing;
+            } else if (!arabic) {
+                textNode.nodeValue = original;
+            }
+        });
     }
 
     const languageToggle = document.getElementById("languageToggle");
@@ -893,12 +952,9 @@
     if (languageToggle) {
         languageToggle.addEventListener("click", () => {
             currentLanguage = currentLanguage === "en" ? "ar" : "en";
-            applyLanguage(currentLanguage);
+            try { localStorage.setItem("portfolio-language", currentLanguage); } catch (e) {}
+            location.reload(); // Reload to ensure dynamic content translates properly
         });
-    }
-
-    if (currentLanguage !== "en") {
-        applyLanguage(currentLanguage);
     }
 
     /* Organize existing experience entries into readable groups. */
@@ -925,6 +981,14 @@
 
         const assigned = new Set();
 
+        // Translate group headers if in Arabic mode
+        const groupTitleMap = {
+            "Software Development": "تطوير البرمجيات",
+            "HR & Volunteering": "الموارد البشرية والتطوع",
+            "Administration & IT Training": "الإدارة والتدريب التقني",
+            "Additional Experience": "خبرات إضافية"
+        };
+
         groups.forEach((group) => {
             const matchingItems = entries.filter(
                 (entry) => !assigned.has(entry) && group.match(entry)
@@ -937,7 +1001,9 @@
 
             const heading = document.createElement("h3");
             heading.className = "timelineGroupTitle";
-            heading.textContent = group.title;
+
+            // Use translated title if Arabic
+            heading.textContent = (currentLanguage === "ar" && groupTitleMap[group.title]) ? groupTitleMap[group.title] : group.title;
 
             wrapper.appendChild(heading);
 
@@ -957,7 +1023,7 @@
 
             const heading = document.createElement("h3");
             heading.className = "timelineGroupTitle";
-            heading.textContent = "Additional Experience";
+            heading.textContent = (currentLanguage === "ar" && groupTitleMap["Additional Experience"]) ? groupTitleMap["Additional Experience"] : "Additional Experience";
 
             wrapper.appendChild(heading);
 
@@ -968,7 +1034,7 @@
         timeline.dataset.grouped = "true";
     }
 
-    /* Translate group headings created by the grouping code above. */
+    /* Apply translation on page load if Arabic is selected */
     if (currentLanguage === "ar") {
         applyLanguage("ar");
     }

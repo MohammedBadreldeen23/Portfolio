@@ -295,7 +295,7 @@ h4 {
 }
 
 
-/* Fixed Avatar Styling */
+/* Fixed Avatar Styling to prevent black box */
 
 .sidebarAvatar {
     position: relative;
@@ -636,6 +636,7 @@ header.scrolled {
     border: 2px solid rgba(116, 224, 189, 0.45);
     box-shadow: 0 0 0 3px rgba(197, 243, 107, 0.10), 0 4px 12px rgba(116, 224, 189, 0.18);
     transition: transform 0.3s var(--ease), box-shadow 0.3s ease;
+    background: #fff;
 }
 
 .logo:hover .img1 {
