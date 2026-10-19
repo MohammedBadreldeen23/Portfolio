@@ -33,7 +33,7 @@
                 title: "Pharmaceutical Warehouse System",
                 subtitle: "A desktop application for medicine warehouse management.",
                 image: "SRC/PIC/Capture.PNG",
-                images: [], // Add more image paths here when those files exist.
+                images: ["SRC/PIC/Capture2.PNG", "SRC/PIC/Capture3.PNG", "SRC/PIC/Capture4.PNG", "SRC/PIC/Capture5.PNG"], // Add more image paths here when those files exist.
                 date: "2022",
                 duration: "3 months",
                 role: "Solo Developer",
@@ -103,7 +103,7 @@
                 title: "IEEE UofG SB Programming Competition",
                 subtitle: "Programming Contestant | Problem-Solving | Competitive Programming.",
                 image: "SRC/PIC/Comp1.jpg",
-                images: [],
+                images: ["SRC/PIC/Comp2.jpg"],
                 date: "2021",
                 role: "Participant",
                 tags: ["C#", ".NET", "Events", "IEEE UOFG SB"],
@@ -166,7 +166,7 @@
                 title: "From Code to Presentation: 50 Scientific Papers Challenge",
                 subtitle: "Finalist with a Medicine Warehouse Management System Developed in VB.NET | IEEE UofG SB.",
                 image: "SRC/PIC/Con1.jpg",
-                images: [],
+                images: ["SRC/PIC/Con1.jpg", "SRC/PIC/Con2.jpg", "SRC/PIC/Con3.jpg"],
                 date: "2022",
                 role: "Participant",
                 tags: ["IEEE", "Conference", "Networking", "Uofg"],
