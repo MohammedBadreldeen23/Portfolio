@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
     <meta name="description" content="Mohammed Badreldeen — Software Developer. Projects, research papers, seminars and conferences. C#, .NET, Java, Python, SQL.">
     <meta name="author" content="Mohammed Badreldeen">
-    <meta name="theme-color" content="#0a0e1a">
+    <meta name="theme-color" content="#0b1020">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mohammed Badreldeen | Software Developer">
@@ -38,12 +38,12 @@
                 <p class="sidebarRole">
                     <span class="statusDot" aria-hidden="true"></span> Software Developer
                 </p>
-                <p class="sidebarLocation">Sudan-Gzira-Wad_Madni · Remote friendly</p>
+                <p class="sidebarLocation">Wad Madani, Sudan · Open to remote opportunities</p>
             </div>
 
             <!-- Short bio -->
             <p class="sidebarBio">
-                I build practical desktop with C#, .NET, SQL SERVER &amp; web applications with HTML, CSS, JS, and MYSQL — focused on clean architecture and real-world problems. &amp; Mobile application with Fultter, Dart
+                I build practical desktop applications with C# and .NET, and explore web and mobile development with HTML, CSS, JavaScript, Flutter and Dart.
             </p>
 
             <!-- Top skills -->
@@ -55,11 +55,11 @@
                     <li>WinForms</li>
                     <li>Java</li>
                     <li>Python</li>
-                    <li>Html</li>
-                    <li>css</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
                     <li>JS</li>
                     <li>Soft Skills</li>
-                    <li>Repoting Siklls</li>
+                    <li>Reporting</li>
                     <li>Technical Skills</li>
 
                 </ul>
@@ -100,11 +100,20 @@
             </a>
 
             <p class="sidebarFooter">
-                © <span id="yearSide">2027</span> · Made with <span class="heart">♥</span>
+                © <span id="yearSide">2026</span> · Made with <span class="heart">♥</span>
             </p>
 
         </div>
     </aside>
+
+    <button class="sidebar-overlay" id="sidebarOverlay" type="button" aria-label="Close profile details" tabindex="-1"></button>
+
+    <!-- Compact profile summary for small screens -->
+    <div class="mobile-profile-summary">
+        <img src="SRC/PIC/Pers.svg" alt="" onerror="this.style.display='none'">
+        <div><strong>Mohammed Badreldeen</strong><span>Software Developer · C# / .NET</span></div>
+        <button type="button" id="mobileProfileOpen" aria-controls="sidebar" aria-expanded="false">Details</button>
+    </div>
 
     <!-- Decorative background -->
     <div class="bg-decor" aria-hidden="true">
@@ -123,6 +132,8 @@
             <img class="img1" src="SRC/PIC/Pers.svg" alt="Mohammed Badreldeen Logo">
         </a>
 
+        <button class="language-toggle" type="button" id="languageToggle" aria-label="Switch language">العربية</button>
+        <button class="profile-details-toggle" type="button" id="profileDetailsToggle" aria-controls="sidebar" aria-expanded="false">Profile details</button>
         <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
             <span></span><span></span><span></span>
         </button>
@@ -429,7 +440,7 @@
         <div class="footerInner">
             <p class="footerLine">Built by <strong>Mohammed Badreldeen</strong></p>
             <p class="footerSub">
-                Software Developer · <span id="year">2025</span>
+                Software Developer · <span id="year">2026</span>
             </p>
         </div>
     </footer>
