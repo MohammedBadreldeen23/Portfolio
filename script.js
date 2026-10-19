@@ -78,7 +78,7 @@
                 categoryLabel: "Research Paper",
                 title: "Implementation of a Medicine Warehouse System",
                 subtitle: "A research paper on designing and implementing a medicine warehouse management system.",
-                image: "assets/imgs/app.png",
+                image: "SRC/PIC/Paper.jpg",
                 images: [],
                 date: "2022",
                 role: "Author",
