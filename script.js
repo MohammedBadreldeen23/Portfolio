@@ -19,12 +19,12 @@
                 categoryLabel: "Project",
                 title: "Pharmaceutical Warehouse System",
                 subtitle: "A desktop application for managing Drugs.",
-                image: "/SRC/PIC/Capture.PNG",
+                image: "SRC/PIC/Capture.PNG",
                 date: "2022",
                 duration: "3 months",
                 role: "Solo Developer",
-                tags: ["C#", ".NET", "Windows Forms", "SQLsever"],
-                description: "A complete desktop solution built with C# and Windows Forms for Drugs Warhouses. Staff can manage drug, fast interface backed by a local SQL Server database. The focus was on reliability, offline-first design, and a clean object-oriented structure.",
+                tags: ["C#", ".NET", "Windows Forms", "SQL Server"],
+                description: "A complete desktop solution built with C# and Windows Forms for Drugs warehouses. Staff can manage drug, fast interface backed by a local SQL Server database. The focus was on reliability, offline-first design, and a clean object-oriented structure.",
                 highlights: [
                     "Full CRUD for drug",
                     "Due-date tracking with overdue alerts",
@@ -42,7 +42,7 @@
                 categoryLabel: "Project",
                 title: "Personal Portfolio Website",
                 subtitle: "A responsive portfolio built with semantic HTML, modern CSS and vanilla JavaScript.",
-                image: "/SRC/PIC/web.jpg",
+                image: "SRC/PIC/web.jpg",
                 date: "2024",
                 duration: "2 weeks",
                 role: "Designer & Developer",
@@ -98,7 +98,7 @@
                 subtitle: "Programming Contestant | Problem-Solving | Competitive Programming.",
                 image: "SRC/PIC/Comp1.jpg",
                 date: "2021",
-                role: "participated",
+                role: "Participant",
                 tags: ["C#", ".NET", "Events", "IEEE UOFG SB"],
                 description: "Presented an overview of the latest C# language features and .NET 8 improvements relevant to desktop developers, including performance improvements, new syntax, and best practices.",
                 highlights: [
@@ -134,10 +134,10 @@
                 category: "conferences",
                 categoryLabel: "Conference",
                 title: "IEEE UOFG SB DAY",
-                subtitle: "IEEE event in celebration of Internatonal Foundation Day",
+                subtitle: "IEEE event in celebration of International Foundation Day",
                 image: "SRC/PIC/Day1.jpg",
                 date: "2025",
-                role: "HR Coordnator",
+                role: "HR Coordinator",
                 tags: ["Tech Summit", "Networking", "IEEE-UOFG-SB"],
                 description: "Participated in IEEE Day celebrations organized by the IEEE University of Gezira Student Branch, an occasion celebrating the IEEE community, its achievements, and its impact on technology and engineering. The event brought members together to recognize volunteer contributions, share experiences, and strengthen the spirit of collaboration and innovation.",
                 highlights: [
@@ -531,5 +531,152 @@
     });
 
 
+
+
+    /* =========================================================
+       ACCESSIBLE PROFILE DRAWER + BILINGUAL INTERFACE
+       Existing class names and content rendering are preserved.
+    ========================================================= */
+    const sidebar = document.getElementById("sidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+    const profileButtons = [
+        document.getElementById("profileDetailsToggle"),
+        document.getElementById("mobileProfileOpen")
+    ].filter(Boolean);
+
+    function setProfileDrawer(open) {
+        if (!sidebar) return;
+        sidebar.classList.toggle("drawer-open", open);
+        if (sidebarOverlay) sidebarOverlay.classList.toggle("visible", open);
+        profileButtons.forEach((button) => button.setAttribute("aria-expanded", String(open)));
+        document.body.classList.toggle("profile-drawer-open", open);
+    }
+    profileButtons.forEach((button) => button.addEventListener("click", () => {
+        setProfileDrawer(!sidebar.classList.contains("drawer-open"));
+    }));
+    if (sidebarOverlay) sidebarOverlay.addEventListener("click", () => setProfileDrawer(false));
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setProfileDrawer(false);
+    });
+    if (sidebar) sidebar.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setProfileDrawer(false)));
+
+    const translations = {
+        "About Me": "نبذة عني",
+        "MyWorks": "أعمالي",
+        "Skills": "المهارات",
+        "About": "نبذة",
+        "me": "عني",
+        "My recent": "أحدث",
+        "works": "الأعمال",
+        "Projects, research papers, Events, and conferences — click any item to see the full details.": "مشروعات وأوراق علمية وفعاليات ومؤتمرات — اختر أي عنصر لعرض التفاصيل.",
+        "All": "الكل",
+        "Projects": "المشروعات",
+        "Papers": "الأوراق العلمية",
+        "Events": "الفعاليات",
+        "Conferences": "المؤتمرات",
+        "Skills &": "المهارات و",
+        "Experience": "الخبرات",
+        "What I do best": "أبرز مهاراتي",
+        "Desktop App Development": "تطوير تطبيقات سطح المكتب",
+        "Databases & Data Modeling": "قواعد البيانات ونمذجة البيانات",
+        "Object-Oriented Programming": "البرمجة كائنية التوجه",
+        "Web Development": "تطوير الويب",
+        "Problem Solving & Algorithms": "حل المشكلات والخوارزميات",
+        "Version Control & Collaboration": "إدارة الإصدارات والعمل الجماعي",
+        "Tools & Technologies": "الأدوات والتقنيات",
+        "Experience & Activities": "الخبرات والأنشطة",
+        "Available for opportunities": "متاح للفرص المهنية",
+        "Hire Me": "تواصل للتوظيف",
+        "Download Cv": "تحميل السيرة الذاتية",
+        "Get in touch": "تواصل معي",
+        "Top Skills": "أهم المهارات",
+        "Back to works": "العودة إلى الأعمال",
+        "Overview": "نظرة عامة",
+        "Highlights": "أبرز النقاط",
+        "Technologies": "التقنيات",
+        "Links": "الروابط",
+        "Related items": "عناصر ذات صلة",
+        "← Explore more works": "← استكشف المزيد من الأعمال",
+        "Profile details": "تفاصيل الملف الشخصي",
+        "Details": "التفاصيل",
+        "Software Developer": "مطور برمجيات",
+        "Built by": "تصميم وتطوير",
+        "Open to remote opportunities": "متاح للعمل عن بُعد",
+        "Software Development": "تطوير البرمجيات",
+        "HR & Volunteering": "الموارد البشرية والتطوع",
+        "Administration & IT Training": "الإدارة والتدريب التقني",
+        "Additional Experience": "خبرات إضافية"
+    };
+    const originalText = new WeakMap();
+
+    function applyLanguage(language) {
+        const arabic = language === "ar";
+        document.documentElement.lang = arabic ? "ar" : "en";
+        document.documentElement.dir = arabic ? "rtl" : "ltr";
+        const toggle = document.getElementById("languageToggle");
+        if (toggle) toggle.textContent = arabic ? "English" : "العربية";
+        document.querySelectorAll("body *:not(script):not(style)").forEach((element) => {
+            if (element.children.length !== 0) return;
+            if (!originalText.has(element)) originalText.set(element, element.textContent);
+            const original = originalText.get(element).trim();
+            if (!original) return;
+            if (arabic && translations[original]) element.textContent = translations[original];
+            else if (!arabic) element.textContent = originalText.get(element);
+        });
+        document.body.classList.toggle("language-ar", arabic);
+        try { localStorage.setItem("portfolio-language", language); } catch (_) {}
+    }
+    const languageToggle = document.getElementById("languageToggle");
+    let currentLanguage = "en";
+    try { currentLanguage = localStorage.getItem("portfolio-language") || "en"; } catch (_) {}
+    if (languageToggle) languageToggle.addEventListener("click", () => {
+        currentLanguage = currentLanguage === "en" ? "ar" : "en";
+        applyLanguage(currentLanguage);
+    });
+    if (currentLanguage !== "en") applyLanguage(currentLanguage);
+
+    /* Organize the existing experience entries into readable groups. */
+    const timeline = document.querySelector(".timeline");
+    if (timeline && !timeline.dataset.grouped) {
+        const entries = Array.from(timeline.querySelectorAll(":scope > .timelineItem"));
+        const groups = [
+            { title: "Software Development", match: (item) => /Freelance Software Development/i.test(item.textContent) },
+            { title: "HR & Volunteering", match: (item) => /IEEE University of Gezira|NextSudan HR|LCOY Gezira|Google Developer Student Clubs/i.test(item.textContent) },
+            { title: "Administration & IT Training", match: (item) => /Sudanese Standards and Metrology|Information Center of Gezira State/i.test(item.textContent) }
+        ];
+        const assigned = new Set();
+        groups.forEach((group) => {
+            const items = entries.filter((item) => !assigned.has(item) && group.match(item));
+            if (!items.length) return;
+            const wrapper = document.createElement("section");
+            wrapper.className = "timelineGroup";
+            const heading = document.createElement("h3");
+            heading.className = "timelineGroupTitle";
+            heading.textContent = group.title;
+            wrapper.appendChild(heading);
+            items.forEach((item) => { assigned.add(item);
+                wrapper.appendChild(item); });
+            timeline.appendChild(wrapper);
+        });
+        const remaining = entries.filter((item) => !assigned.has(item));
+        if (remaining.length) {
+            const wrapper = document.createElement("section");
+            wrapper.className = "timelineGroup";
+            const heading = document.createElement("h3");
+            heading.className = "timelineGroupTitle";
+            heading.textContent = "Additional Experience";
+            wrapper.appendChild(heading);
+            remaining.forEach((item) => wrapper.appendChild(item));
+            timeline.appendChild(wrapper);
+        }
+        timeline.dataset.grouped = "true";
+    }
+
+    /* Keep copyright years current rather than hard-coding a future year. */
+    const currentYear = String(new Date().getFullYear());
+    ["year", "yearSide"].forEach((id) => {
+        const year = document.getElementById(id);
+        if (year) year.textContent = currentYear;
+    });
 
 })();
