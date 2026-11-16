@@ -69,6 +69,40 @@
                     "Zero dependencies — pure HTML, CSS and JS"
                 ],
                 links: []
+            }, {
+                id: "islamic-quiz",
+                category: "projects",
+                categoryLabel: "Mobile & Web",
+                title: "Islamic Quiz — Mobile & Web",
+                subtitle: "An interactive Islamic quiz app built with Flutter, available on mobile and web.",
+                image: "SRC/PIC/islamic-quiz-1.png",
+                images: [
+                    "SRC/PIC/islamic-quiz-1.png",
+                    "SRC/PIC/islamic-quiz-2.png",
+                    "SRC/PIC/islamic-quiz-3.png",
+                    "SRC/PIC/islamic-quiz-4.png",
+                    "SRC/PIC/islamic-quiz-web-1.PNG",
+                    "SRC/PIC/islamic-quiz-web-2.PNG",
+                    "SRC/PIC/islamic-quiz-web-3.PNG"
+                ],
+                date: "2026",
+                duration: "3 weeks",
+                role: "Solo Developer",
+                tags: ["Flutter", "Dart", "Flutter Web", "Material 3", "Audioplayers"],
+                description: "A cross-platform Islamic quiz application built with Flutter and deployed on both mobile and web. It features 30 diverse questions across aqeedah, Quran, seerah, fiqh, and companions, with sound effects, instant visual feedback, live scoring, and a modern Islamic-inspired design. The web build runs directly in the browser with no installation, while the mobile app delivers the same experience on Android and iOS.",
+                highlights: [
+                    "30 diverse Islamic questions across five categories",
+                    "Available on both mobile (Android/iOS) and web browsers",
+                    "Sound effects for correct/wrong answers and fireworks on completion",
+                    "Instant visual feedback with the correct answer revealed on mistakes",
+                    "Live score tracking that persists across navigation",
+                    "Results screen with percentage circle and star rating (0–3)",
+                    "Modern Islamic design with emerald, gold, and warm white colors",
+                    "Cairo and Amiri fonts for a traditional yet highly readable feel",
+                    "Code-drawn Islamic geometric pattern (no external image assets)",
+                    "Fully RTL Arabic interface with responsive layout"
+                ],
+                links: []
             },
 
             /* ---------- PAPERS ---------- */
