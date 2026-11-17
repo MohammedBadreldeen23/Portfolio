@@ -81,9 +81,10 @@
                     "SRC/PIC/islamic-quiz-2.png",
                     "SRC/PIC/islamic-quiz-3.png",
                     "SRC/PIC/islamic-quiz-4.png",
-                    "SRC/PIC/islamic-quiz-web-1.PNG",
-                    "SRC/PIC/islamic-quiz-web-2.PNG",
-                    "SRC/PIC/islamic-quiz-web-3.PNG"
+                    "SRC/PIC/islamic-quiz-web-1.jpg",
+                    "SRC/PIC/islamic-quiz-web-2.png",
+                    "SRC/PIC/islamic-quiz-web-3.png",
+                    "SRC/PIC/islamic-quiz-web-4.png"
                 ],
                 date: "2026",
                 duration: "3 weeks",
@@ -125,7 +126,7 @@
                     "Sales invoices and transaction records"
                 ],
                 links: [
-                    { label: "Read the paper (PDF)", url: "assets/last.pdf" }
+                    { label: "Read the paper (PDF)", url: "assets/last%20.pdf" }
                 ]
             },
 
@@ -198,16 +199,16 @@
                 category: "conferences",
                 categoryLabel: "Conference",
                 title: "From Code to Presentation: 50 Scientific Papers Challenge",
-                subtitle: "Finalist with a Medicine Warehouse Management System Developed in VB.NET | IEEE UofG SB.",
+                subtitle: "Finalist with a Medicine Warehouse Management System Developed in C# | IEEE UofG SB.",
                 image: "SRC/PIC/Con1.jpg",
-                images: ["SRC/PIC/Con1.jpg", "SRC/PIC/Con2.jpg", "SRC/PIC/Con3.jpg"],
+                images: ["SRC/PIC/Con1.jpg", "SRC/PIC/con2.jpg", "SRC/PIC/con3.jpg"],
                 date: "2022",
                 role: "Participant",
                 tags: ["IEEE", "Conference", "Networking", "Uofg"],
-                description: "I participated in the IEEE University of Gezira Student Branch 50 Scientific Papers Challenge and presented my Medicine Warehouse Management System, developed using VB.NET. Reaching the final stage was a valuable milestone in my academic and technical journey. I explained the project's concept and demonstrated how software can address practical challenges in medicine warehouse management. The experience also strengthened my public speaking, technical communication, and project presentation skills.",
+                description: "I participated in the IEEE University of Gezira Student Branch 50 Scientific Papers Challenge and presented my Medicine Warehouse Management System, developed using C#. Reaching the final stage was a valuable milestone in my academic and technical journey. I explained the project's concept and demonstrated how software can address practical challenges in medicine warehouse management. The experience also strengthened my public speaking, technical communication, and project presentation skills.",
                 highlights: [
                     "Reached the final stage of the IEEE UofG SB 50 Scientific Papers Challenge.",
-                    "Developed a Medicine Warehouse Management System using VB.NET.",
+                    "Developed a Medicine Warehouse Management System using C#.",
                     "Networked with IEEE members and industry professionals.",
                     "Presented the project to an audience, demonstrating its concept and practical applications.",
                     "Enhanced technical communication, public speaking, and software presentation skills."
@@ -232,16 +233,353 @@
     }
 
     /* =========================================================
+       IMAGE VIEWER — main image, thumbnails and full-screen lightbox.
+       Shows every image listed for a work. A missing file is labelled
+       "unavailable" instead of being silently removed.
+    ========================================================= */
+
+    const VIEWER_TEXT = {
+        "Image unavailable": "الصورة غير متاحة",
+        "Unavailable": "غير متاح",
+        "Previous image": "الصورة السابقة",
+        "Next image": "الصورة التالية",
+        "Close image viewer": "إغلاق عارض الصور",
+        "Open full-size image": "فتح الصورة بالحجم الكامل",
+        "Show image": "عرض الصورة"
+    };
+
+    function viewerText(text) {
+        let arabic = false;
+        try {
+            arabic = localStorage.getItem("portfolio-language") === "ar";
+        } catch (_) {}
+        return arabic && VIEWER_TEXT[text] ? VIEWER_TEXT[text] : text;
+    }
+
+    /* GitHub Pages is case-sensitive: "shot.PNG" and "shot.png" are different files.
+       If one spelling fails, try the other once before giving up. */
+    function swapExtensionCase(src) {
+        return src.replace(/\.(png|jpe?g|webp|gif)$/i, (match) => {
+            const ext = match.slice(1);
+            const swapped = ext === ext.toUpperCase() ? ext.toLowerCase() : ext.toUpperCase();
+            return "." + swapped;
+        });
+    }
+
+    /* Attach a one-time fallback to an <img>. Calls onFail when both spellings fail. */
+    function attachImageFallback(img, onFail) {
+        let retried = false;
+        img.addEventListener("error", () => {
+            const original = img.dataset.src;
+            if (!retried) {
+                retried = true;
+                const alternative = swapExtensionCase(original);
+                if (alternative !== original) {
+                    img.src = alternative;
+                    return;
+                }
+            }
+            img.removeAttribute("src");
+            onFail();
+        });
+    }
+
+    /* Probe each source once and cache the working URL (or null). */
+    const resolvedImageCache = new Map();
+
+    function resolveImageSource(src) {
+        if (!resolvedImageCache.has(src)) {
+            resolvedImageCache.set(src, new Promise((resolve) => {
+                const tryUrl = (url, onFail) => {
+                    const probe = new Image();
+                    probe.onload = () => resolve(url);
+                    probe.onerror = onFail;
+                    probe.src = url;
+                };
+
+                tryUrl(src, () => {
+                    const alternative = swapExtensionCase(src);
+                    if (alternative === src) {
+                        resolve(null);
+                        return;
+                    }
+                    tryUrl(alternative, () => resolve(null));
+                });
+            }));
+        }
+        return resolvedImageCache.get(src);
+    }
+
+    /* Main image first, then extra images, without duplicates or empty paths. */
+    function collectImages(item) {
+        const sources = [item.image].concat(Array.isArray(item.images) ? item.images : []);
+        const seen = new Set();
+
+        return sources
+            .filter((src) => typeof src === "string" && src.trim())
+            .map((src) => src.trim())
+            .filter((src) => {
+                if (seen.has(src)) return false;
+                seen.add(src);
+                return true;
+            });
+    }
+
+    function initImageViewer(item) {
+        const hero = document.getElementById("detailHero");
+        const mainImage = document.getElementById("detailImage");
+        const fallback = document.getElementById("detailFallback");
+        const prevButton = document.getElementById("viewerPrev");
+        const nextButton = document.getElementById("viewerNext");
+        const expandButton = document.getElementById("viewerExpand");
+        const counter = document.getElementById("viewerCounter");
+        const gallery = document.getElementById("detailGallery");
+        const thumbGrid = document.getElementById("detailGalleryGrid");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxStage = document.getElementById("lightboxStage");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const lightboxCaption = document.getElementById("lightboxCaption");
+        const lightboxClose = document.getElementById("lightboxClose");
+        const lightboxPrev = document.getElementById("lightboxPrev");
+        const lightboxNext = document.getElementById("lightboxNext");
+
+        if (!hero || !mainImage) return;
+
+        const images = collectImages(item);
+        const total = images.length;
+        const hasMany = total > 1;
+        let current = 0;
+        let mainRequest = 0;
+        let lightboxRequest = 0;
+        let lastFocus = null;
+
+        if (total === 0) {
+            mainImage.hidden = true;
+            fallback.textContent = viewerText("Image unavailable");
+            fallback.hidden = false;
+            return;
+        }
+
+        /* Labels for controls that are static in HTML. */
+        [
+            [prevButton, "Previous image"], [nextButton, "Next image"],
+            [lightboxPrev, "Previous image"], [lightboxNext, "Next image"],
+            [lightboxClose, "Close image viewer"], [expandButton, "Open full-size image"]
+        ].forEach(([element, label]) => {
+            if (element) element.setAttribute("aria-label", viewerText(label));
+        });
+
+        [prevButton, nextButton, counter, lightboxPrev, lightboxNext].forEach((el) => {
+            if (el) el.hidden = !hasMany;
+        });
+        if (gallery) gallery.hidden = !hasMany;
+
+        /* Thumbnails: every image is listed; failures are labelled. */
+        if (thumbGrid && hasMany) {
+            thumbGrid.innerHTML = images.map((src, index) => `
+                <button class="detailGalleryItem" type="button"
+                        data-index="${index}" aria-pressed="false"
+                        aria-label="${escapeHTML(viewerText("Show image"))} ${index + 1} / ${total}">
+                    <span class="thumbFrame">
+                        <img data-src="${escapeHTML(src)}" src="${escapeHTML(src)}"
+                             alt="" loading="lazy" decoding="async">
+                        <span class="thumbMissing">${escapeHTML(viewerText("Unavailable"))}</span>
+                    </span>
+                    <span class="thumbLabel">${index + 1} / ${total}</span>
+                </button>
+            `).join("");
+
+            thumbGrid.querySelectorAll(".detailGalleryItem").forEach((button) => {
+                const thumb = button.querySelector("img");
+                attachImageFallback(thumb, () => button.classList.add("unavailable"));
+            });
+        }
+
+        function updateControls() {
+            if (counter) counter.textContent = `${current + 1} / ${total}`;
+
+            if (thumbGrid) {
+                thumbGrid.querySelectorAll(".detailGalleryItem").forEach((button) => {
+                    const active = Number(button.dataset.index) === current;
+                    button.setAttribute("aria-pressed", String(active));
+                    button.classList.toggle("active", active);
+                });
+            }
+        }
+
+        function showMain(index) {
+            current = (index + total) % total;
+            updateControls();
+
+            const request = ++mainRequest;
+            resolveImageSource(images[current]).then((url) => {
+                if (request !== mainRequest) return;
+
+                if (url) {
+                    mainImage.src = url;
+                    mainImage.alt = `${item.title} — ${current + 1} / ${total}`;
+                    mainImage.hidden = false;
+                    fallback.hidden = true;
+                } else {
+                    mainImage.hidden = true;
+                    mainImage.removeAttribute("src");
+                    fallback.textContent = viewerText("Image unavailable");
+                    fallback.hidden = false;
+                }
+            });
+
+            /* Warm the next image so navigation feels instant. */
+            if (hasMany) resolveImageSource(images[(current + 1) % total]);
+        }
+
+        function renderLightbox(index) {
+            if (!lightbox) return;
+
+            const request = ++lightboxRequest;
+            resolveImageSource(images[index]).then((url) => {
+                if (request !== lightboxRequest) return;
+
+                if (url) {
+                    lightboxImage.src = url;
+                    lightboxImage.alt = `${item.title} — ${index + 1} / ${total}`;
+                    lightboxImage.hidden = false;
+                    lightboxCaption.textContent = `${index + 1} / ${total}`;
+                } else {
+                    lightboxImage.hidden = true;
+                    lightboxImage.removeAttribute("src");
+                    lightboxCaption.textContent = viewerText("Image unavailable");
+                }
+            });
+        }
+
+        function goTo(index) {
+            showMain(index);
+            if (lightbox && !lightbox.hidden) renderLightbox(current);
+        }
+
+        function openLightbox() {
+            if (!lightbox) return;
+            lastFocus = document.activeElement;
+            renderLightbox(current);
+            lightbox.hidden = false;
+            document.body.classList.add("lightbox-open");
+            if (lightboxClose) lightboxClose.focus();
+        }
+
+        function closeLightbox() {
+            if (!lightbox || lightbox.hidden) return;
+            lightbox.hidden = true;
+            document.body.classList.remove("lightbox-open");
+            if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+        }
+
+        /* Thumbnail clicks. Scroll the viewer into view only if it is off-screen. */
+        if (thumbGrid) {
+            thumbGrid.addEventListener("click", (event) => {
+                const button = event.target.closest(".detailGalleryItem");
+                if (!button || !thumbGrid.contains(button)) return;
+
+                goTo(Number(button.dataset.index));
+
+                if (hero.getBoundingClientRect().top < 0) {
+                    hero.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+        }
+
+        if (prevButton) prevButton.addEventListener("click", () => goTo(current - 1));
+        if (nextButton) nextButton.addEventListener("click", () => goTo(current + 1));
+        if (expandButton) expandButton.addEventListener("click", openLightbox);
+        mainImage.addEventListener("click", openLightbox);
+        mainImage.style.cursor = "zoom-in";
+
+        if (lightboxPrev) lightboxPrev.addEventListener("click", () => goTo(current - 1));
+        if (lightboxNext) lightboxNext.addEventListener("click", () => goTo(current + 1));
+        if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+
+        /* Clicking the dark area (not the image) closes the lightbox. */
+        if (lightboxStage) {
+            lightboxStage.addEventListener("click", (event) => {
+                if (event.target === lightboxStage) closeLightbox();
+            });
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (!lightbox || lightbox.hidden) return;
+
+            if (event.key === "Escape") {
+                closeLightbox();
+            } else if (event.key === "ArrowRight" && hasMany) {
+                goTo(current + 1);
+            } else if (event.key === "ArrowLeft" && hasMany) {
+                goTo(current - 1);
+            } else if (event.key === "Tab") {
+                /* Keep keyboard focus inside the open lightbox. */
+                const focusable = [lightboxClose, lightboxPrev, lightboxNext]
+                    .filter((el) => el && !el.hidden);
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        /* Swipe left/right on touch screens. */
+        function addSwipe(element) {
+            if (!element) return;
+            let startX = null;
+
+            element.addEventListener("touchstart", (event) => {
+                startX = event.changedTouches[0].clientX;
+            }, { passive: true });
+
+            element.addEventListener("touchend", (event) => {
+                if (startX === null || !hasMany) return;
+                const deltaX = event.changedTouches[0].clientX - startX;
+                startX = null;
+                if (Math.abs(deltaX) > 45) goTo(current + (deltaX < 0 ? 1 : -1));
+            }, { passive: true });
+        }
+
+        addSwipe(hero);
+        addSwipe(lightboxStage);
+
+        showMain(0);
+    }
+
+    /* =========================================================
        INDEX PAGE — RENDER WORKS + FILTERS
     ========================================================= */
 
     const worksGrid = document.getElementById("worksGrid");
+
+    /* Technology filter groups. Matching uses each item's existing tags only;
+       a group button is shown only if at least one work matches it. */
+    const TECH_GROUPS = [
+        { key: "csharp", label: "C# / .NET", tags: ["c#", ".net", "windows forms"] },
+        { key: "flutter", label: "Flutter / Dart", tags: ["flutter", "dart", "flutter web"] },
+        { key: "web", label: "HTML / CSS / JS", tags: ["html", "css", "javascript"] }
+    ];
+
+    function techKeysOf(item) {
+        const tags = item.tags.map((tag) => tag.toLowerCase());
+        return TECH_GROUPS
+            .filter((group) => group.tags.some((tag) => tags.includes(tag)))
+            .map((group) => group.key);
+    }
 
     if (worksGrid) {
         SITE_DATA.works.forEach((item) => {
             const li = document.createElement("li");
             li.className = "workItem";
             li.setAttribute("data-category", item.category);
+            li.setAttribute("data-tech", techKeysOf(item).join(" "));
 
             const tagsHTML = item.tags
                 .slice(0, 3)
@@ -277,27 +615,54 @@
             }
         });
 
-        const filterButtons = document.querySelectorAll(".filter-btn");
+        /* Build technology buttons from the data (only groups that have works). */
+        const techFilter = document.getElementById("techFilter");
+        const activeTechGroups = TECH_GROUPS.filter((group) =>
+            SITE_DATA.works.some((item) => techKeysOf(item).includes(group.key))
+        );
 
-        filterButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                filterButtons.forEach((otherButton) => {
-                    otherButton.classList.remove("active");
-                    otherButton.setAttribute("aria-selected", "false");
-                });
+        if (techFilter && activeTechGroups.length) {
+            techFilter.innerHTML =
+                '<button class="filter-btn active" type="button" data-tech="all" aria-pressed="true">All technologies</button>' +
+                activeTechGroups.map((group) =>
+                    `<button class="filter-btn" type="button" data-tech="${group.key}" aria-pressed="false">${escapeHTML(group.label)}</button>`
+                ).join("");
+        } else if (techFilter) {
+            techFilter.hidden = true;
+        }
 
-                button.classList.add("active");
-                button.setAttribute("aria-selected", "true");
+        /* Category and technology filters combine (AND). */
+        const filterState = { category: "all", tech: "all" };
 
-                const filter = button.getAttribute("data-filter");
-
-                document.querySelectorAll(".workItem").forEach((workItem) => {
-                    const category = workItem.getAttribute("data-category");
-                    const shouldShow = filter === "all" || filter === category;
-                    workItem.classList.toggle("hidden", !shouldShow);
-                });
+        function applyFilters() {
+            document.querySelectorAll(".workItem").forEach((workItem) => {
+                const categoryOk = filterState.category === "all" ||
+                    filterState.category === workItem.getAttribute("data-category");
+                const techOk = filterState.tech === "all" ||
+                    workItem.getAttribute("data-tech").split(" ").includes(filterState.tech);
+                workItem.classList.toggle("hidden", !(categoryOk && techOk));
             });
-        });
+        }
+
+        function bindFilterGroup(container, attribute, stateKey) {
+            if (!container) return;
+            container.addEventListener("click", (event) => {
+                const button = event.target.closest(".filter-btn");
+                if (!button || !container.contains(button)) return;
+
+                container.querySelectorAll(".filter-btn").forEach((other) => {
+                    const isActive = other === button;
+                    other.classList.toggle("active", isActive);
+                    other.setAttribute("aria-pressed", String(isActive));
+                });
+
+                filterState[stateKey] = button.getAttribute(attribute);
+                applyFilters();
+            });
+        }
+
+        bindFilterGroup(document.getElementById("categoryFilter"), "data-filter", "category");
+        bindFilterGroup(techFilter, "data-tech", "tech");
     }
 
     /* =========================================================
@@ -333,91 +698,8 @@
             setText("detailSub", item.subtitle);
             setText("detailDescription", item.description);
 
-            /* Main image */
-            const mainImage = document.getElementById("detailImage");
-
-            if (mainImage) {
-                mainImage.src = item.image;
-                mainImage.alt = item.title;
-                mainImage.loading = "eager";
-                mainImage.decoding = "async";
-
-                mainImage.addEventListener("error", () => {
-                    const hero = mainImage.closest(".detailHero");
-                    if (hero) hero.classList.add("image-unavailable");
-                    mainImage.hidden = true;
-                }, { once: true });
-            }
-
-            /* Optional gallery */
-            const gallery = document.getElementById("detailGallery");
-            const galleryGrid = document.getElementById("detailGalleryGrid");
-
-            const extraImages = Array.isArray(item.images) ?
-                item.images.filter((src) =>
-                    typeof src === "string" &&
-                    src.trim() &&
-                    src !== item.image
-                ) : [];
-
-            if (gallery && galleryGrid && extraImages.length > 0) {
-                gallery.hidden = false;
-
-                galleryGrid.innerHTML = extraImages.map((src, index) => `
-                    <button
-                        class="detailGalleryItem"
-                        type="button"
-                        data-gallery-src="${escapeHTML(src)}"
-                        aria-label="View additional image ${index + 1} for ${escapeHTML(item.title)}"
-                        aria-pressed="false">
-                        <img
-                            src="${escapeHTML(src)}"
-                            alt="${escapeHTML(item.title)} — image ${index + 2}"
-                            loading="lazy"
-                            decoding="async">
-                        <span>Image ${index + 2}</span>
-                    </button>
-                `).join("");
-
-                galleryGrid.querySelectorAll(".detailGalleryItem").forEach((button) => {
-                    const thumbnail = button.querySelector("img");
-
-                    if (thumbnail) {
-                        thumbnail.addEventListener("error", () => button.remove(), { once: true });
-                    }
-
-                    button.addEventListener("click", () => {
-                        if (!mainImage) return;
-
-                        mainImage.hidden = false;
-                        mainImage.src = button.getAttribute("data-gallery-src");
-
-                        // Fixed: Removed the space between ? and .alt that caused the syntax error
-                        const thumbImg = button.querySelector("img");
-                        mainImage.alt = thumbImg ? thumbImg.alt : item.title;
-
-                        const hero = mainImage.closest(".detailHero");
-                        if (hero) hero.classList.remove("image-unavailable");
-
-                        galleryGrid.querySelectorAll(".detailGalleryItem").forEach((otherButton) => {
-                            otherButton.setAttribute(
-                                "aria-pressed",
-                                String(otherButton === button)
-                            );
-                        });
-
-                        if (hero) {
-                            hero.scrollIntoView({
-                                behavior: "smooth",
-                                block: "center"
-                            });
-                        }
-                    });
-                });
-            } else if (gallery && galleryGrid) {
-                gallery.hidden = true;
-                galleryGrid.replaceChildren();
-            }
+            /* Image viewer: main image, thumbnails and lightbox */
+            initImageViewer(item);
 
             /* Meta line */
             const metaElement = document.getElementById("detailMeta");
@@ -830,6 +1112,7 @@
         "works": "الأعمال",
         "Projects, research papers, events, and conferences — click any item to see the full details.": "مشروعات وأوراق علمية وفعاليات ومؤتمرات — اختر أي عنصر لعرض التفاصيل.",
         "All": "الكل",
+        "All technologies": "كل التقنيات",
         "Projects": "المشروعات",
         "Papers": "الأوراق العلمية",
         "Events": "الفعاليات",
@@ -870,6 +1153,7 @@
         "Duration:": "المدة:",
         "Role:": "الدور:",
         "More images": "صور إضافية",
+        "Project images": "صور المشروع",
         "Image 2": "الصورة 2",
         "Image 3": "الصورة 3",
         "No external links available.": "لا توجد روابط خارجية متاحة.",
@@ -888,7 +1172,6 @@
         "Project": "مشروع",
         "Research Paper": "ورقة علمية",
         "Conference": "مؤتمر",
-        "Events": "فعالية",
         "IEEE University of Gezira Student Branch": "فرع طلاب IEEE جامعة الجزيرة",
         "Active Member & Volunteer": "عضو نشط ومتطوع",
         "Freelance Software Development": "تطوير برمجيات مستقل",

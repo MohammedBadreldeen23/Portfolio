@@ -7,7 +7,9 @@
     <title>Details | Mohammed Badreldeen</title>
 
     <meta name="description" content="Details of a project, paper, seminar or conference by Mohammed Badreldeen.">
-    <meta name="theme-color" content="#0c1110">
+    <meta name="author" content="Mohammed Badreldeen">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#07101c">
 
     <link rel="icon" href="assets/imgs/profile.png" type="image/png">
 
@@ -19,6 +21,7 @@
 </head>
 
 <body>
+<a class="skipLink" href="#detailPage">Skip to content</a>
 
     <!-- ========== SIDEBAR (fixed) ========== -->
     <aside class="sidebar" id="sidebar" aria-label="Profile sidebar">
@@ -139,13 +142,25 @@
                 <div class="detailMeta" id="detailMeta"></div>
             </div>
 
-            <div class="detailHero">
+            <div class="detailHero" id="detailHero">
                 <img id="detailImage" src="" alt="">
+                <p class="detailFallback" id="detailFallback" hidden></p>
+
+                <button class="viewerNav viewerPrev" id="viewerPrev" type="button" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+                </button>
+                <button class="viewerNav viewerNext" id="viewerNext" type="button" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                </button>
+                <button class="viewerExpand" id="viewerExpand" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+                </button>
+                <span class="viewerCounter" id="viewerCounter" hidden></span>
             </div>
 
-            <!-- Extra screenshots appear only when images[] contains extra paths. -->
-            <section class="detailGallery" id="detailGallery" aria-label="Additional project images" hidden>
-                <h2 class="detailSectionTitle">More images</h2>
+            <!-- Thumbnails: one button per image. Filled by script.js; hidden for single-image works. -->
+            <section class="detailGallery" id="detailGallery" aria-label="Project images" hidden>
+                <h2 class="detailSectionTitle">Project images</h2>
                 <div class="detailGalleryGrid" id="detailGalleryGrid"></div>
             </section>
 
@@ -191,6 +206,25 @@
 
         </div>
     </main>
+
+    <!-- LIGHTBOX (full-size image viewer) -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project image viewer" hidden>
+        <button class="lightboxClose" id="lightboxClose" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <div class="lightboxStage" id="lightboxStage">
+            <button class="viewerNav lightboxPrev" id="lightboxPrev" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+            </button>
+            <figure class="lightboxFigure">
+                <img id="lightboxImage" src="" alt="">
+                <figcaption id="lightboxCaption"></figcaption>
+            </figure>
+            <button class="viewerNav lightboxNext" id="lightboxNext" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            </button>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer>

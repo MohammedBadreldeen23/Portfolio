@@ -8,8 +8,11 @@
 
     <meta name="description" content="Mohammed Badreldeen — Software Developer. Projects, research papers, seminars and conferences. C#, .NET, Java, Python, SQL.">
     <meta name="author" content="Mohammed Badreldeen">
-    <meta name="theme-color" content="#0c1110">
+    <meta name="theme-color" content="#07101c">
 
+    <meta name="robots" content="index, follow">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mohammed Badreldeen | Software Developer">
     <meta property="og:description" content="Software Developer focused on C#, .NET, Java, Python and databases.">
@@ -24,6 +27,7 @@
 </head>
 
 <body>
+<a class="skipLink" href="#main">Skip to content</a>
 
     <!-- ========== SIDEBAR (fixed) ========== -->
     <aside class="sidebar" id="sidebar" aria-label="Profile sidebar">
@@ -146,6 +150,7 @@
         </nav>
     </header>
 
+    <main id="main">
     <!-- HERO -->
     <section class="Hreo" id="top">
         <img class="arrow" src="assets/svg/arrow.svg" alt="Arrow" aria-hidden="true">
@@ -159,7 +164,7 @@
 
             <div class="HeroBtns">
                 <a class="hireMe" href="mailto:mohammedbadreldeen23@gmail.com">Hire Me</a>
-                <a class="CV" href="assets/Mohammed cv.pdf" download>
+                <a class="CV" href="assets/Mohammed%20cv.pdf" download>
                     Download Cv
                     <img src="assets/svg/download.svg" alt="Download button">
                 </a>
@@ -204,13 +209,15 @@
                 Projects, research papers, events, and conferences — click any item to see the full details.
             </p>
 
-            <div class="worksFilter" role="tablist" aria-label="Filter works by type">
-                <button class="filter-btn active" type="button" data-filter="all" role="tab" aria-selected="true">All</button>
-                <button class="filter-btn" type="button" data-filter="projects" role="tab" aria-selected="false">Projects</button>
-                <button class="filter-btn" type="button" data-filter="papers" role="tab" aria-selected="false">Papers</button>
-                <button class="filter-btn" type="button" data-filter="Events" role="tab" aria-selected="false">Events</button>
-                <button class="filter-btn" type="button" data-filter="conferences" role="tab" aria-selected="false">Conferences</button>
+            <div class="worksFilter" id="categoryFilter" role="group" aria-label="Filter works by type">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter-btn" type="button" data-filter="projects" aria-pressed="false">Projects</button>
+                <button class="filter-btn" type="button" data-filter="papers" aria-pressed="false">Papers</button>
+                <button class="filter-btn" type="button" data-filter="Events" aria-pressed="false">Events</button>
+                <button class="filter-btn" type="button" data-filter="conferences" aria-pressed="false">Conferences</button>
             </div>
+
+            <div class="worksFilter techFilter" id="techFilter" role="group" aria-label="Filter works by technology"></div>
 
             <ul class="worksGrid" id="worksGrid"></ul>
 
@@ -434,6 +441,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- FOOTER -->
     <footer>
