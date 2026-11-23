@@ -21,7 +21,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -144,8 +144,10 @@
         <nav class="navigation" id="primaryNav" aria-label="Main navigation">
             <ul>
                 <li><a class="nav-link" href="#aboutMe">About Me</a></li>
-                <li><a class="nav-link" href="#MyWorks">MyWorks</a></li>
+                <li><a class="nav-link" href="#MyWorks">My Works</a></li>
                 <li><a class="nav-link" href="#skills">Skills</a></li>
+                <li><a class="nav-link" href="#education">Education</a></li>
+                <li><a class="nav-link" href="#certificates">Certificates</a></li>
             </ul>
         </nav>
     </header>
@@ -157,17 +159,20 @@
 
         <div class="HeroSub">
             <p class="hero-greet"><span class="dot"></span> Available for opportunities</p>
-            <h1 class="name">I'M Mohammed Badreldeen</h1>
+            <h1 class="name">I'm Mohammed Badreldeen</h1>
             <h1 class="tital">
                 <span class="typed-text" id="typedText"></span><span class="caret" aria-hidden="true"></span>
             </h1>
+
+            <p class="heroLead">I build practical desktop applications with C# and .NET, and explore web and mobile development with HTML, CSS, JavaScript, Flutter and Dart.</p>
 
             <div class="HeroBtns">
                 <a class="hireMe" href="mailto:mohammedbadreldeen23@gmail.com">Hire Me</a>
                 <a class="CV" href="assets/Mohammed%20cv.pdf" download>
                     Download Cv
-                    <img src="assets/svg/download.svg" alt="Download button">
+                    <img src="assets/svg/download.svg" alt="" aria-hidden="true">
                 </a>
+                <a class="heroLink" href="#MyWorks">View my work ↓</a>
             </div>
         </div>
 
@@ -185,14 +190,9 @@
                 <img src="assets/svg/lightbulb.svg" alt="" class="light">
             </div>
 
-            <p class="aboutMePar">
-                Hi, I'm Mohamed Badreldeen Albalal, a Software Developer with a background in Computer Science and a strong interest in building practical software solutions that solve real-world problems. My technical interests include C#, .NET, Windows Forms, Java,
-                Python, Object-Oriented Programming (OOP), and database technologies such as SQL Server and SQLite. I enjoy developing desktop applications, working with data, and continuously expanding my technical skills to create reliable, user-friendly
-                solutions. Beyond programming, I have experience in Human Resources (HR), team coordination, and volunteering, particularly through my involvement with IEEE University of Gezira Student Branch. These experiences have strengthened my communication,
-                teamwork, organizational, and problem-solving skills, helping me understand that successful software development is not just about writing code, but also about understanding people, their needs, and how technology can improve their work.
-                I believe in continuous learning, collaboration, and building solutions that create real value. My goal is to combine technology, creativity, and management skills to develop meaningful software, contribute to innovative projects, and
-                grow as a developer. Let's connect and turn ideas into practical solutions.
-            </p>
+            <p class="aboutMePar">Hi, I'm Mohamed Badreldeen Albalal, a Software Developer with a background in Computer Science and a strong interest in building practical software solutions that solve real-world problems. My technical interests include C#, .NET, Windows Forms, Java, Python, Object-Oriented Programming (OOP), and database technologies such as SQL Server and SQLite. I enjoy developing desktop applications, working with data, and continuously expanding my technical skills to create reliable, user-friendly solutions.</p>
+<p class="aboutMePar">Beyond programming, I have experience in Human Resources (HR), team coordination, and volunteering, particularly through my involvement with IEEE University of Gezira Student Branch. These experiences have strengthened my communication, teamwork, organizational, and problem-solving skills, helping me understand that successful software development is not just about writing code, but also about understanding people, their needs, and how technology can improve their work.</p>
+<p class="aboutMePar">I believe in continuous learning, collaboration, and building solutions that create real value. My goal is to combine technology, creativity, and management skills to develop meaningful software, contribute to innovative projects, and grow as a developer. Let's connect and turn ideas into practical solutions.</p>
         </div>
     </section>
 
@@ -206,7 +206,7 @@
             </div>
 
             <p class="worksIntro">
-                Projects, research papers, events, and conferences — click any item to see the full details.
+                Projects, research papers, events and conferences. Click any card to open its full details.
             </p>
 
             <div class="worksFilter" id="categoryFilter" role="group" aria-label="Filter works by type">
@@ -439,6 +439,71 @@
                 </div>
 
             </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="education" id="education">
+        <div class="sectionWrap">
+            <div class="projectTitle">
+                <h1 class="aboutName">Educational</h1>
+                <h1 class="aboutTitle">Path</h1>
+            </div>
+            <p class="sectionIntro">My academic journey, from primary school to postgraduate studies.</p>
+
+            <ol class="eduList">
+                <li class="eduItem reveal">
+                    <span class="eduYear">2026</span>
+                    <div class="eduCard">
+                        <h3>Higher Diploma</h3>
+                        <p class="eduPlace">University of Gezira</p>
+                        <span class="eduGrade">Grade: Good</span>
+                    </div>
+                </li>
+                <li class="eduItem reveal">
+                    <span class="eduYear">2022</span>
+                    <div class="eduCard">
+                        <h3>Computer Science</h3>
+                        <p class="eduPlace">Wad Madani Ahlia University</p>
+                        <span class="eduGrade">Grade: Good</span>
+                    </div>
+                </li>
+                <li class="eduItem reveal">
+                    <span class="eduYear">2016</span>
+                    <div class="eduCard">
+                        <h3>Secondary School</h3>
+                        <p class="eduPlace">Nokhba Wad Madani</p>
+                    </div>
+                </li>
+                <li class="eduItem reveal">
+                    <span class="eduYear">2012</span>
+                    <div class="eduCard">
+                        <h3>Primary School</h3>
+                        <p class="eduPlace">Al-Bandar</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES (cards are rendered from CERTIFICATES in script.js) -->
+    <section class="certificates" id="certificates">
+        <div class="sectionWrap">
+            <div class="projectTitle">
+                <h1 class="aboutName">Certificates &amp;</h1>
+                <h1 class="aboutTitle">Credentials</h1>
+            </div>
+            <p class="sectionIntro">Academic and professional certificates.</p>
+            <ul class="certGrid" id="certGrid"></ul>
+        </div>
+    </section>
+
+    <!-- CONTACT CALL TO ACTION -->
+    <section class="contactCta" id="contact">
+        <div class="sectionWrap contactBox">
+            <h2>Let's work together</h2>
+            <p>Have a project or an opportunity in mind? Send me an email and I will reply as soon as possible.</p>
+            <a class="hireMe" href="mailto:mohammedbadreldeen23@gmail.com">Email me</a>
         </div>
     </section>
 

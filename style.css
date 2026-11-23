@@ -2811,3 +2811,318 @@ body.lightbox-open {
         max-height: calc(100vh - 7rem);
     }
 }
+
+
+/* =========================================================
+   HERO + ABOUT (match reference), EDUCATION, CERTIFICATES, CTA
+========================================================= */
+.name {
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    font-weight: 700;
+}
+
+.tital {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    transform: none;
+    animation: none;
+    line-height: 1.15;
+}
+
+.heroLead {
+    max-width: 34rem;
+    margin: 0.4rem 0 1.3rem;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.HeroBtns {
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.heroLink {
+    color: var(--accent-2);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.heroLink:hover {
+    border-bottom-color: currentColor;
+}
+
+.aboutMePar {
+    color: var(--text);
+    opacity: 0.88;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.aboutMePar + .aboutMePar {
+    margin-top: 1rem;
+}
+
+/* Work cards: visible "View details" call to action */
+.workBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.workCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    align-self: flex-start;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(110, 168, 255, 0.38);
+    color: var(--accent-2);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: background 0.2s ease, color 0.2s ease, gap 0.2s ease;
+}
+
+.workCta svg {
+    width: 16px;
+    height: 16px;
+}
+
+.workItem:hover .workCta,
+.workItem a:focus-visible .workCta {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #07101c;
+    gap: 0.7rem;
+}
+
+/* Shared section wrapper for the new sections */
+.sectionWrap {
+    width: min(92%, var(--container));
+    margin: 0 auto;
+}
+
+.education,
+.certificates {
+    padding: 4rem 0;
+}
+
+.sectionIntro {
+    color: var(--text-muted);
+    margin: -0.4rem 0 2rem;
+    max-width: 38rem;
+}
+
+.eduList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.eduList::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    inset-inline-start: 4.6rem;
+    width: 2px;
+    background: linear-gradient(var(--accent), transparent);
+    opacity: 0.45;
+}
+
+.eduItem {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1.6rem;
+    align-items: start;
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+
+.eduItem::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: calc(4rem + 0.8rem - 6px + 0.0rem);
+    top: 1.1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.eduYear {
+    padding-top: 0.55rem;
+    color: var(--accent-2);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.eduCard {
+    margin-inline-start: 1.2rem;
+    padding: 1.1rem 1.3rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.eduCard:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+}
+
+.eduCard h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.25rem;
+}
+
+.eduPlace {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.eduGrade {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.certGrid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+}
+
+.certCard {
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.certCard:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+}
+
+.certPreview {
+    display: grid;
+    place-items: center;
+    height: 150px;
+    background: linear-gradient(135deg, var(--surface-2), var(--bg));
+    color: var(--accent);
+}
+
+.certPreview svg {
+    width: 56px;
+    height: 56px;
+}
+
+.certPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.certBody {
+    padding: 1rem 1.2rem 1.3rem;
+}
+
+.certBody .workBadge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+}
+
+.certBody h3 {
+    font-size: 1.02rem;
+    margin: 0 0 0.3rem;
+}
+
+.certBody p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.certLink {
+    display: inline-block;
+    margin-top: 0.8rem;
+    color: var(--accent-2);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.contactCta {
+    padding: 3rem 0 5rem;
+}
+
+.contactBox {
+    text-align: center;
+    padding: 2.6rem 1.5rem;
+    border-radius: calc(var(--radius) + 6px);
+    background: linear-gradient(135deg, var(--accent-soft), rgba(110, 168, 255, 0.08));
+    border: 1px solid var(--border-strong);
+}
+
+.contactBox h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 0.6rem;
+}
+
+.contactBox p {
+    margin: 0 auto 1.4rem;
+    max-width: 34rem;
+    color: var(--text-muted);
+}
+
+.contactBox .hireMe {
+    display: inline-block;
+}
+
+/* Arabic: font + mirrored arrows */
+body.language-ar {
+    font-family: "Cairo", "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body.language-ar h1, body.language-ar h2, body.language-ar h3,
+body.language-ar .name, body.language-ar .tital {
+    font-family: "Cairo", "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+    letter-spacing: 0;
+}
+
+html[dir="rtl"] .workCta svg,
+html[dir="rtl"] .arrow {
+    transform: scaleX(-1);
+}
+
+@media (max-width: 600px) {
+    .eduList::before { inset-inline-start: 3.2rem; }
+    .eduItem { grid-template-columns: 2.6rem 1fr; gap: 1rem; }
+    .eduItem::before { inset-inline-start: calc(2.6rem + 0.5rem - 6px); }
+    .eduCard { margin-inline-start: 0.9rem; }
+}
+
+/* Keep phone numbers and emails readable inside right-to-left pages. */
+.sidebar a[href^="tel:"],
+.sidebar a[href^="mailto:"] {
+    direction: ltr;
+    unicode-bidi: isolate;
+    text-align: start;
+}

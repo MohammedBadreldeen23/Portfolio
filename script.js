@@ -248,6 +248,14 @@
         "Show image": "عرض الصورة"
     };
 
+    /* Called only after the page has loaded (inside promise callbacks). */
+    function viewerTitle(title) {
+        try {
+            if (localStorage.getItem("portfolio-language") === "ar" && translations[title]) return translations[title];
+        } catch (_) {}
+        return title;
+    }
+
     function viewerText(text) {
         let arabic = false;
         try {
@@ -417,7 +425,7 @@
 
                 if (url) {
                     mainImage.src = url;
-                    mainImage.alt = `${item.title} — ${current + 1} / ${total}`;
+                    mainImage.alt = `${viewerTitle(item.title)} — ${current + 1} / ${total}`;
                     mainImage.hidden = false;
                     fallback.hidden = true;
                 } else {
@@ -441,7 +449,7 @@
 
                 if (url) {
                     lightboxImage.src = url;
-                    lightboxImage.alt = `${item.title} — ${index + 1} / ${total}`;
+                    lightboxImage.alt = `${viewerTitle(item.title)} — ${index + 1} / ${total}`;
                     lightboxImage.hidden = false;
                     lightboxCaption.textContent = `${index + 1} / ${total}`;
                 } else {
@@ -600,6 +608,9 @@
                         <h3>${escapeHTML(item.title)}</h3>
                         <p>${escapeHTML(item.subtitle)}</p>
                         <div class="workMeta">${tagsHTML}</div>
+                        <span class="workCta">View details
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                        </span>
                     </div>
                 </a>
             `;
@@ -949,14 +960,47 @@
     window.addEventListener("resize", onScroll);
     onScroll();
 
+    /* =========================================================
+       CERTIFICATES — add yours here. Each entry becomes a card.
+       image: optional picture path (SRC/PIC/...). file: optional PDF/image link.
+       category: "University" | "Experience" | "Course" (any label works).
+    ========================================================= */
+    const CERTIFICATES = [
+        { title: "Higher Diploma Certificate", issuer: "University of Gezira", year: "2026", category: "University", image: "", file: "" },
+        { title: "Computer Science Degree Certificate", issuer: "Wad Madani Ahlia University", year: "2022", category: "University", image: "", file: "" }
+    ];
+
+    const certGrid = document.getElementById("certGrid");
+
+    if (certGrid) {
+        certGrid.innerHTML = CERTIFICATES.map((cert) => {
+            const preview = cert.image
+                ? `<img src="${escapeHTML(cert.image)}" alt="${escapeHTML(cert.title)}" loading="lazy" decoding="async">`
+                : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9 13.5L8 21l4-2 4 2-1-7.5"/></svg>`;
+            const link = cert.file
+                ? `<a class="certLink" href="${escapeHTML(cert.file)}" target="_blank" rel="noopener">View certificate</a>`
+                : "";
+            return `
+                <li class="certCard">
+                    <div class="certPreview">${preview}</div>
+                    <div class="certBody">
+                        <span class="workBadge">${escapeHTML(cert.category)}</span>
+                        <h3>${escapeHTML(cert.title)}</h3>
+                        <p>${escapeHTML(cert.issuer)} · ${escapeHTML(cert.year)}</p>
+                        ${link}
+                    </div>
+                </li>`;
+        }).join("");
+    }
+
     /* Typing effect */
     const typedText = document.getElementById("typedText");
-    const roles = [
-        "Software Developer",
-        "C# / .NET Developer",
-        "Desktop App Builder",
-        "Problem Solver"
-    ];
+    let arabicSelected = false;
+    try { arabicSelected = localStorage.getItem("portfolio-language") === "ar"; } catch (_) {}
+
+    const roles = arabicSelected
+        ? ["مطوّر برمجيات", "مطوّر C# / .NET", "مطوّر تطبيقات سطح المكتب", "حلّال مشكلات"]
+        : ["Software Developer", "C# / .NET Developer", "Desktop App Builder", "Problem Solver"];
 
     if (typedText) {
         const reduceMotion = window.matchMedia(
@@ -1203,6 +1247,138 @@
         "Received practical training in computer maintenance, hardware troubleshooting, and computer networking. Developed foundational technical skills in diagnosing computer issues, maintaining hardware, and understanding network infrastructure and connectivity.": "تلقى تدريبًا عمليًا في صيانة الكمبيوتر واستكشاف أخطاء الأجهزة وإصلاحها وشبكات الكمبيوتر. تطوير المهارات التقنية الأساسية في تشخيص مشاكل الكمبيوتر، وصيانة الأجهزة، وفهم البنية التحتية للشبكة والاتصال."
     };
 
+
+    /* Full Arabic coverage for the sections and project data added/used after the first release. */
+    Object.assign(translations, {
+        "Skip to content": "انتقل إلى المحتوى",
+        "Mohammed Badreldeen": "محمد بدر الدين البلال",
+        "· Made with": "· صُنع بـ",
+        "My Works": "أعمالي", "Education": "التعليم", "Certificates": "الشهادات",
+        "I'm Mohammed Badreldeen": "أنا محمد بدر الدين البلال",
+        "View my work ↓": "شاهد أعمالي ↓",
+        "I build practical desktop applications with C# and .NET, and explore web and mobile development with HTML, CSS, JavaScript, Flutter and Dart.": "أبني تطبيقات سطح مكتب عملية باستخدام C# و .NET، وأستكشف تطوير الويب والجوال باستخدام HTML و CSS و JavaScript و Flutter و Dart.",
+        "Hi, I'm Mohamed Badreldeen Albalal, a Software Developer with a background in Computer Science and a strong interest in building practical software solutions that solve real-world problems. My technical interests include C#, .NET, Windows Forms, Java, Python, Object-Oriented Programming (OOP), and database technologies such as SQL Server and SQLite. I enjoy developing desktop applications, working with data, and continuously expanding my technical skills to create reliable, user-friendly solutions.": "مرحبًا، أنا محمد بدر الدين البلال، مطوّر برمجيات خلفيتي في علوم الحاسوب، ولديّ اهتمام كبير ببناء حلول برمجية عملية تعالج مشكلات واقعية. تشمل اهتماماتي التقنية C# و .NET و Windows Forms و Java و Python والبرمجة كائنية التوجّه (OOP) وقواعد البيانات مثل SQL Server و SQLite. أستمتع بتطوير تطبيقات سطح المكتب والعمل مع البيانات وتطوير مهاراتي التقنية باستمرار لبناء حلول موثوقة وسهلة الاستخدام.",
+        "Beyond programming, I have experience in Human Resources (HR), team coordination, and volunteering, particularly through my involvement with IEEE University of Gezira Student Branch. These experiences have strengthened my communication, teamwork, organizational, and problem-solving skills, helping me understand that successful software development is not just about writing code, but also about understanding people, their needs, and how technology can improve their work.": "إلى جانب البرمجة، لديّ خبرة في الموارد البشرية وتنسيق الفرق والعمل التطوعي، خاصةً من خلال مشاركتي في فرع طلاب IEEE بجامعة الجزيرة. عززت هذه التجارب مهاراتي في التواصل والعمل الجماعي والتنظيم وحل المشكلات، وجعلتني أدرك أن نجاح تطوير البرمجيات لا يقتصر على كتابة الكود، بل يشمل فهم الناس واحتياجاتهم وكيف تُحسّن التقنية عملهم.",
+        "I believe in continuous learning, collaboration, and building solutions that create real value. My goal is to combine technology, creativity, and management skills to develop meaningful software, contribute to innovative projects, and grow as a developer. Let's connect and turn ideas into practical solutions.": "أؤمن بالتعلّم المستمر والتعاون وبناء حلول تصنع قيمة حقيقية. هدفي الجمع بين التقنية والإبداع والمهارات الإدارية لتطوير برمجيات ذات معنى، والمساهمة في مشاريع مبتكرة، والنمو كمطوّر. دعونا نتواصل ونحوّل الأفكار إلى حلول عملية.",
+        "Projects, research papers, events and conferences. Click any card to open its full details.": "مشاريع وأوراق بحثية وفعاليات ومؤتمرات. اضغط على أي بطاقة لفتح تفاصيلها الكاملة.",
+        "View details": "عرض التفاصيل",
+        "Mobile & Web": "جوال وويب",
+        "Software Engineering": "هندسة البرمجيات", "Design Patterns": "أنماط التصميم", "Networking": "التواصل المهني", "Social": "اجتماعي", "Tech Summit": "قمة التقنية",
+        "Pharmaceutical Warehouse System": "نظام مستودع الأدوية",
+        "A desktop application for medicine warehouse management.": "تطبيق سطح مكتب لإدارة مستودعات الأدوية.",
+        "Personal Portfolio Website": "موقع الملف الشخصي",
+        "A responsive portfolio built with semantic HTML, modern CSS and vanilla JavaScript.": "موقع ملف شخصي متجاوب مبني بـ HTML دلالي وCSS حديث وJavaScript خالصة.",
+        "Islamic Quiz — Mobile & Web": "مسابقة إسلامية — جوال وويب",
+        "An interactive Islamic quiz app built with Flutter, available on mobile and web.": "تطبيق مسابقة إسلامية تفاعلي مبني بـ Flutter، متاح على الجوال والويب.",
+        "Implementation of a Medicine Warehouse System": "تنفيذ نظام مستودع أدوية",
+        "A research paper on designing and implementing a medicine warehouse management system.": "ورقة بحثية عن تصميم وتنفيذ نظام لإدارة مستودعات الأدوية.",
+        "IEEE UofG SB Programming Competition": "مسابقة البرمجة — فرع IEEE بجامعة الجزيرة",
+        "Programming Contestant | Problem-Solving | Competitive Programming.": "متسابق برمجة | حل المشكلات | البرمجة التنافسية.",
+        "IEEE UOFG SB Social Event": "فعالية اجتماعية — فرع IEEE بجامعة الجزيرة",
+        "Connecting Members Through Fun, Friendship, and Teamwork": "تقريب الأعضاء من خلال المرح والصداقة والعمل الجماعي",
+        "IEEE Day — IEEE UofG SB": "يوم IEEE — فرع IEEE بجامعة الجزيرة",
+        "Celebrating the IEEE community, volunteering, and technology": "الاحتفاء بمجتمع IEEE والعمل التطوعي والتقنية",
+        "From Code to Presentation: 50 Scientific Papers Challenge": "من الكود إلى العرض: تحدي الخمسين ورقة علمية",
+        "Finalist with a Medicine Warehouse Management System Developed in C# | IEEE UofG SB.": "متأهل للنهائيات بنظام إدارة مستودع أدوية مطوَّر بلغة C# | فرع IEEE بجامعة الجزيرة.",
+        "Data Structures · Logic": "هياكل البيانات · المنطق",
+        "Led human resources activities, supported volunteer engagement, coordinated HR team operations, and contributed to team restructuring and organizational development. Helped improve volunteer participation through recruitment, performance evaluation, and team development initiatives.": "قدت أنشطة الموارد البشرية، ودعمت إشراك المتطوعين، ونسّقت عمليات فريق الموارد البشرية، وساهمت في إعادة هيكلة الفريق والتطوير التنظيمي. ساعدت في رفع مشاركة المتطوعين عبر الاستقطاب وتقييم الأداء ومبادرات تطوير الفريق.",
+        "May 2025 – Aug 2025": "مايو 2025 – أغسطس 2025",
+        "Managed HR operations for the local climate conference, overseeing volunteer recruitment, team coordination, task allocation, communication, and volunteer engagement. Supported team organization and ensured effective collaboration to achieve the conference objectives.": "أدرت عمليات الموارد البشرية للمؤتمر المحلي للمناخ، وأشرفت على استقطاب المتطوعين وتنسيق الفريق وتوزيع المهام والتواصل وإشراك المتطوعين. دعمت تنظيم الفريق وضمنت التعاون الفعّال لتحقيق أهداف المؤتمر.",
+        "Educational": "المسار", "Path": "التعليمي",
+        "My academic journey, from primary school to postgraduate studies.": "رحلتي الأكاديمية، من المرحلة الأساسية إلى الدراسات العليا.",
+        "Higher Diploma": "دبلوم عالٍ", "University of Gezira": "جامعة الجزيرة",
+        "Grade: Good": "التقدير: جيد",
+        "Computer Science": "علوم الحاسوب", "Wad Madani Ahlia University": "جامعة ود مدني الأهلية",
+        "Secondary School": "المرحلة الثانوية", "Nokhba Wad Madani": "نخبة ود مدني",
+        "Primary School": "المرحلة الأساسية", "Al-Bandar": "البندر",
+        "Certificates &": "الشهادات", "Credentials": "والمؤهلات",
+        "Academic and professional certificates.": "الشهادات الأكاديمية والمهنية.",
+        "University": "جامعية",
+        "Higher Diploma Certificate": "شهادة الدبلوم العالي",
+        "University of Gezira · 2026": "جامعة الجزيرة · 2026",
+        "Computer Science Degree Certificate": "شهادة علوم الحاسوب",
+        "Wad Madani Ahlia University · 2022": "جامعة ود مدني الأهلية · 2022",
+        "Let's work together": "لنعمل معًا",
+        "Have a project or an opportunity in mind? Send me an email and I will reply as soon as possible.": "هل لديك مشروع أو فرصة عمل؟ راسلني عبر البريد وسأردّ في أقرب وقت.",
+        "Email me": "راسلني",
+        "Profile sidebar": "الشريط الجانبي للملف الشخصي",
+        "Close profile details": "إغلاق تفاصيل الملف الشخصي",
+        "Back to top": "العودة للأعلى",
+        "Mohammed Badreldeen Logo": "شعار محمد بدر الدين البلال",
+        "Switch language": "تغيير اللغة", "Open menu": "فتح القائمة",
+        "Main navigation": "التنقل الرئيسي", "Arrow": "سهم",
+        "Hero illustration": "رسم توضيحي", "About me illustration": "رسم توضيحي عني",
+        "Filter works by type": "تصفية الأعمال حسب النوع",
+        "Filter works by technology": "تصفية الأعمال حسب التقنية",
+        "Back to home": "العودة للرئيسية", "Project image viewer": "عارض صور المشروع",
+        "3 months": "3 أشهر", "2 weeks": "أسبوعان", "3 weeks": "3 أسابيع",
+        "Designer & Developer": "مصمم ومطوّر", "Author": "المؤلف", "Participant": "مشارك",
+        "HR Coordinator": "منسق الموارد البشرية",
+        "No related items yet.": "لا توجد عناصر ذات صلة بعد.",
+        "📄 Read the paper (PDF) →": "📄 اقرأ الورقة (PDF) ←",
+        "A desktop application built with C# and Windows Forms to support medicine warehouse operations. It helps staff maintain medicine records through a straightforward interface backed by a SQL Server database. The project focuses on reliable data handling, practical workflows, and a clean object-oriented structure.": "تطبيق سطح مكتب مبني بـ C# وWindows Forms لدعم عمليات مستودع الأدوية. يساعد الموظفين على إدارة سجلات الأدوية عبر واجهة بسيطة مدعومة بقاعدة بيانات SQL Server. يركّز المشروع على موثوقية التعامل مع البيانات وسير عمل عملي وبنية كائنية نظيفة.",
+        "Create, view, update, and delete medicine records": "إضافة سجلات الأدوية وعرضها وتعديلها وحذفها",
+        "Expiry-date tracking and overdue alerts": "متابعة تواريخ الصلاحية وتنبيهات المنتهي منها",
+        "Search and filter medicine records": "البحث في سجلات الأدوية وتصفيتها",
+        "Reports and data export functionality": "التقارير وتصدير البيانات",
+        "Local SQL Server database integration": "التكامل مع قاعدة بيانات SQL Server محلية",
+        "A modern, static portfolio designed to showcase projects, skills, and experience. The focus was on clean structure, accessibility, and a smooth experience across every device — without any external dependencies.": "موقع ملف شخصي ثابت وحديث لعرض المشاريع والمهارات والخبرات. ركّزتُ على البنية النظيفة وسهولة الوصول وتجربة سلسة على كل الأجهزة، دون أي اعتماديات خارجية.",
+        "Fully responsive layout for all screen sizes": "تصميم متجاوب بالكامل لجميع أحجام الشاشات",
+        "Smooth scroll and reveal animations": "تمرير سلس ورسوم ظهور متحركة",
+        "Accessible semantic markup": "ترميز دلالي سهل الوصول",
+        "Zero dependencies — pure HTML, CSS and JS": "بلا اعتماديات — HTML وCSS وJS خالصة",
+        "A cross-platform Islamic quiz application built with Flutter and deployed on both mobile and web. It features 30 diverse questions across aqeedah, Quran, seerah, fiqh, and companions, with sound effects, instant visual feedback, live scoring, and a modern Islamic-inspired design. The web build runs directly in the browser with no installation, while the mobile app delivers the same experience on Android and iOS.": "تطبيق مسابقة إسلامية متعدد المنصات مبني بـ Flutter ومنشور على الجوال والويب. يضم 30 سؤالًا متنوعًا في العقيدة والقرآن والسيرة والفقه والصحابة، مع مؤثرات صوتية وتغذية راجعة بصرية فورية ونتيجة مباشرة وتصميم حديث بطابع إسلامي. نسخة الويب تعمل مباشرة في المتصفح دون تثبيت، وتطبيق الجوال يقدّم التجربة نفسها على أندرويد وiOS.",
+        "30 diverse Islamic questions across five categories": "30 سؤالًا إسلاميًا متنوعًا في خمسة أقسام",
+        "Available on both mobile (Android/iOS) and web browsers": "متاح على الجوال (أندرويد/iOS) ومتصفحات الويب",
+        "Sound effects for correct/wrong answers and fireworks on completion": "مؤثرات صوتية للإجابات الصحيحة والخاطئة وألعاب نارية عند الإتمام",
+        "Instant visual feedback with the correct answer revealed on mistakes": "تغذية راجعة بصرية فورية مع إظهار الإجابة الصحيحة عند الخطأ",
+        "Live score tracking that persists across navigation": "متابعة مباشرة للنتيجة تبقى أثناء التنقل",
+        "Results screen with percentage circle and star rating (0–3)": "شاشة نتائج بدائرة النسبة المئوية وتقييم بالنجوم (0–3)",
+        "Modern Islamic design with emerald, gold, and warm white colors": "تصميم إسلامي حديث بألوان الزمرد والذهب والأبيض الدافئ",
+        "Cairo and Amiri fonts for a traditional yet highly readable feel": "خطا القاهرة والأميري لإحساس تقليدي وسهل القراءة",
+        "Code-drawn Islamic geometric pattern (no external image assets)": "نقش هندسي إسلامي مرسوم بالكود (دون صور خارجية)",
+        "Fully RTL Arabic interface with responsive layout": "واجهة عربية كاملة من اليمين لليسار بتصميم متجاوب",
+        "This paper examines the design and implementation of a medicine warehouse information system. It discusses the importance of managing warehouse data reliably and describes a flexible database structure intended to make records easier to maintain and update. The study used a descriptive approach and presented a working system for medicine, supplier, customer, and sales records.": "تتناول هذه الورقة تصميم وتنفيذ نظام معلومات لمستودع الأدوية. وتناقش أهمية إدارة بيانات المستودع بموثوقية، وتصف بنية قاعدة بيانات مرنة تسهّل صيانة السجلات وتحديثها. استخدمت الدراسة المنهج الوصفي وقدّمت نظامًا عاملًا لسجلات الأدوية والموردين والعملاء والمبيعات.",
+        "A flexible database structure designed for easier updates": "بنية قاعدة بيانات مرنة تسهّل التحديث",
+        "Medicine warehouse inventory management": "إدارة مخزون مستودع الأدوية",
+        "Records for suppliers, customers, and medicine categories": "سجلات للموردين والعملاء وفئات الأدوية",
+        "Sales invoices and transaction records": "فواتير المبيعات وسجلات المعاملات",
+        "Participated as a contestant in an open programming competition organized by the IEEE University of Gezira Student Branch. The competition provided an opportunity to apply programming knowledge, logical reasoning, and problem-solving skills under contest conditions.": "شاركتُ متسابقًا في مسابقة برمجة مفتوحة نظّمها فرع طلاب IEEE بجامعة الجزيرة. أتاحت المسابقة فرصة لتطبيق المعرفة البرمجية والتفكير المنطقي ومهارات حل المشكلات في أجواء تنافسية.",
+        "Participated as a contestant in an open programming competition organized by IEEE UofG SB.": "شاركتُ متسابقًا في مسابقة برمجة مفتوحة نظّمها فرع IEEE بجامعة الجزيرة.",
+        "Applied programming knowledge and logical thinking to solve coding challenges.": "طبّقتُ المعرفة البرمجية والتفكير المنطقي لحل تحديات برمجية.",
+        "Demonstrated problem-solving and analytical skills in a competitive environment.": "أظهرتُ مهارات حل المشكلات والتحليل في بيئة تنافسية.",
+        "Gained valuable experience in competitive programming and technical skill development.": "اكتسبتُ خبرة قيّمة في البرمجة التنافسية وتطوير المهارات التقنية.",
+        "Participated in the IEEE University of Gezira Student Branch Social Day, an event designed to bring members together through interactive games, social activities, and opportunities to connect with fellow volunteers. The event fostered friendship, strengthened relationships among members, and promoted a sense of belonging within the IEEE community.": "شاركتُ في اليوم الاجتماعي لفرع طلاب IEEE بجامعة الجزيرة، وهي فعالية تجمع الأعضاء عبر ألعاب تفاعلية وأنشطة اجتماعية وفرص للتعارف مع زملاء المتطوعين. عززت الفعالية الصداقة وقوّت العلاقات بين الأعضاء وزادت الشعور بالانتماء لمجتمع IEEE.",
+        "Participated in interactive games and fun social activities with IEEE members.": "شاركتُ في ألعاب تفاعلية وأنشطة اجتماعية ممتعة مع أعضاء IEEE.",
+        "Networked with fellow IEEE members and volunteers.": "تواصلتُ مع أعضاء IEEE وزملاء المتطوعين.",
+        "Contributed to fostering a welcoming, collaborative, and engaging IEEE community.": "ساهمتُ في بناء مجتمع IEEE مرحّب وتعاوني ونشط.",
+        "Enhanced teamwork, communication, and interpersonal skills.": "طوّرتُ مهارات العمل الجماعي والتواصل والعلاقات الشخصية.",
+        "Participated in IEEE Day celebrations organized by the IEEE University of Gezira Student Branch, an occasion celebrating the IEEE community, its achievements, and its impact on technology and engineering. The event brought members together to recognize volunteer contributions, share experiences, and strengthen the spirit of collaboration and innovation.": "شاركتُ في احتفالات يوم IEEE التي نظّمها فرع طلاب IEEE بجامعة الجزيرة، وهي مناسبة للاحتفاء بمجتمع IEEE وإنجازاته وأثره في التقنية والهندسة. جمعت الفعالية الأعضاء لتقدير إسهامات المتطوعين وتبادل الخبرات وتعزيز روح التعاون والابتكار.",
+        "Celebrated IEEE's global community and its contributions to technology and engineering": "احتفلتُ بمجتمع IEEE العالمي وإسهاماته في التقنية والهندسة",
+        "Recognized the importance of volunteering, teamwork, and professional growth.": "أدركتُ أهمية التطوع والعمل الجماعي والنمو المهني.",
+        "Connected with IEEE UofG SB members and fellow volunteers": "تواصلتُ مع أعضاء فرع IEEE بجامعة الجزيرة وزملاء المتطوعين",
+        "I participated in the IEEE University of Gezira Student Branch 50 Scientific Papers Challenge and presented my Medicine Warehouse Management System, developed using C#. Reaching the final stage was a valuable milestone in my academic and technical journey. I explained the project's concept and demonstrated how software can address practical challenges in medicine warehouse management. The experience also strengthened my public speaking, technical communication, and project presentation skills.": "شاركتُ في تحدي الخمسين ورقة علمية لفرع طلاب IEEE بجامعة الجزيرة وقدّمتُ نظام إدارة مستودع الأدوية الذي طوّرته بلغة C#. كان الوصول إلى المرحلة النهائية محطة مهمة في مسيرتي الأكاديمية والتقنية. شرحتُ فكرة المشروع وبيّنتُ كيف تعالج البرمجيات تحديات عملية في إدارة مستودعات الأدوية. كما عززت التجربة مهاراتي في الإلقاء والتواصل التقني وعرض المشاريع.",
+        "Reached the final stage of the IEEE UofG SB 50 Scientific Papers Challenge.": "وصلتُ إلى المرحلة النهائية من تحدي الخمسين ورقة علمية لفرع IEEE بجامعة الجزيرة.",
+        "Developed a Medicine Warehouse Management System using C#.": "طوّرتُ نظام إدارة مستودع أدوية بلغة C#.",
+        "Networked with IEEE members and industry professionals.": "تواصلتُ مع أعضاء IEEE ومختصين في المجال.",
+        "Presented the project to an audience, demonstrating its concept and practical applications.": "قدّمتُ المشروع أمام جمهور مبيّنًا فكرته وتطبيقاته العملية.",
+        "Enhanced technical communication, public speaking, and software presentation skills.": "طوّرتُ مهارات التواصل التقني والإلقاء وعرض البرمجيات."
+    });
+
+    /* Dynamic labels: "View details: X" and "X — 1 / 5". */
+    function translateDynamic(text) {
+        const key = text.trim().replace(/\s+/g, " ");
+        if (translations[key]) return translations[key];
+
+        let match = key.match(/^View details: (.+)$/);
+        if (match) return "عرض التفاصيل: " + (translations[match[1]] || match[1]);
+
+        match = key.match(/^(.+) — (\d+ \/ \d+)$/);
+        if (match && translations[match[1]]) return translations[match[1]] + " — " + match[2];
+
+        return null;
+    }
+
     const originalText = new WeakMap();
 
     function applyLanguage(language) {
@@ -1240,12 +1416,24 @@
             textNodes.push(node);
         }
 
+        /* Translate accessible names and tooltips too. */
+        document.querySelectorAll("[aria-label], [alt], [title]").forEach((element) => {
+            ["aria-label", "alt", "title"].forEach((attribute) => {
+                if (!element.hasAttribute(attribute)) return;
+                const key = "data-orig-" + attribute;
+                if (!element.hasAttribute(key)) element.setAttribute(key, element.getAttribute(attribute));
+                const original = element.getAttribute(key);
+                const translated = arabic ? translateDynamic(original) : null;
+                element.setAttribute(attribute, translated || original);
+            });
+        });
+
         textNodes.forEach((textNode) => {
             if (!originalText.has(textNode)) {
                 originalText.set(textNode, textNode.nodeValue);
             }
             const original = originalText.get(textNode);
-            const trimmed = original.trim();
+            const trimmed = original.trim().replace(/\s+/g, " ");
 
             if (arabic && translations[trimmed]) {
                 const leading = original.match(/^\s*/)[0];
