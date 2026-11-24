@@ -2530,6 +2530,7 @@ html[dir="rtl"] .timelineGroup {
 /* =========================================================
    ACCESSIBILITY + TECHNOLOGY FILTER (additions)
 ========================================================= */
+
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
@@ -2566,6 +2567,7 @@ html[dir="rtl"] .timelineGroup {
    DETAIL IMAGE VIEWER — main stage, thumbnails, lightbox
    Placed last so it overrides the earlier gallery rules.
 ========================================================= */
+
 [hidden] {
     display: none !important;
 }
@@ -2664,7 +2666,9 @@ html[dir="rtl"] .timelineGroup {
     font-variant-numeric: tabular-nums;
 }
 
+
 /* Thumbnails: every image is shown, uncropped. */
+
 .detailGalleryGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -2722,7 +2726,9 @@ html[dir="rtl"] .timelineGroup {
     font-variant-numeric: tabular-nums;
 }
 
+
 /* Full-size lightbox */
+
 .lightbox {
     position: fixed;
     inset: 0;
@@ -2776,18 +2782,15 @@ body.lightbox-open {
     .detailHero {
         height: clamp(220px, 72vw, 420px);
     }
-
     .detailHero img {
         padding: 0.5rem;
     }
-
     .viewerNav,
     .viewerExpand,
     .lightboxClose {
         width: 40px;
         height: 40px;
     }
-
     /* On phones the thumbnails become a swipeable strip, not a tall list. */
     .detailGalleryGrid {
         grid-template-columns: none;
@@ -2798,15 +2801,12 @@ body.lightbox-open {
         -webkit-overflow-scrolling: touch;
         padding-bottom: 0.5rem;
     }
-
     .detailGalleryItem {
         scroll-snap-align: start;
     }
-
     .lightboxStage {
         padding: 4rem 0.5rem 2.5rem;
     }
-
     .lightboxFigure img {
         max-height: calc(100vh - 7rem);
     }
@@ -2816,6 +2816,7 @@ body.lightbox-open {
 /* =========================================================
    HERO + ABOUT (match reference), EDUCATION, CERTIFICATES, CTA
 ========================================================= */
+
 .name {
     font-size: clamp(1.7rem, 3.4vw, 2.4rem);
     font-weight: 700;
@@ -2862,11 +2863,13 @@ body.lightbox-open {
     line-height: 1.9;
 }
 
-.aboutMePar + .aboutMePar {
+.aboutMePar+.aboutMePar {
     margin-top: 1rem;
 }
 
+
 /* Work cards: visible "View details" call to action */
+
 .workBody {
     display: flex;
     flex-direction: column;
@@ -2901,7 +2904,9 @@ body.lightbox-open {
     gap: 0.7rem;
 }
 
+
 /* Shared section wrapper for the new sections */
+
 .sectionWrap {
     width: min(92%, var(--container));
     margin: 0 auto;
@@ -3096,13 +3101,18 @@ body.lightbox-open {
     display: inline-block;
 }
 
+
 /* Arabic: font + mirrored arrows */
+
 body.language-ar {
     font-family: "Cairo", "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
 }
 
-body.language-ar h1, body.language-ar h2, body.language-ar h3,
-body.language-ar .name, body.language-ar .tital {
+body.language-ar h1,
+body.language-ar h2,
+body.language-ar h3,
+body.language-ar .name,
+body.language-ar .tital {
     font-family: "Cairo", "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
     letter-spacing: 0;
 }
@@ -3113,13 +3123,24 @@ html[dir="rtl"] .arrow {
 }
 
 @media (max-width: 600px) {
-    .eduList::before { inset-inline-start: 3.2rem; }
-    .eduItem { grid-template-columns: 2.6rem 1fr; gap: 1rem; }
-    .eduItem::before { inset-inline-start: calc(2.6rem + 0.5rem - 6px); }
-    .eduCard { margin-inline-start: 0.9rem; }
+    .eduList::before {
+        inset-inline-start: 3.2rem;
+    }
+    .eduItem {
+        grid-template-columns: 2.6rem 1fr;
+        gap: 1rem;
+    }
+    .eduItem::before {
+        inset-inline-start: calc(2.6rem + 0.5rem - 6px);
+    }
+    .eduCard {
+        margin-inline-start: 0.9rem;
+    }
 }
 
+
 /* Keep phone numbers and emails readable inside right-to-left pages. */
+
 .sidebar a[href^="tel:"],
 .sidebar a[href^="mailto:"] {
     direction: ltr;
@@ -3153,7 +3174,9 @@ html[dir="rtl"] .arrow {
     --gradient-rich: linear-gradient(135deg, #42d9c3 0%, #82b2ff 65%, #f2bd78 100%);
 }
 
+
 /* Remove the green cast from the header/sidebar and keep the palette unified. */
+
 .sidebar {
     background: rgba(13, 23, 40, 0.96);
     border-right-color: var(--border);
@@ -3182,7 +3205,9 @@ header.scrolled {
     }
 }
 
+
 /* More legible hero hierarchy and a clearer primary action. */
+
 .Hreo {
     gap: clamp(2rem, 5vw, 4rem);
     margin-top: clamp(2.5rem, 5vw, 4.5rem);
@@ -3218,7 +3243,9 @@ button:focus-visible {
     outline-offset: 4px;
 }
 
+
 /* Keep section starts easy to scan without changing their order. */
+
 .aboutMe,
 .works,
 .skills,
@@ -3259,7 +3286,9 @@ button:focus-visible {
     color: #071522;
 }
 
+
 /* Cards communicate that the whole card opens a detail page. */
+
 .workItem {
     background: linear-gradient(160deg, rgba(20, 34, 56, 0.98), rgba(15, 27, 45, 0.98));
     border-color: rgba(205, 222, 246, 0.14);
@@ -3289,7 +3318,9 @@ button:focus-visible {
     padding-bottom: 0.55rem;
 }
 
+
 /* Improve scanability of the long-form sections and detail page. */
+
 .eduCard,
 .certCard,
 .skillsColumn,
@@ -3305,9 +3336,7 @@ button:focus-visible {
 }
 
 .contactBox {
-    background:
-        radial-gradient(circle at 15% 15%, rgba(66, 217, 195, 0.12), transparent 45%),
-        linear-gradient(135deg, rgba(130, 178, 255, 0.09), rgba(17, 30, 50, 0.88));
+    background: radial-gradient(circle at 15% 15%, rgba(66, 217, 195, 0.12), transparent 45%), linear-gradient(135deg, rgba(130, 178, 255, 0.09), rgba(17, 30, 50, 0.88));
     border-color: rgba(130, 178, 255, 0.25);
 }
 
@@ -3323,7 +3352,6 @@ button:focus-visible {
     .Hreo {
         gap: 2rem;
     }
-
     .worksGrid,
     .works ul.worksGrid {
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
@@ -3335,32 +3363,26 @@ button:focus-visible {
         margin-top: 2rem;
         margin-bottom: 3.5rem;
     }
-
     .HeroBtns {
         align-items: stretch;
     }
-
     .HeroBtns .hireMe,
     .HeroBtns .CV {
         min-height: 46px;
         justify-content: center;
     }
-
     .worksGrid,
     .works ul.worksGrid {
         grid-template-columns: minmax(0, 1fr);
         gap: 1rem;
     }
-
     .workBody {
         min-height: 0;
     }
-
     .contactCta {
         padding-top: 2rem;
         padding-bottom: 3rem;
     }
-
     .contactBox {
         padding: 2rem 1.15rem;
     }
