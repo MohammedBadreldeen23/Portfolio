@@ -3126,3 +3126,252 @@ html[dir="rtl"] .arrow {
     unicode-bidi: isolate;
     text-align: start;
 }
+
+
+/* =========================================================
+   UX POLISH — clearer hierarchy, consistent surfaces & focus
+   Keeps the existing section structure and interactions.
+========================================================= */
+
+:root {
+    --bg: #080f1c;
+    --bg-soft: #0d1728;
+    --surface: #111e32;
+    --surface-2: #1a2a43;
+    --surface-3: #263b5a;
+    --border: rgba(205, 222, 246, 0.12);
+    --border-strong: rgba(205, 222, 246, 0.22);
+    --text: #f1f5fb;
+    --text-muted: #b1bfd2;
+    --text-dim: #8798b1;
+    --accent: #42d9c3;
+    --accent-2: #82b2ff;
+    --accent-3: #f2bd78;
+    --accent-soft: rgba(66, 217, 195, 0.12);
+    --accent-glow: rgba(130, 178, 255, 0.2);
+    --gradient: linear-gradient(135deg, #42d9c3, #82b2ff);
+    --gradient-rich: linear-gradient(135deg, #42d9c3 0%, #82b2ff 65%, #f2bd78 100%);
+}
+
+/* Remove the green cast from the header/sidebar and keep the palette unified. */
+.sidebar {
+    background: rgba(13, 23, 40, 0.96);
+    border-right-color: var(--border);
+}
+
+header {
+    background-color: rgba(8, 15, 28, 0.9);
+    border-radius: 0 0 14px 14px;
+}
+
+header.scrolled {
+    background-color: rgba(8, 15, 28, 0.97);
+}
+
+.navigation {
+    background: transparent;
+}
+
+.skillsColumn {
+    background: linear-gradient(145deg, rgba(26, 42, 67, 0.88), rgba(13, 23, 40, 0.96));
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        background-color: rgba(13, 23, 40, 0.98);
+    }
+}
+
+/* More legible hero hierarchy and a clearer primary action. */
+.Hreo {
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.heroLead {
+    max-width: 38rem;
+    font-size: clamp(1rem, 1.25vw, 1.08rem);
+}
+
+.HeroBtns {
+    gap: 0.8rem;
+}
+
+.hireMe,
+.sidebarCta,
+.contactBox .hireMe {
+    box-shadow: 0 10px 28px rgba(66, 217, 195, 0.14);
+}
+
+.hireMe:focus-visible,
+.CV:focus-visible,
+.heroLink:focus-visible,
+.sidebarCta:focus-visible,
+.nav-link:focus-visible,
+.filter-btn:focus-visible,
+.workItem a:focus-visible,
+.sidebarContactItem:focus-visible,
+.certLink:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent-2);
+    outline-offset: 4px;
+}
+
+/* Keep section starts easy to scan without changing their order. */
+.aboutMe,
+.works,
+.skills,
+.education,
+.certificates {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+.worksIntro,
+.sectionIntro {
+    max-width: 44rem;
+    margin-inline: auto;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.worksIntro {
+    margin-bottom: 1.6rem;
+}
+
+.worksFilter {
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+    min-height: 42px;
+    padding-inline: 1.2rem;
+    border-color: var(--border-strong);
+}
+
+.filter-btn:hover {
+    background: var(--surface-2);
+    color: var(--text);
+}
+
+.filter-btn.active {
+    color: #071522;
+}
+
+/* Cards communicate that the whole card opens a detail page. */
+.workItem {
+    background: linear-gradient(160deg, rgba(20, 34, 56, 0.98), rgba(15, 27, 45, 0.98));
+    border-color: rgba(205, 222, 246, 0.14);
+}
+
+.workItem:hover {
+    border-color: rgba(130, 178, 255, 0.55);
+    box-shadow: 0 22px 46px -24px rgba(130, 178, 255, 0.42);
+}
+
+.workBody {
+    min-height: 190px;
+    padding: 1.25rem 1.3rem 1.35rem;
+}
+
+.workBody h3 {
+    line-height: 1.35;
+}
+
+.workBody p {
+    line-height: 1.7;
+}
+
+.workCta {
+    margin-top: auto;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+}
+
+/* Improve scanability of the long-form sections and detail page. */
+.eduCard,
+.certCard,
+.skillsColumn,
+.experienceColumn,
+.detailSection,
+.detailGallery {
+    border-color: var(--border);
+}
+
+.eduCard,
+.certCard {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.contactBox {
+    background:
+        radial-gradient(circle at 15% 15%, rgba(66, 217, 195, 0.12), transparent 45%),
+        linear-gradient(135deg, rgba(130, 178, 255, 0.09), rgba(17, 30, 50, 0.88));
+    border-color: rgba(130, 178, 255, 0.25);
+}
+
+.nav-contact {
+    color: var(--accent);
+}
+
+.sidebarContactItem span {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+    .Hreo {
+        gap: 2rem;
+    }
+
+    .worksGrid,
+    .works ul.worksGrid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .Hreo {
+        margin-top: 2rem;
+        margin-bottom: 3.5rem;
+    }
+
+    .HeroBtns {
+        align-items: stretch;
+    }
+
+    .HeroBtns .hireMe,
+    .HeroBtns .CV {
+        min-height: 46px;
+        justify-content: center;
+    }
+
+    .worksGrid,
+    .works ul.worksGrid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .workBody {
+        min-height: 0;
+    }
+
+    .contactCta {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+    }
+
+    .contactBox {
+        padding: 2rem 1.15rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .workItem,
+    .eduCard,
+    .certCard,
+    .hireMe,
+    .sidebarCta {
+        transition-duration: 0.01ms !important;
+    }
+}
